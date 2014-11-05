@@ -1,0 +1,100 @@
+{% extends "VideocvFrontendBundle::layout.html.twig" %}
+{% block title %} Login {% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+
+	<div class="main-content buildprofile login_form_page custom_layout_fosUserBundle">
+		<div class="list-content">
+			<div class="content">
+				{% if app.session.getFlashBag().has( 'note_success' ) %}
+					<div class="alert alert-success">
+						<button title="{{'Close'|trans}}" class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('note_success')%}
+							<p>{{ 'You must activate your account by clicking on the link in the email we have just sent you' | trans }}.</p>
+							<p><strong>- {{ 'Company - NOTE Check your spam / junk folder if you do not find your mail!' | trans }}</strong></p>
+							<p>({{ 'Company - If you still can not log in then please contact our customer service on 0700-955020' | trans }})</p>
+						{% endfor %}
+					</div>
+				{% endif %}
+				{% if app.session.getFlashBag().has( 'successful_resetting_password' ) %}
+						<div class="alert alert-success">
+							<button class="close" data-dismiss="alert" type="button">×</button>
+								{% for message in app.session.getFlashBag().get('successful_resetting_password')%}
+									{{message}}
+								{% endfor %}
+						</div>
+				{% endif %}
+
+				{% if app.session.getFlashBag().has( 'successful_change_password' ) %}
+						<div class="alert alert-success">
+							<button class="close" data-dismiss="alert" type="button">×</button>
+								{% for message in app.session.getFlashBag().get('successful_change_password')%}
+									{{message}}
+								{% endfor %}
+						</div>
+				{% endif %}
+
+				{% if app.session.getFlashBag().has( 'success_register' ) %}
+						<div class="alert alert-success">
+							<button class="close" data-dismiss="alert" type="button">×</button>
+								{% for message in app.session.getFlashBag().get('success_register')%}
+                                                                    <p>{{ 'You must activate your account by clicking on the link in the email we just sent you' | trans }}</p>
+                                                                    <p><strong>- {{ 'NOTE Check your spam / junk folder if you do not find your mail!' | trans }}</strong></p>
+                                                                    <p>({{ 'If you still can not log in then please contact our customer service on 0700-955020' | trans }})</p>
+								{% endfor %}
+						</div>
+				{% endif %}
+
+				{% if app.session.getFlashBag().has( 'check_user_login_error' ) %}
+						<div class="alert alert-error">
+							<button class="close" data-dismiss="alert" type="button">×</button>
+								{% for message in app.session.getFlashBag().get('check_user_login_error')%}
+									{{message}}
+								{% endfor %}
+						</div>
+				{% endif %}
+
+				{% if app.session.getFlashBag().has( 'check_user_login_not_exist' ) %}
+						<div class="alert alert-error">
+							<button class="close" data-dismiss="alert" type="button">×</button>
+								{% for message in app.session.getFlashBag().get('check_user_login_not_exist')%}
+									{{message}}
+								{% endfor %}
+						</div>
+				{% endif %}
+
+				{% if error %}
+					<div class="alert alert-error"><button class="close" data-dismiss="alert" type="button">×</button> {{ error|trans|raw }}</div>
+				{% endif %}
+				<h2>{{ 'Login'|trans }}</h2>
+				<form class="clearfix" action="{{ path("fos_user_security_check") }}" method="post">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+					<label for="username">{{ 'Email: '|trans }}</label>
+					<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" title="{{ 'Email'|trans }}" />
+
+					<label for="password">{{ 'Password'|trans }}:</label>
+					<input type="password" id="password" name="_password" required="required" title="{{ 'Password'|trans }}" />
+					<div class="forgetpass_rememberme clearfix">
+						<p class="pull-left forget_pass">
+							<a href="{{ path('fos_user_resetting_request') }}" title="{{ 'Forget Password'|trans }}">{{ 'Forget Password'|trans }}</a>
+						</p>
+					</div>
+					<div class="login-rememberme clearfix">
+						<input class="custom_btn login pull-left" type="submit" id="_submit" name="_submit" value="{{ 'Login'|trans }}" />
+						<div class="clearfix remember_me pull-left">
+							<label class="pull-right" for="remember_me">{{ 'Remember me'|trans }}</label>
+							<input type="checkbox" id="remember_me" name="_remember_me" value="on" class="styled" title="{{ 'Remember me'|trans }}" />
+						</div>
+					</div>
+					<div class="candidate-and-company clearfix">
+						<a class="custom_btn register pull-left" href="{{ path('videocv_frontend_register_candidate') }}">{% trans %}Register candidate{% endtrans %}</a>
+						<a class="custom_btn company pull-left" href="{{ path('videocv_frontend_company_add') }}">{% trans %}Create company{% endtrans %}</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

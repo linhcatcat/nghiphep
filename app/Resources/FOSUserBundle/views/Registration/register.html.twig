@@ -1,0 +1,15 @@
+{% extends "VideocvFrontendBundle::layout.html.twig" %}
+{% block title %} Register {% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+
+	<div class="main-content buildprofile register_form_page">
+		<div class="list-content">
+			<div class="content">
+				{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

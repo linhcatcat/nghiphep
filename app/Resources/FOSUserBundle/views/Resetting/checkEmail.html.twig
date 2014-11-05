@@ -1,0 +1,15 @@
+{% extends "VideocvFrontendBundle::layout.html.twig" %}
+{% block title %} Check Email {% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+	<div class="main-content buildprofile check_email_reset custom_layout_fosUserBundle">
+		<div class="list-content">
+			<div class="content">
+				<div class="alert alert-success"><button class="close" data-dismiss="alert" type="button">×</button> {{ 'A resetting password email has been sent to you. Please check.'|trans({'%email%': email}) }}</div>
+				<a class="custom_btn" href="{{ path('fos_user_security_login') }}">{{ 'Login'|trans }}</a>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,398 @@
+{% trans_default_domain 'FOSUserBundle' %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li class="active"><a href="#build_profile" data-toggle="tab">Build Profile</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="build_profile">
+					<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+					<div class="user_information row-fluid">
+						<ul class="span6">
+							<li class="clearfix">
+								{{ form_label(form.email,null,{ 'label_attr': {'class': 'pull-left'}} ) }}
+								{{ form_errors(form.email) }}
+								{{ form_widget(form.email)}}
+							</li>
+							<li class="clearfix">
+								{{ form_label(form.plainPassword,null,{ 'label_attr': {'class': 'pull-left'}} ) }}
+								{{ form_errors(form.plainPassword) }}
+								{{ form_widget(form.plainPassword)}}
+							</li>
+							<li class="clearfix">
+								{{ form_label(form.address,null,{ 'label_attr': {'class': 'pull-left'}} ) }}
+								{{ form_errors(form.address) }}
+								{{ form_widget(form.address)}}
+							</li>
+							<li class="clearfix">
+								<div class='clearfix pull-left'>
+									{{ form_label(form.postnr,null,{ 'label_attr': {'class': 'pull-left'}} ) }}
+									{{ form_widget(form.postnr)}}
+								</div>
+								<div class='clearfix pull-left'>
+									{{ form_label(form.ort,null,{ 'label_attr': {'class': 'pull-left'}} ) }}
+									{{ form_widget(form.ort)}}
+								</div>
+							</li>
+						</ul>
+						
+						<ul class="span6 second_inform">
+							<li class="clearfix radio_sex">
+								<div class="pull-left clearfix">
+									<input class="styled" type="radio" id="dude" name="sex" value="dude">
+									<label class="pull-left" for="dude">I'm a dude</label>
+								</div>
+								<div class="pull-left">
+									<input class="styled" type="radio" id="dudette" name="sex" value="dudette">
+									<label class="pull-left" for="dudette">I'm a dudette</label>
+								</div>
+							</li>
+							<li class="clearfix citizen">
+								<div class="pull-left">
+									<select name="citizen_swedish" class="selecter_basic">
+										<option>Swedish citizen</option>
+										<option>Yes</option>
+										<option>No</option>
+										<option>No</option>
+										<option>No</option>
+										<option>No</option>
+										<option>No</option>
+									</select>
+								</div>
+								<div class="pull-left work_permit_radio">
+									<input class="styled" type="radio" id="work_permit" name="work_permit" value="work_permit">
+									<label class="pull-left" for="work_permit">Swedish work permit</label>
+								</div>
+							</li>
+							<li class="year_of_birth">
+								<select name="year_of_birth" class="selecter_basic">
+									<option>Year of birth</option>
+									<option>1990</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+									<option>1991</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+					<div class="name_user clearfix">
+						<div class='clearfix pull-left'>
+							<label for="first_name" class="pull-left">First Name</label>
+							<input id="first_name" class="pull-left" type="text">
+						</div>
+						<div class='clearfix pull-left'>
+							<label for="last_name" class="pull-left">Last Name</label>
+							<input id="last_name" class="pull-left" type="text">
+						</div>
+					</div>
+					<div class="avatar_video row-fluid">
+						<div class="span6 avatar">
+							<div class="clearfix list_avatar">
+								<img class="img_black_white" src="{{ asset('application/images/avatar1.png') }}" class="pull-left"/>
+								<img class="img_black_white" src="{{ asset('application/images/avatar1.png') }}" class="pull-left"/>
+								<img class="img_black_white" src="{{ asset('application/images/avatar1.png') }}" class="pull-left"/>
+							</div>
+							<div class="upload clearfix">
+								<i class="icon-camera"></i>
+								<input type="file" title="Upload">
+								<span>Upload your profile images</span>
+							</div>
+						</div>
+						<div class="span6 video">
+							<img src="{{ asset('application/images/video1.png') }}"/>
+						</div>
+					</div>
+					<section class="my_timeline">
+						<h2>My timeline</h2>
+						<div class="education timeline_content">
+							<h3 class="title_icon">
+								<span>Education</span>
+								<a class="help" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at blandit sem. Morbi venenatis dapibus ligula a aliquam. Pellentesque eleifend velit sit amet dolor placerat pharetra. Proin eget tempus justo, non auctor ligula. Interdum et male" data-toggle="popover" href="#"><i class="icon-question-sign"></i></a>
+							</h3>
+							<ul>
+								<li class="clearfix">
+									<input class="school pull-left" name="school" type="text" placeholder="School">
+									<input class="education pull-left" name="education" type="text" placeholder="Education">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="school pull-left" name="school" type="text" placeholder="School">
+									<input class="education pull-left" name="education" type="text" placeholder="Education">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="school pull-left" name="school" type="text" placeholder="School">
+									<input class="education pull-left" name="education" type="text" placeholder="Education">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="school pull-left" name="school" type="text" placeholder="School">
+									<input class="education pull-left" name="education" type="text" placeholder="Education">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+							</ul>
+						</div>
+						<div class="career timeline_content">
+							<h3 class="title_icon">
+								<span>Career</span>
+								<a class="help" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at blandit sem. Morbi venenatis dapibus ligula a aliquam. Pellentesque eleifend velit sit amet dolor placerat pharetra. Proin eget tempus justo, non auctor ligula. Interdum et male" data-toggle="popover" href="#"><i class="icon-question-sign"></i></a>
+							</h3>
+							<ul>
+								<li class="clearfix">
+									<input class="company_name pull-left" name="company_name" type="text" placeholder="Company Name">
+									<input class="position pull-left" name="position" type="text" placeholder="Position">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="company_name pull-left" name="company_name" type="text" placeholder="Company Name">
+									<input class="position pull-left" name="position" type="text" placeholder="Position">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="company_name pull-left" name="company_name" type="text" placeholder="Company Name">
+									<input class="position pull-left" name="position" type="text" placeholder="Position">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+								<li class="clearfix">
+									<input class="company_name pull-left" name="company_name" type="text" placeholder="Company Name">
+									<input class="position pull-left" name="position" type="text" placeholder="Position">
+									<span class="pull-left input_date">
+										<input class="from_date" name="from_date" type="text" placeholder="From Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+									<span class="pull-left input_date">
+										<input class="to_date" name="to_date" type="text" placeholder="To Date">
+										<span><i class="icon-chevron-down"></i></span>
+									</span>
+								</li>
+							</ul>
+						</div>
+						<div class="language_driving row-fluid">
+							<div class="span6 language_profile language_driving_content">
+								<h3>Language</h3>
+								<ul>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Swedish</option>
+												<option>English</option>
+												<option>Chinese</option>
+											</select>
+										</div>
+										<div class="rating pull-right">
+											<select class="rating_select" name="rating">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</li>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Swedish</option>
+												<option>English</option>
+												<option>Chinese</option>
+											</select>
+										</div>
+										<div class="rating pull-right">
+											<select class="rating_select" name="rating">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</li>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Swedish</option>
+												<option>English</option>
+												<option>Chinese</option>
+											</select>
+										</div>
+										<div class="rating pull-right">
+											<select class="rating_select" name="rating">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="span6 driving_profile language_driving_content">
+								<h3>Driving Lincenese</h3>
+								<ul>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Car</option>
+												<option>Aeroplan</option>
+												<option>Train</option>
+											</select>
+										</div>
+										<div class="rank pull-right clearfix">
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_a">A</label>
+												<input class="styled" type="radio" value="A" name="rank_1" id="rank_a">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_b">B</label>
+												<input class="styled" type="radio" value="B" name="rank_1" id="rank_b">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_c">C</label>
+												<input class="styled" type="radio" value="C" name="rank_1" id="rank_c">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_d">D</label>
+												<input class="styled" type="radio" value="D" name="rank_1" id="rank_d">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_e">E</label>
+												<input class="styled" type="radio" value="E" name="rank_1" id="rank_e">
+											</span>
+										</div>
+									</li>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Car</option>
+												<option>Aeroplan</option>
+												<option>Train</option>
+											</select>
+										</div>
+										<div class="rank pull-right clearfix">
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_a">A</label>
+												<input class="styled" type="radio" value="A" name="rank_2" id="rank_a">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_b">B</label>
+												<input class="styled" type="radio" value="B" name="rank_2" id="rank_b">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_c">C</label>
+												<input class="styled" type="radio" value="C" name="rank_2" id="rank_c">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_d">D</label>
+												<input class="styled" type="radio" value="D" name="rank_2" id="rank_d">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_e">E</label>
+												<input class="styled" type="radio" value="E" name="rank_2" id="rank_e">
+											</span>
+										</div>
+									</li>
+									<li class="clearfix">
+										<div class="pull-left">
+											<select class="selecter_basic">
+												<option>Car</option>
+												<option>Aeroplan</option>
+												<option>Train</option>
+												<option>Train</option>
+												<option>Train</option>
+												<option>Train</option>
+												<option>Train</option>
+												<option>Train</option>
+												<option>Train</option>
+											</select>
+										</div>
+										<div class="rank pull-right clearfix">
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_a">A</label>
+												<input class="styled" type="radio" value="A" name="rank_3" id="rank_a">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_b">B</label>
+												<input class="styled" type="radio" value="B" name="rank_3" id="rank_b">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_c">C</label>
+												<input class="styled" type="radio" value="C" name="rank_3" id="rank_c">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_d">D</label>
+												<input class="styled" type="radio" value="D" name="rank_3" id="rank_d">
+											</span>
+											<span class="pull-left clearfix">
+												<label class="pull-left" for="rank_e">E</label>
+												<input class="styled" type="radio" value="E" name="rank_3" id="rank_e">
+											</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+							{{ form_row(form.username) }}
+					<div>{{ form_widget(form._token) }}</div>
+					
+					<div>
+						<input type="submit" value="{{ 'Register'|trans }}" />
+					</div>
+					</form>
+				</div>
+			</div>

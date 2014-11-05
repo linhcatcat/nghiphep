@@ -1,0 +1,27 @@
+wincofood_application:
+    resource: "@WincofoodApplicationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wincofood_product:
+    resource: "@WincofoodProductBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wincofood_cms:
+    resource: "@WincofoodCmsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_frontend:
+    resource: "@ApplicationFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# app/config/routing.yml
+application_backend:
+    resource: "@ApplicationBackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+application_sale:
+    resource: "@WincofoodSaleBundle/Resources/config/routing.yml"
+    prefix:   /sale
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

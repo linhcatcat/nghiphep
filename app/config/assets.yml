@@ -1,0 +1,118 @@
+assetic:
+    assets:
+        application_frontend_css:
+            filters:
+                - cssrewrite
+            inputs:
+                - '%kernel.root_dir%/../web/application/css/bootstrap.min.css'
+                - '%kernel.root_dir%/../web/application/font-awesome/css/font-awesome.min.css'
+                - '%kernel.root_dir%/../web/application/css/bootstrap-responsive.min.css'
+                - '%kernel.root_dir%/../web/application/css/custom-form-elements.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.mCustomScrollbar.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.bxslider.css'
+                - '%kernel.root_dir%/../web/application/css/uniform.default.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.fs.selecter.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.fs.scroller.css'
+                - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.css'
+                - '%kernel.root_dir%/../web/application/css/colorbox.css'
+                - '%kernel.root_dir%/../web/application/css/style.css'
+
+        application_backend_css:
+            filters:
+                - cssrewrite
+            inputs:
+                - '%kernel.root_dir%/../web/application/css/bootstrap.min.css'
+                - '%kernel.root_dir%/../web/application/font-awesome/css/font-awesome.min.css'
+                - '%kernel.root_dir%/../web/application/css/bootstrap-responsive.min.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.mCustomScrollbar.css'
+                - '%kernel.root_dir%/../web/application/css/custom-form-elements.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.fs.selecter.css'
+                - '%kernel.root_dir%/../web/application/css/jquery.fs.scroller.css'
+                - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.css'
+                - '%kernel.root_dir%/../web/application/css/colorbox.css'
+                - '%kernel.root_dir%/../web/application/css/main.css'
+                - '%kernel.root_dir%/../web/application/css/login-backend.css'
+
+        application_shared_ie7_css:
+            filters:
+                - cssrewrite
+            inputs:
+                - '%kernel.root_dir%/../web/application/font-awesome/css/font-awesome-ie7.min.css'
+                - '%kernel.root_dir%/../web/application/css/style-ie7.css'
+
+        application_frontend_js:
+            inputs:
+                - '%kernel.root_dir%/../web/application/js/sv.js'
+                - '%kernel.root_dir%/../web/application/js/vendor/bootstrap.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery-ui-1.10.3.custom.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/custom-form-elements.js'
+                - '%kernel.root_dir%/../web/application/js/libs/bootstrap.file-input.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.fs.selecter.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.fs.scroller.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.barrating.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.bxslider.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.mCustomScrollbar.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.uniform.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.mustache.js'
+                - '%kernel.root_dir%/../web/application/js/libs/mustache.js'
+                - '%kernel.root_dir%/../web/application/js/libs/raphael-min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/raphael.popup.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery-sortable.js'
+                - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.form.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.colorbox-min.js'
+                - '%kernel.root_dir%/../web/application/js/widget/image_grayscale.js'
+                - '%kernel.root_dir%/../web/application/js/widget/chart.js'
+                - '%kernel.root_dir%/../web/application/js/widget/new-chart.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.fakemultitouch.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.showtouches.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jQueryRotateCompressed.js'
+                - '%kernel.root_dir%/../web/application/js/plugins.js'
+                - '%kernel.root_dir%/../web/application/js/main.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/candidate/add-ticket.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/candidate/register.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/candidate/edit.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/candidate/view-job-candidate.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/company/profile.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/company/edit.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/company/add.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/default/resetPassword.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/default/changePassword.js'
+
+        application_backend_js:
+            inputs:
+                - '%kernel.root_dir%/../web/application/js/sv.js'
+                - '%kernel.root_dir%/../web/application/js/vendor/bootstrap.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery-ui-1.10.3.custom.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/custom-form-elements.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.mustache.js'
+                - '%kernel.root_dir%/../web/application/js/libs/mustache.js'
+                - '%kernel.root_dir%/../web/application/js/libs/raphael-min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/raphael.popup.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery-sortable.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.colorbox-min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.mCustomScrollbar.min.js'
+                - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.js'
+                - '%kernel.root_dir%/../web/application/js/libs/bootstrap.file-input.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.fs.selecter.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.fs.scroller.js'
+                - '%kernel.root_dir%/../web/application/js/libs/jquery.barrating.min.js'
+                - '%kernel.root_dir%/../web/application/js/widget/image_grayscale.js'
+                - '%kernel.root_dir%/../web/application/js/widget/chart.js'
+                - '%kernel.root_dir%/../web/application/js/widget/new-chart.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.min.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.fakemultitouch.js'
+                - '%kernel.root_dir%/../web/application/js/libs/hammer.showtouches.js'
+                - '%kernel.root_dir%/../web/application/js/plugins.js'
+                - '%kernel.root_dir%/../web/application/js/main.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/candidate/edit.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/candidate/index.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/candidate/report.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/company/edit.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/company/view-application.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/frontend/candidate/view-job-candidate.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/company/index.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/default/index.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/transfer-company-job/edit.js'
+                - '%kernel.root_dir%/../web/application/js/js-template/backend/transfer-company-job/index.js'

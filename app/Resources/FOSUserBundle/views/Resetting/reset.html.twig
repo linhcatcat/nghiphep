@@ -1,0 +1,19 @@
+{% extends "VideocvFrontendBundle::layout.html.twig" %}
+{% block title %} Check Email {% endblock %}
+
+{% block content %}
+	<div class="main-content buildprofile check_email_reset custom_layout_fosUserBundle">
+		<div class="list-content">
+			<div class="content">
+				<h2>{{ 'New Password'|trans }}</h2>
+				{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+
+{% block gloabalVariableJavascript %} 
+	<script type="text/javascript">
+		var bCheckJavascriptResetPassword= true;
+	</script>
+{% endblock %}

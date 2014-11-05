@@ -1,0 +1,13 @@
+{% extends "VideocvFrontendBundle::layout.html.twig" %}
+{% block title %} Request {% endblock %}
+
+{% block content %}
+	<div class="main-content buildprofile request_password_user custom_layout_fosUserBundle">
+		<div class="list-content">
+			<div class="content">
+				<h2>{{ 'Reset Password'|trans }}</h2>
+				{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
