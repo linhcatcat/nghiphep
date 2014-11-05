@@ -1,0 +1,87 @@
+body.backend_login_page {
+	padding-bottom: 40px;
+	color: #555555;
+	font-family: "Ubuntu",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+}
+body.backend_login_page .sidebar-nav {
+	padding: 9px 0;
+}
+body.backend_login_page h2 {
+	font-size: 24px;
+	line-height: 36px;
+}
+body.backend_login_page h1, 
+body.backend_login_page h2, 
+body.backend_login_page h3, 
+body.backend_login_page h4, 
+body.backend_login_page h5, 
+body.backend_login_page h6 {
+	color: #317EAC;
+	font-family: 'Karla',sans-serif;
+	font-weight: bold;
+	margin: 0;
+	text-rendering: optimizelegibility;
+}
+body.backend_login_page div.center, 
+body.backend_login_page p.center, 
+body.backend_login_page img.center {
+	display: block;
+	float: none !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center;
+}
+body.backend_login_page .login-header {
+	height: 120px;
+	padding-top: 30px;
+}
+
+body.backend_login_page .login-box .input-prepend {
+	margin-bottom: 10px;
+}
+body.backend_login_page .remember {
+	margin-top: 3px;
+}
+
+body.backend_login_page .remember input {
+	margin-bottom: 3px;
+	margin-right: 3px;
+}
+body.backend_login_page .login-box .btn {
+	margin-top: 15px;
+	width: 100%;
+}
+body.backend_login_page input, button, select, textarea {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+body.backend_login_page .btn-primary {
+  background-color: #43a1da;
+  background-image: -moz-linear-gradient(top, #4ba6db, #369bd7);
+  background-image: -ms-linear-gradient(top, #4ba6db, #369bd7);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4ba6db), to(#369bd7));
+  background-image: -webkit-linear-gradient(top, #4ba6db, #369bd7);
+  background-image: -o-linear-gradient(top, #4ba6db, #369bd7);
+  background-image: linear-gradient(top, #4ba6db, #369bd7);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ba6db', endColorstr='#369bd7', GradientType=0);
+  border-color: #369bd7 #369bd7 #2071a1;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #369bd7;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+body.backend_login_page .btn-primary:hover,
+body.backend_login_page .btn-primary:active,
+body.backend_login_page .btn-primary.active,
+body.backend_login_page .btn-primary.disabled,
+body.backend_login_page .btn-primary[disabled] {
+  background-color: #369bd7;
+}
+body.backend_login_page .btn-primary:active,
+body.backend_login_page .btn-primary.active {
+  background-color: #2480b6;
+}

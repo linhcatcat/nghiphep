@@ -1,0 +1,81 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_user %}active{% endblock %}
+{% endembed %}
+<div class="main-content">
+	<div class="list-content list_cms_page">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'edit_cms_page_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_cms_page_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_cms_page_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_cms_page_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li><a class="btn" href="{{ path('application_backend_user_add') }}">{{ 'Add'|trans }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="cms-page">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>{{ 'ID'|trans }}</th>
+								<th>{{ 'First Name'|trans }}</th>
+								<th>{{ 'Last Name'|trans }}</th>
+								<th>{{ 'Username'|trans }}</th>
+								<th>{{ 'Email'|trans }}</th>
+								<th>{{ 'Gender'|trans }}</th>
+								<th>{{ 'Role'|trans }}</th>
+								<th>{{ 'Create'|trans }}</th>
+								<th>{{ 'Update'|trans }}</th>
+								<th>{{ 'Last Login'|trans }}</th>
+								<th>{{ 'Action'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+							<tr>
+								<td>{{ user.id }}</td>
+								<td>{{ user.firstName }}</td>
+								<td>{{ user.lastName }}</td>
+								<td>{{ user.username }}</td>
+								<td>{{ user.email }}</td>
+								<td>{{ user.Gender?'Male':'Female' }}</td>
+								<td>{% for role in user.roles %}{% if role != 'ROLE_USER' %}{{ role }}<br/>{% endif %}{% endfor %}</td>
+								<td>{{ user.createdDate|date('d-m-y') }}</td>
+								<td>{{ user.updatedDate|date('d-m-y') }}</td>
+								<td>{{ user.lastLogin|date('d-m-y') }}</td>
+								<td>
+									<a href="{{ path('application_backend_user_edit',{'userID' : user.id}) }}" class="edit-product">{{ 'Edit'|trans }}</a> 
+									<a onclick="return confirm('{% trans %}Are you sure you want to delete this product{% endtrans %}?');" href="{{ path('application_backend_user_delete',{'userID' : user.id}) }}" class="delete_user">{{ 'Delete'|trans }}</a>
+								</td>
+							</tr>
+							{% else %}
+								<tr>
+									<td colspan="4">{{ 'No Cms Page found'|trans }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{% if users is not empty %}
+						{{ pagination | raw }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

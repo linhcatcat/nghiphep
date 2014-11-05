@@ -1,0 +1,7 @@
+application_backend_group_index:
+    pattern:  /
+    defaults: { _controller: "ApplicationBackendBundle:Group:index" }
+
+application_backend_group_add:
+    pattern: /add
+    defaults: { _controller: "ApplicationBackendBundle:Group:add" }

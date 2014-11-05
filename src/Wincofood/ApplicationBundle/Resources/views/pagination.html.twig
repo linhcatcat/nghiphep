@@ -1,0 +1,28 @@
+<div class="pagination pagination-centered">
+	{% if '' != sParamSort %}
+		{% set sParamSort = '&' ~ sParamSort %}
+	{% endif %}
+	<ul class="pagination">
+	<li{% if current_page == 1 %} class="disabled"{% endif %}><a href="{{ path(app.request.get('_route')) }}?{{ sPageKey }}=1{{ sParamSort }}">«</a></li>
+	{% set min = 1 %}
+	{% set max = total_pages %}
+	{% if total_pages > 9 %}
+		{% if current_page > 4 %}
+			{% set min = current_page - 4 %}
+			{% if total_pages - current_page < 4 %}
+				{% set min = total_pages - 10 %}
+			{% endif %}
+		{% endif %}
+		{% if current_page < total_pages - 4 %}
+			{% set max = current_page + 4 %}
+			{% if max < 9 %}
+				{% set max = 9 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	{% for page in min..max %}
+		<li{% if page == current_page %} class="active"{% endif %}><a href="{{ path(app.request.get('_route')) }}?{{ sPageKey }}={{ page ~ sParamSort }}">{{ page }}</a></li>
+	{% endfor %}
+	<li{% if current_page == total_pages %} class="disabled"{% endif %}><a href="{{ path(app.request.get('_route')) }}?{{ sPageKey }}={{ total_pages ~ sParamSort }}">»</a></li>
+	</ul>
+</div>

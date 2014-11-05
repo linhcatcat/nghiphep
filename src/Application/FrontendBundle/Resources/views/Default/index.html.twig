@@ -1,0 +1,25 @@
+{% extends "ApplicationFrontendBundle::layout.html.twig" %}
+
+{% block content %}
+	Hello Chao {{ user.username }}!
+	<a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
+	<br/>
+	From: <input type="text" id="txtFromDate" />
+	To: <input type="text" id="txtToDate" />
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$("#txtFromDate").datepicker({
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+			  $("#txtToDate").datepicker("option","minDate", selected)
+			}
+		});
+		$("#txtToDate").datepicker({ 
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+			   $("#txtFromDate").datepicker("option","maxDate", selected)
+			}
+		});
+	</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+application_backend_index:
+    pattern:   /
+    defaults: { _controller: "ApplicationBackendBundle:Default:index" }
+
+application_backend_product:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/product.yml"
+    prefix: /product
+
+application_backend_cms_page:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/cms-page.yml"
+    prefix:   /cms-page
+
+application_backend_user:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/user.yml"
+    prefix:   /user
+
+application_backend_group:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/group.yml"
+    prefix:   /group

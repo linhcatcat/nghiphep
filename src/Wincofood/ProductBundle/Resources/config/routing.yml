@@ -1,0 +1,3 @@
+wincofood_product_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WincofoodProductBundle:Default:index }

@@ -1,0 +1,16 @@
+services:
+#    wincofood_application.example:
+#        class: Wincofood\ApplicationBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    wincofood_pagination_service:
+       class: Wincofood\ApplicationBundle\Service\PaginationService
+       arguments: ["@templating", "@doctrine.orm.entity_manager", "@service_container"]
+    wincofood_upload_service:
+       class: Wincofood\ApplicationBundle\Service\UploadImageService
+       arguments: ["%limit_file_size%"]
+    wincofood_mail_service:
+        class: Wincofood\ApplicationBundle\Service\MailService
+        arguments:
+          - '@service_container'
+          - '@mailer'
+          - '@Application_email_template.service'

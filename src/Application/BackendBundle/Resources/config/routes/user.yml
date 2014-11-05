@@ -1,0 +1,15 @@
+application_backend_user_index:
+    pattern:  /
+    defaults: { _controller: "ApplicationBackendBundle:User:index" }
+
+application_backend_user_add:
+    pattern:  /add
+    defaults: { _controller: "ApplicationBackendBundle:User:add" }
+
+application_backend_user_edit:
+    pattern:  /{userID}/edit
+    defaults: { _controller: "ApplicationBackendBundle:User:edit" }
+
+application_backend_user_delete:
+    pattern:  /{userID}/delete
+    defaults: { _controller: "ApplicationBackendBundle:User:delete" }

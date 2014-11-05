@@ -1,0 +1,7 @@
+parameters:
+#    Application_email_template.example.class: Application\EmailTemplateBundle\Example
+
+services:
+    Application_email_template.service:
+       class: Application\EmailTemplateBundle\Service\EmailTemplateService
+       arguments: ["@doctrine.orm.entity_manager", "@templating"]

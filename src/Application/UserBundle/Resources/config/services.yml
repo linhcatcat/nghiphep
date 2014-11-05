@@ -1,0 +1,23 @@
+parameters:
+#    Application_user.example.class: Application\UserBundle\Example
+
+services:
+#    Application_user.example:
+#        class: %Application_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    Application_user.service:
+        class: Application\UserBundle\Service\UserService
+        arguments: 
+          - '@doctrine.orm.entity_manager'
+          - '@fos_user.user_manager'
+          - '@wincofood_mail_service'
+          - '@router'
+          - '@event_dispatcher'
+    application_group_service:
+        class: Application\UserBundle\Service\GroupService
+        arguments: ["@doctrine.orm.entity_manager"]
+    application.user.security.success_handler:
+        class: Application\UserBundle\Security\Authentication\Handler\LoginSuccessHandler
+        public: false
+        arguments:  ["@router", "@security.context", @Application_user.service, @session]

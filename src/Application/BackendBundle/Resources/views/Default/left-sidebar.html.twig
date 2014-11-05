@@ -1,0 +1,33 @@
+<a id="button_collapse_left_sidebar" class="button_collapse_sidebar" href="#"></a>
+<aside class="left_sidebar" id="collapse_sidebar">
+	<ul>
+		<li class="clearfix cms_page {% block active_class_user %}{% endblock %}">
+			<a href="{{ path('application_backend_user_index') }}" class="clearfix">
+				<span class="icon_menu"><i class="icon-envelope"></i></span>
+				<span class="title_menu">{{ 'User'|trans }}</span>
+				<span class="icon_arrow pull-right"><i class="icon-chevron-right"></i></span>
+			</a>
+		</li>
+		<li class="clearfix cms_page {% block active_class_group %}{% endblock %}">
+			<a href="{{ path('application_backend_group_index') }}" class="clearfix">
+				<span class="icon_menu"><i class="icon-envelope"></i></span>
+				<span class="title_menu">{{ 'Group'|trans }}</span>
+				<span class="icon_arrow pull-right"><i class="icon-chevron-right"></i></span>
+			</a>
+		</li>
+		<li class="clearfix cms_page {% block active_class_cms_page %}{% endblock %}">
+			<a href="{{ path('application_backend_cms_page_index') }}" class="clearfix">
+				<span class="icon_menu"><i class="icon-envelope"></i></span>
+				<span class="title_menu">{{ 'CMS Pages'|trans }}</span>
+				<span class="icon_arrow pull-right"><i class="icon-chevron-right"></i></span>
+			</a>
+		</li>
+		<li class="clearfix cms_page {% block active_class_product %}{% endblock %}">
+			<a href="{{ path('application_backend_product_index') }}" class="clearfix">
+				<span class="icon_menu"><i class="icon-envelope"></i></span>
+				<span class="title_menu">{{ 'Product'|trans }}</span>
+				<span class="icon_arrow pull-right"><i class="icon-chevron-right"></i></span>
+			</a>
+		</li>
+	</ul>
+</aside>

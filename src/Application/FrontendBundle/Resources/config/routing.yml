@@ -1,0 +1,18 @@
+application_frontend_homepage:
+    path:     /
+    defaults: { _controller: ApplicationFrontendBundle:Default:index }
+
+application_frontend_errorpage:
+    path:     /error
+    defaults: { _controller: ApplicationFrontendBundle:Default:error }
+
+application_frontend_login:
+    pattern:   /login
+    defaults: { _controller: "ApplicationBackendBundle:Security:login" }
+
+application_frontend_login_check:
+    pattern:   /check-login
+    defaults: { _controller: "FOSUserBundle:Security:check" }
+
+application_frontend_logout:
+    pattern:   /logout

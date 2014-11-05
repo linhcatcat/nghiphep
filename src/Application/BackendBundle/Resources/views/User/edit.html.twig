@@ -1,0 +1,42 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_user %}active{% endblock %}
+{% endembed %}
+<div class="main-content">
+	<div class="list-content">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'edit_user_error' ) %}
+				<div class="alert alert-error">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_user_error')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li class="active"><a href="#user-admin">{{ 'edit user admin'|trans|capitalize }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="user-admin">
+					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form">
+						{{ form_widget(form) }}
+						<div class="submit-profile clearfix">
+							<div class="save-user pull-left">
+								<i class="icon-save"></i>
+								<input class="btn save-profile" type="submit" value="{{ 'Update'|trans }}" />
+							</div>
+							<a href="{{ path('application_backend_user_index') }}" class="btn cancel-add-user-admin pull-left">
+								<i class="icon-long-arrow-left"></i>
+								{% trans %}Cancel{% endtrans %}
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

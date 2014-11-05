@@ -1,0 +1,7 @@
+services:
+#    wincofood_product.example:
+#        class: Wincofood\ProductBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    wincofood_product_service:
+        class: Wincofood\ProductBundle\Service\ProductService
+        arguments: ["@doctrine.orm.entity_manager"]

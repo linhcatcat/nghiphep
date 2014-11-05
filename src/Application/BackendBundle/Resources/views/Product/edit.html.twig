@@ -1,0 +1,47 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_product %}active{% endblock %}
+{% endembed %}
+<div class="main-content">
+	<div class="list-content">
+		<div class="content">
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li class="active"><a href="#cms-page">{{ 'Edit CmsPage'|trans }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="cms-page">
+					<form enctype="multipart/form-data" method="POST" class="edit_product_form backend-form">
+						{{ form_row(form.title) }}
+						{{ form_row(form.slug) }}
+						<div class="clearfix">
+							{% if (oProduct.image is not empty) %}
+								<img id="img-preview" class="pull-left" src="{{ asset(oProduct.image) }}" />
+							{% else %}
+								<img id="img-preview" class="pull-left" src="" />
+							{% endif %}
+							<input type="hidden" class="check_remove_image" name="check_remove_image" value="false" >
+							<a class="remove-image pull-left" {% if (oProduct.image is not empty) %}style="display: block"{% endif %} title="{{'Remove image'|trans}}" href="#"><i class="icon-remove"></i></a>
+						</div>
+						<div><input id="fileupload" type="file" name="filesUpload" accept="image/*" title="{{'Upload image'|trans}}"></div>
+						{{ form_widget(form) }}
+						<div class="submit-profile clearfix">
+							<div class="save-cmspage pull-left">
+								<i class="icon-save"></i>
+								<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+							</div>
+							<a href="{{ path('application_backend_cms_page_index') }}" class="btn cancel-edit-cmspage pull-left">
+								<i class="icon-long-arrow-left"></i>
+								{% trans %}Cancel{% endtrans %}
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block js_upload %}ProductType_content{% endblock %}

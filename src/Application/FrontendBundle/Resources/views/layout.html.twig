@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Leave Manage{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="{{ asset('application/images/favicon.ico')}}" />
+        <link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/138fefb8-90b9-432a-bed8-1e198f5f543d.css"/>
+        {% stylesheets '@application_frontend_css' %}
+        <link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.css')}}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
+        
+        {% endstylesheets %}
+        <!--[if IE 7]>
+        {% stylesheets '@application_shared_ie7_css' %}
+  <link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+        {% endstylesheets %}
+              <![endif]-->
+
+        {% block stylesheet %} {% endblock %}
+
+        <script src="{{ asset('web/application/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="background">
+            <img class="bg" src="{{ video_cv_bg_url }}">
+        </div>
+        <div id="container">
+            <header>
+                <section class="container">
+                    <a id="logo" href="{{ path('application_frontend_homepage') }}">
+                        <img src="{{ asset('application/images/logo.png') }}" alt="logo"/>
+                    </a>
+                </section>
+            </header>
+            <div id="main" role="main">
+                <section class="container backend">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+        <footer>
+            <section class="container">
+                <p class="footer-left pull-left">{{'Copyright by WincoFood. All rights reserved.'|trans}}</p>
+                <p class="footer-right pull-right">{{'Webbutveckling & design av'|trans}} WincoFood Digital</p>
+            </section>
+        </footer>
+    </div> <!-- /container -->
+
+    <script src="{{ asset('web/application/js/libs/jquery.js')}}"></script>
+    <script src="{{ asset('web/application/js/libs/jquery-ui.js')}}"></script>
+
+    <script>window.jQuery || document.write('<script src="{{ asset('web/application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
+
+    <script src="{{ asset('web/bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript">
+            var iLimitFileSize = {{ limit_file_size }};     </script>
+    {% block gloabalVariableJavascript %} {% endblock %}
+
+    {% javascripts '@application_backend_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <!--[if IE 7]>
+      <script src="{{ asset('application/js/script-ie7.js') }}"></script>
+    <![endif]-->
+    <script>
+        var _gaq = [['_setAccount', 'UA-48658771-1'], ['_trackPageview']];
+        (function(d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = '//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
+    </script>
+
+    {% block javascript %} {% endblock %}
+</body>
+</html>

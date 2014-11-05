@@ -1,0 +1,15 @@
+application_backend_product_index:
+    pattern:  /
+    defaults: { _controller: "ApplicationBackendBundle:Product:index" }
+
+application_backend_product_add:
+    pattern: /add
+    defaults: { _controller: "ApplicationBackendBundle:Product:add" }
+
+application_backend_product_edit:
+    pattern:  /{productID}/edit
+    defaults: { _controller: "ApplicationBackendBundle:Product:edit" }
+
+application_backend_product_delete:
+    pattern:  /{productID}/delete
+    defaults: { _controller: "ApplicationBackendBundle:Product:delete" }

@@ -1,0 +1,17 @@
+application_backend_cms_page_index:
+    pattern:  /
+    defaults: { _controller: "ApplicationBackendBundle:CmsPage:index" }
+
+application_backend_cms_page_edit:
+    pattern:  /{cmsPageID}/edit
+    defaults: { _controller: "ApplicationBackendBundle:CmsPage:edit" }
+    requirements:
+        emailTemplateID: '[0-9a-f]+'
+
+application_backend_cms_page_delete:
+    pattern:  /{cmsPageID}/delete
+    defaults: { _controller: "ApplicationBackendBundle:CmsPage:delete" }
+
+application_backend_cms_page_add:
+    pattern:  /add
+    defaults: { _controller: "ApplicationBackendBundle:CmsPage:add" }

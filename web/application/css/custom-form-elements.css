@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Custom Form Elements, custom-form-elements.css
+   ========================================================================== */
+
+
+.checkbox {
+	width: 24px;
+	height: 24px;
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	background: url(../images/checkbox_bg_4.png) no-repeat;
+}
+
+/*.list-content .table-striped tbody > tr:nth-child(2n + 1) > td .checkbox {
+	background: url(../images/checkbox_bg.png) no-repeat;
+}
+
+.list-content .table-striped tbody > tr:nth-child(2n) > td .checkbox {
+	background: url(../images/checkbox_bg_2.png) no-repeat;
+}*/
+
+.radio {
+	background: url(../images/radio_bg_2.png) no-repeat;
+	width: 23px;
+	height: 23px;
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	float: left;
+	margin-right: 11px;
+}
+.select {
+	position: absolute;
+	width: 149px;  /*With the padding included, the width is 190 pixels: the actual width of the image. */
+	height: 27px;
+	padding: 0;
+	color: #1e1e1e;
+	background: url(../images/button_select_5.png) no-repeat;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 14px;
+	padding-left: 8px;
+	padding-top: 10px;
+}

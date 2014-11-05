@@ -1,0 +1,3 @@
+wincofood_sale_index:
+    path:     /
+    defaults: { _controller: WincofoodSaleBundle:Default:index }

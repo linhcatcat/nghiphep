@@ -1,0 +1,8 @@
+services:
+#    wincofood_cms.example:
+#        class: Wincofood\CmsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+services:
+    application_cms_page_service:
+        class: Wincofood\CmsBundle\Service\CmsPageService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
