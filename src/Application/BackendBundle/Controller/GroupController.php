@@ -10,8 +10,7 @@ use Application\BackendBundle\Form\GroupUserType;
 use Application\UserBundle\Entity\Group;
 use Application\UserBundle\Entity\GroupUser;
 
-class GroupController extends Controller
-{
+class GroupController extends Controller {
 	/**
 	 * List Product
 	 * @author Alex <alex@likipe.se>
@@ -119,15 +118,57 @@ class GroupController extends Controller
 		if ($form->isValid()) {
 			$em = $this->getDoctrine()->getEntityManager();
 			$groupUser->setGroup( $group );
-			//var_dump($groupUser);exit();
 			$em->persist($groupUser);
 			$em->flush();
 			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' successfully to group '.$group->getName()));
-			return $this->redirect($this->generateUrl('application_backend_group_index'));
+			return $this->redirect($this->generateUrl('application_backend_group_show_user', array('groupID' => $groupID)));
 		}
 		
 		return $this->render('ApplicationBackendBundle:Group:addUser.html.twig', array(
 			'form'	=>	$form->createView(),
 		));
+	}
+
+	/**
+	 * List user in group
+	 * @author Alex <alex@likipe.se>
+	 * @return view, array group
+	 */
+	public function showUserAction(Request $request, $groupID) {
+		$groupUserService = $this->get('application_group_user_service');
+		$groupService = $this->get('application_group_service');
+		$group = $groupService->find($groupID);
+		if(empty($group)) {
+			throw $this->createNotFoundException($translator->trans('Group Not found'));
+		}
+		$page = (int) $request->query->get('page', 1);
+		$limit = $this->container->getParameter('limit_items_per_page');
+		$offset = $limit * ($page - 1);
+		$totalGroup = $groupUserService->count( $groupID );
+		$aFilters = array('id' => 'DESC');
+		return $this->render('ApplicationBackendBundle:Group:showUser.html.twig',array(
+			'group' => $group,
+			'groupUsers'	=>	$groupUserService->filter($limit, $offset, $aFilters, $groupID),
+			//'pagination'	=>	$this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalGroup / $limit), array()),
+		));
+	}
+
+	/**
+	 * Remove user from group
+	 * @author Alex <alex@likipe.se>
+	 * @param int $groupID
+	 * @return redirect
+	 * @throws type
+	 */
+	public function deleteUserAction($groupUserID) {
+		$groupUserService = $this->get('application_group_user_service');
+		$translator = $this->get('translator');
+		$groupUser = $groupUserService->find($groupUserID);
+		if (empty($groupUser)) {
+			throw $this->createNotFoundException($translator->trans('No employee found for id ' . $groupUserID));
+		}
+		$groupUserService->remove($groupUserID);
+		$this->get('session')->getFlashBag()->add('remove_group_user_successfully', $translator->trans('Removed successfully'));
+		return $this->redirect($this->generateUrl('application_backend_group_show_user', array('groupID' => $groupUser->getGroup()->getId())));
 	}
 }

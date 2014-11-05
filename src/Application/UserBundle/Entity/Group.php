@@ -58,6 +58,10 @@ class Group {
 	public function __construct() {
 	}
 
+	public function __toString(){
+	    return $this->name;
+	}
+
 	/**
 	 * Set user
 	 *

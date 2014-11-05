@@ -18,8 +18,10 @@ class GroupUserRepository extends EntityRepository {
 	 * @param integer $limit
 	 * @param integer $offset
 	 */
-	public function filter($limit, $offset, $aFilters) {
+	public function filter($limit, $offset, $aFilters, $groupID) {
 		$qb = $this->createQueryBuilder('gu');
+		$qb->where('gu.group = :group');
+    	$qb->setParameter('group', $groupID);
 		$qb->setFirstResult($offset);
 		if (0 <= $limit) {
 			$qb->setMaxResults($limit);
@@ -43,8 +45,10 @@ class GroupUserRepository extends EntityRepository {
 	 * @author Alex
 	 * Return count
 	 */
-	public function count() {
-		$qb = $this->createQueryBuilder('gu');
+	public function count($groupID) {
+		$qb = $this->createQueryBuilder('gu');		
+		$qb->where('gu.group = :group');
+    	$qb->setParameter('group', $groupID);
 		$qb->select($qb->expr()->countDistinct('gu.id'));
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;

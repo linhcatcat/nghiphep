@@ -23,13 +23,13 @@ class GroupUser {
 
 	/**
 	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
-	 * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
 	 */
 	protected $user;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
-	 * @ORM\JoinColumn(name="group", referencedColumnName="id", nullable=true)
+	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\Group", mappedBy="GroupUser")
+	 * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=true)
 	 */
 	protected $group;
 

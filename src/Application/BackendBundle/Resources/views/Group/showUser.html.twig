@@ -1,0 +1,72 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_group %}active{% endblock %}
+{% endembed %}
+<div class="main-content">
+	<div class="list-content list_cms_page">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'edit_group_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_group_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_group_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_group_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li><a>{% trans %}Group{% endtrans %}: {{ group.name }}</a></li>
+				<li><a>{% trans %}Manager{% endtrans %}: {{ group.user.username }} - {{ group.user.firstName }} {{ group.user.lastName }}</a></li>
+				<li><a class="btn" href="{{ path('application_backend_group_add_user',{'groupID' : group.id}) }}" class="add-group-user">{{ 'Add Employee'|trans }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="cms-page">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>{{ 'Username'|trans }}</th>
+								<th>{{ 'Name'|trans }}</th>
+								<th>{{ 'Email'|trans }}</th>
+								<th>{{ 'Created'|trans }}</th>
+								<th>{{ 'Updated'|trans }}</th>
+								<th>{{ 'Action'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for groupUser in groupUsers %}
+							<tr>
+								<td>{{ groupUser.user.username }}</td>
+								<td>{{ groupUser.user.firstName }} {{ groupUser.user.lastName }}</td>
+								<td>{{ groupUser.user.email }}</td>
+								<td>{{ groupUser.created|date('d-m-y') }}</td>
+								<td>{{ groupUser.updated|date('d-m-y') }}</td>
+								<td>
+									<a onclick="return confirm('{% trans %}Are you sure you want to remove this employee from{% endtrans %} {{ group.name }} group?');" href="{{ path('application_backend_group_delete_user',{'groupUserID' : groupUser.id}) }}" class="delete_group">{{ 'Delete'|trans }}</a>
+								</td>
+							</tr>
+							{% else %}
+								<tr>
+									<td colspan="4">{{ 'Not found employee in group'|trans }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{#% if groups is not empty %}
+						{{ pagination | raw }}
+					{% endif %#}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
