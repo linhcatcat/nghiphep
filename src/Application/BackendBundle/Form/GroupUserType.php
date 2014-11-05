@@ -19,7 +19,7 @@ class GroupUserType extends AbstractType {
 			"class" => "ApplicationUserBundle:User",
 			"query_builder" => function(EntityRepository $er){
 				return $er->createQueryBuilder("u")
-					->where( "u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_EMPLOYEE")) ."'" )
+					->where( "u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_EMPLOYEE")) ."' and u.id NOT IN (5, 6)" )
 					->orderBy("u.username", "DESC");
 			},
 		));
