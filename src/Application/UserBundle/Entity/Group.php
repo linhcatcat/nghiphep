@@ -3,11 +3,13 @@
 namespace Application\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 /**
  * Application\ProductBundle\Entity\Group
  * @ORM\Table(name="nghiphep.group")
  * @ORM\Entity
+ * @DoctrineAssert\UniqueEntity(fields="name", message="This group name already exists, you can choose another group name.")
  * @ORM\Entity(repositoryClass="Application\UserBundle\Repository\GroupRepository")
  * @ORM\HasLifecycleCallbacks
  */

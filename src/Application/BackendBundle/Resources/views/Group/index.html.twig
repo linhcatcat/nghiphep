@@ -49,8 +49,8 @@
 								<td>{{ group.created|date('d-m-y') }}</td>
 								<td>{{ group.updated|date('d-m-y') }}</td>
 								<td>
-									<a href="{{ path('application_backend_product_edit',{'productID' : group.id}) }}" class="edit-product">{{ 'Edit'|trans }}</a> 
-									<a onclick="return confirm('{% trans %}Are you sure you want to delete this group{% endtrans %}?');" href="{{ path('application_backend_product_delete',{'productID' : group.id}) }}" class="delete_group">{{ 'Delete'|trans }}</a>
+									<a href="{{ path('application_backend_group_edit',{'groupID' : group.id}) }}" class="edit-product">{{ 'Edit'|trans }}</a> 
+									<a onclick="return confirm('{% trans %}Are you sure you want to delete this group{% endtrans %}?');" href="{{ path('application_backend_group_delete',{'groupID' : group.id}) }}" class="delete_group">{{ 'Delete'|trans }}</a>
 								</td>
 							</tr>
 							{% else %}

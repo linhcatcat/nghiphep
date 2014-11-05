@@ -70,8 +70,8 @@ class GroupService {
 	 * @param object $oCompanyJob
 	 * @return boolean
 	 */
-	public function update($oProduct) {
-		if (empty($oProduct)) {
+	public function update($group) {
+		if (empty($group)) {
 			return false;
 		}
 		$this->em->flush();
@@ -85,11 +85,11 @@ class GroupService {
 	 * @return boolean
 	 */
 	public function remove($id) {
-		$oProduct = $this->getRepository()->find($id);
-		if (empty($oProduct)) {
+		$group = $this->getRepository()->find($id);
+		if (empty($group)) {
 			return false;
 		}
-		$this->em->remove($oProduct);
+		$this->em->remove($group);
 		$this->em->flush();
 
 		return true;

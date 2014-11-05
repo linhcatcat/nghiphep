@@ -51,4 +51,54 @@ class GroupController extends Controller
 			'form'	=>	$form->createView(),
 		));
 	}
+
+	/**
+	 * Edit cms page
+	 * @author Alex <alex@likipe.se>
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $groupID
+	 * @return form
+	 */
+	public function editAction(Request $request, $groupID) {
+		$groupService = $this->get('application_group_service');
+		$translator = $this->get('translator');
+
+		$group = $groupService->find($groupID);
+		if(empty($group))
+			throw $this->createNotFoundException($translator->trans('Email Template Not found'));
+		
+		$form = $this->createForm(new GroupType(), $group);
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$bUpdate = $groupService->update($group);
+			if($bUpdate) {
+				$this->get('session')->getFlashBag()->add('edit_group_successfully', $translator->trans('Edit ' . $group->getName() . ' Successfully'));
+				return $this->redirect($this->generateUrl('application_backend_group_index'));
+			}
+		}
+		return $this->render('ApplicationBackendBundle:Group:edit.html.twig', array(
+			'form'	=>	$form->createView(),
+			'group' => $group
+		));
+	}
+
+
+	/**
+	 * Delete user
+	 * @author Alex <alex@likipe.se>
+	 * @param int $groupID
+	 * @return redirect
+	 * @throws type
+	 */
+	public function deleteAction($groupID) {
+		$groupService = $this->get('application_group_service');
+		$translator = $this->get('translator');
+		$group = $groupService->find($groupID);
+		if (empty($group)) {
+			throw $this->createNotFoundException($translator->trans('No group found for id ' . $groupID));
+		}
+		$groupService->remove($groupID);
+		$this->get('session')->getFlashBag()->add('delete_group_successfully', $translator->trans('Deleted successfully'));
+		return $this->redirect($this->generateUrl('application_backend_group_index'));
+	}
 }

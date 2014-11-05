@@ -5,3 +5,11 @@ application_backend_group_index:
 application_backend_group_add:
     pattern: /add
     defaults: { _controller: "ApplicationBackendBundle:Group:add" }
+
+application_backend_group_edit:
+    pattern: /{groupID}/edit
+    defaults: { _controller: "ApplicationBackendBundle:Group:edit" }
+
+application_backend_group_delete:
+    pattern: /{groupID}/delete
+    defaults: { _controller: "ApplicationBackendBundle:Group:delete" }
