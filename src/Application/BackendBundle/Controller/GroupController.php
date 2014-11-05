@@ -113,10 +113,13 @@ class GroupController extends Controller
 		$groupUser = new GroupUser();
 		$groupService = $this->get('application_group_service');
 		$group = $groupService->find($groupID);
-		$form = $this->createForm(new GroupUserType(), $groupUser);
+
+		$form = $this->createForm(new GroupUserType( $groupID ), $groupUser);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$em = $this->getDoctrine()->getEntityManager();
+			$groupUser->setGroup( $group );
+			//var_dump($groupUser);exit();
 			$em->persist($groupUser);
 			$em->flush();
 			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' successfully to group '.$group->getName()));

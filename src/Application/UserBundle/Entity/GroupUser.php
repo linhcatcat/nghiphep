@@ -6,8 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 /**
- * Application\ProductBundle\Entity\GroupUser
- * @ORM\Table(name="nghiphep.group")
+ * Application\UserBundle\Entity
+ * @ORM\Table(name="nghiphep.group_user")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Application\UserBundle\Repository\GroupUserRepository")
  * @ORM\HasLifecycleCallbacks
@@ -22,13 +22,13 @@ class GroupUser {
 	protected $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser", cascade={"remove"})
+	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
 	 * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
 	 */
 	protected $user;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser", cascade={"remove"})
+	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
 	 * @ORM\JoinColumn(name="group", referencedColumnName="id", nullable=true)
 	 */
 	protected $group;
