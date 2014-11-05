@@ -46,7 +46,7 @@ class UserType extends AbstractType {
                 'expanded'   => true,
                 'choices'   => array(1 => 'Male', 0 => 'Female'),
                 'multiple'  => false,
-                'data' => isset($options['gender']) ? $options['gender'] : 0
+                'data' => isset($options['gender']) ? $options['gender'] : 1
             ))
 			->add('role', 'choice', array(
 				'label' => 'Role',

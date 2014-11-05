@@ -13,3 +13,7 @@ application_backend_group_edit:
 application_backend_group_delete:
     pattern: /{groupID}/delete
     defaults: { _controller: "ApplicationBackendBundle:Group:delete" }
+
+application_backend_group_add_user:
+    pattern: /{groupID}/add
+    defaults: { _controller: "ApplicationBackendBundle:Group:addUser" }

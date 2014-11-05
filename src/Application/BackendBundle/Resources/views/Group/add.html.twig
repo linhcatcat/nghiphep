@@ -15,12 +15,12 @@
 				<div class="tab-pane active" id="product">
 					<form enctype="multipart/form-data" method="POST" class="edit_group_form backend-form">
 						{{ form_widget(form) }}
-						<div class="submit-group clearfix">
+						<div class="submit-profile clearfix">
 							<div class="save-group pull-left">
 								<i class="icon-save"></i>
-								<input class="btn save-group" type="submit" value="{{ 'Save'|trans }}" />
+								<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
 							</div>
-							<a href="{{ path('application_backend_cms_page_index') }}" class="btn cancel-edit-group pull-left">
+							<a href="{{ path('application_backend_group_index') }}" class="btn cancel-edit-cmspage pull-left">
 								<i class="icon-long-arrow-left"></i>
 								{% trans %}Cancel{% endtrans %}
 							</a>

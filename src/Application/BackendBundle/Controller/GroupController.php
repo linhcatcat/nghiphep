@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
 use Application\BackendBundle\Form\GroupType;
+use Application\BackendBundle\Form\GroupUserType;
 use Application\UserBundle\Entity\Group;
+use Application\UserBundle\Entity\GroupUser;
 
 class GroupController extends Controller
 {
@@ -82,7 +84,6 @@ class GroupController extends Controller
 		));
 	}
 
-
 	/**
 	 * Delete user
 	 * @author Alex <alex@likipe.se>
@@ -100,5 +101,30 @@ class GroupController extends Controller
 		$groupService->remove($groupID);
 		$this->get('session')->getFlashBag()->add('delete_group_successfully', $translator->trans('Deleted successfully'));
 		return $this->redirect($this->generateUrl('application_backend_group_index'));
+	}
+
+	/**
+	 * Add user to group
+	 * @author Alex <alex@likipe.se>
+	 * @return form
+	 */
+	public function addUserAction(Request $request, $groupID) {
+		$translator = $this->get('translator');
+		$groupUser = new GroupUser();
+		$groupService = $this->get('application_group_service');
+		$group = $groupService->find($groupID);
+		$form = $this->createForm(new GroupUserType(), $groupUser);
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getEntityManager();
+			$em->persist($groupUser);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' successfully to group '.$group->getName()));
+			return $this->redirect($this->generateUrl('application_backend_group_index'));
+		}
+		
+		return $this->render('ApplicationBackendBundle:Group:addUser.html.twig', array(
+			'form'	=>	$form->createView(),
+		));
 	}
 }

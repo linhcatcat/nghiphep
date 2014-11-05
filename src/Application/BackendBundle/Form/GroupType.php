@@ -32,7 +32,7 @@ class GroupType extends AbstractType {
 
         $builder->add('enabled', 'checkbox', array(
 			'mapped' => true,
-			'attr'	=> array(),
+			'attr'	=> array('checked'   => 'checked'),
 			'required'  => false,
 		));
 	}

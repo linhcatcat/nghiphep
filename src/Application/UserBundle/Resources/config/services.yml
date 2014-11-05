@@ -17,6 +17,9 @@ services:
     application_group_service:
         class: Application\UserBundle\Service\GroupService
         arguments: ["@doctrine.orm.entity_manager"]
+    application_group_user_service:
+        class: Application\UserBundle\Service\GroupUserService
+        arguments: ["@doctrine.orm.entity_manager"]
     application.user.security.success_handler:
         class: Application\UserBundle\Security\Authentication\Handler\LoginSuccessHandler
         public: false
