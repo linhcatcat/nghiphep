@@ -6,6 +6,12 @@
 	<br/>
 	From: <input type="text" id="txtFromDate" />
 	To: <input type="text" id="txtToDate" />
+	<p id="datepairExample">
+		From <input type="text" class="date start" />
+		<input type="text" class="time start" /> To
+		<input type="text" class="time end" />
+		<input type="text" class="date end" />
+	</p>
 {% endblock %}
 {% block javascript %}
 	<script type="text/javascript">
@@ -22,4 +28,17 @@
 			}
 		});
 	</script>
+	<script>
+        $('#datepairExample .time').timepicker({
+            'showDuration': true,
+            'timeFormat': 'g:ia'
+        });
+
+        $('#datepairExample .date').datepicker({
+            'format': 'm/d/yyyy',
+            'autoclose': true
+        });
+
+        $('#datepairExample').datepair();
+    </script>
 {% endblock %}
