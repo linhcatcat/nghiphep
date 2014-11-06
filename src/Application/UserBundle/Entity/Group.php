@@ -53,9 +53,7 @@ class Group {
 	protected $enabled;
 
 	/**
-     * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\GroupUser", mappedBy="group")
-     * @JoinTable(name="users_phonenumbers",
-     * @ORM\JoinColumn(name="member", referencedColumnName="id", nullable=true)
+     * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\GroupUser", mappedBy="group", cascade={"remove"})
      */
 	protected $member;
 

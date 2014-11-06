@@ -79,6 +79,27 @@ class GroupUser {
 	}
 
 	/**
+	 * Set group
+	 *
+	 * @param \Application\UserBundle\Entity\Group $group
+	 * @return groupUser
+	 */
+	public function setGroup(\Application\UserBundle\Entity\Group $group = null) {
+		$this->group = $group;
+
+		return $this;
+	}
+
+	/**
+	 * Get group
+	 *
+	 * @return \Application\UserBundle\Entity\Group
+	 */
+	public function getGroup() {
+		return $this->group;
+	}
+
+	/**
 	 * @ORM\PrePersist
 	 */
 	public function prePersist() {

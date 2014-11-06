@@ -65,6 +65,7 @@ class GroupController extends Controller {
 		$translator = $this->get('translator');
 
 		$group = $groupService->find($groupID);
+		//var_dump(count($group->getMembers()));
 		if(empty($group))
 			throw $this->createNotFoundException($translator->trans('Email Template Not found'));
 		
@@ -120,7 +121,7 @@ class GroupController extends Controller {
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$em = $this->getDoctrine()->getEntityManager();
-			//$groupUser->setGroup( $group );
+			$groupUser->setGroup( $group );
 			$em->persist($groupUser);
 			$em->flush();
 			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' successfully to group '.$group->getName()));
@@ -139,6 +140,7 @@ class GroupController extends Controller {
 	 */
 	public function showUserAction(Request $request, $groupID) {
 		$groupUserService = $this->get('application_group_user_service');
+		$translator = $this->get('translator');
 		$groupService = $this->get('application_group_service');
 		$group = $groupService->find($groupID);
 		if(empty($group)) {
