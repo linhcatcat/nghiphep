@@ -66,6 +66,10 @@ class Group {
 		$this->member = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
+	public function __toString(){
+	    return $this->name;
+	}
+
 	/**
 	 * Set user
 	 *

@@ -102,8 +102,8 @@ class GroupUserService {
 	 * @param integer $limit
 	 * @param integer $offset
 	 */
-	public function filter($limit, $offset, $aFilters = array()) {
-		$results = $this->getRepository()->filter($limit, $offset, $aFilters);
+	public function filter($limit, $offset, $aFilters = array(), $groupID) {
+		$results = $this->getRepository()->filter($limit, $offset, $aFilters, $groupID);
 		return $results;
 	}
 
@@ -113,8 +113,8 @@ class GroupUserService {
 	 * @param string $sKeyword
 	 * @param array $aParams
 	 */
-	public function count() {
-		$count = $this->getRepository()->count();
+	public function count($groupID) {
+		$count = $this->getRepository()->count($groupID);
 		return $count;
 	}
 }
