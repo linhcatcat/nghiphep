@@ -28,12 +28,6 @@ class GroupUser {
 	protected $user;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
-	 * @ORM\JoinColumn(name="group", referencedColumnName="id", nullable=true)
-	 */
-	protected $group;
-
-	/**
 	 * @var datetime $created
 	 * @ORM\Column(name="created", type="datetime")
 	 */
@@ -76,27 +70,6 @@ class GroupUser {
 	 */
 	public function getUser() {
 		return $this->user;
-	}
-
-	/**
-	 * Set group
-	 *
-	 * @param \Application\UserBundle\Entity\Group $group
-	 * @return CompanyJob
-	 */
-	public function setGroup(\Application\UserBundle\Entity\Group $group = null) {
-		$this->group = $group;
-
-		return $this;
-	}
-
-	/**
-	 * Get group
-	 *
-	 * @return \Application\UserBundle\Entity\Group
-	 */
-	public function getGroup() {
-		return $this->group;
 	}
 
 	/**

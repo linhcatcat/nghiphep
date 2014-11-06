@@ -13,7 +13,7 @@ use Application\UserBundle\Entity\GroupUser;
 class GroupController extends Controller
 {
 	/**
-	 * List Product
+	 * List group
 	 * @author Alex <alex@likipe.se>
 	 * @return view, array group
 	 */
@@ -72,6 +72,9 @@ class GroupController extends Controller
 		$form = $this->createForm(new GroupType(), $group);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
+			//var_dump($group->getUser()->getUsername());exit();
+			$group->addMember( $group->getUser() );
+			//var_dump(count($group->getMembers()));exit();
 			$bUpdate = $groupService->update($group);
 			if($bUpdate) {
 				$this->get('session')->getFlashBag()->add('edit_group_successfully', $translator->trans('Edit ' . $group->getName() . ' Successfully'));
@@ -118,7 +121,7 @@ class GroupController extends Controller
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$em = $this->getDoctrine()->getEntityManager();
-			$groupUser->setGroup( $group );
+			//$groupUser->setGroup( $group );
 			//var_dump($groupUser);exit();
 			$em->persist($groupUser);
 			$em->flush();
