@@ -9,17 +9,22 @@ use Doctrine\ORM\EntityRepository;
 
 
 class GroupUserType extends AbstractType {
-	/*protected $groupID;
-	public function __construct( $groupID ) {
-		$this->groupID = $groupID;
-	}*/
+	protected $members;
+	protected $notIn = "";
+	public function __construct( $members = array() ) {
+		$this->members = $members;
+	}
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		if( count( $this->members ) ){
+			$this->notIn = "and u.id NOT IN (". implode(',', $this->members) .")";
+		}
 		$builder->add("user","entity",array(
 			"label" => "User",
+			'required'  => true,
 			"class" => "ApplicationUserBundle:User",
 			"query_builder" => function(EntityRepository $er){
 				return $er->createQueryBuilder("u")
-					->where( "u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_EMPLOYEE")) ."' and u.id NOT IN (5, 6)" )
+					->where( "(u.roles = '" . serialize(array("ROLE_SUPER_ADMIN")) . "' or u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_EMPLOYEE")) ."') ". $this->notIn )
 					->orderBy("u.username", "DESC");
 			},
 		));

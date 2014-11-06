@@ -7,18 +7,18 @@
 <div class="main-content">
 	<div class="list-content list_cms_page">
 		<div class="content">
-			{% if app.session.getFlashBag().has( 'edit_group_successfully' ) %}
+			{% if app.session.getFlashBag().has( 'add_group_user_successfully' ) %}
 				<div class="alert alert-success">
 					<button class="close" data-dismiss="alert" type="button">×</button>
-						{% for message in app.session.getFlashBag().get('edit_group_successfully')%}
+						{% for message in app.session.getFlashBag().get('add_group_user_successfully')%}
 							{{message}}
 						{% endfor %}
 				</div>
 			{% endif %}
-			{% if app.session.getFlashBag().has( 'add_group_successfully' ) %}
+			{% if app.session.getFlashBag().has( 'remove_group_user_successfully' ) %}
 				<div class="alert alert-success">
 					<button class="close" data-dismiss="alert" type="button">×</button>
-						{% for message in app.session.getFlashBag().get('add_group_successfully')%}
+						{% for message in app.session.getFlashBag().get('remove_group_user_successfully')%}
 							{{message}}
 						{% endfor %}
 				</div>

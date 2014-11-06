@@ -1,3 +1,183 @@
 http://www.jquerybyexample.net/2012/01/end-date-should-not-be-greater-than.html
 http://smartbossvn.com/chuc-nang/dang-ki-nghi-phep-online/
 http://nghiphep.beton6.com/login.aspx?Cul=vn
+
+OneToMany ...
+http://doctrine-orm.readthedocs.org/en/latest/reference/association-mapping.html
+
+http://www.lafermeduweb.net/tutorial/la-validation-de-donnees-avec-symfony2-p101.html
+/**
+     * @var string $title
+     * @Assert\NotBlank(message="Title must not be empty")
+     * @Assert\MinLength(
+     *      limit=3,
+     *      message="Title should have at least {{ limit }} characters."
+     * )
+     * @Assert\MaxLength(255)
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var text $summary
+     * @Assert\NotBlank()
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
+
+    /**
+     * @var text $description
+     * @Assert\NotBlank()
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var decimal $note
+     * @Assert\Min(limit = "0", message = "Desk's note must be positive")
+     * @Assert\Max(limit = "5", message = "The max value for the note is 5")
+     * @ORM\Column(name="note", type="decimal", nullable=true)
+     */
+    private $note;
+
+    /**
+     * @var integer $voteCount
+     *
+     * @ORM\Column(name="vote_count", type="integer", nullable=true)
+     */
+    private $voteCount;
+
+    /**
+     * @var datetime $createdAt
+     * @Assert\DateTime()
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime $updatedAt
+     * @Assert\DateTime()
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+
+<?php
+...
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Subscription
+ *
+ * @ORM\Table(name="subscriber")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
+class Subscriber
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="Subscriber")
+     * @ORM\JoinColumn(name="book", referencedColumnName="id")
+     */
+    private $book;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="use_shipping", type="boolean", nullable=true)
+     */
+    private $useShipping = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255)
+     * @Assert\NotBlank(message="Name missing!")
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name_ship", type="string", length=255)
+     * @Assert\NotBlank(message="Name missing!", groups={"separateShipping"})
+     */
+    private $firstNameShip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255)
+     * @Assert\NotBlank(message="Name missing!")
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name_ship", type="string", length=255)
+     * @Assert\NotBlank(message="Name missing!", groups={"separateShipping"})
+     */
+    private $lastNameShip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=255)
+     * @Assert\NotBlank(message="Adress missing!")
+     */
+    private $street;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="street_ship", type="string", length=255)
+     * @Assert\NotBlank(message="Adress missing!", groups={"separateShipping"})
+     */
+    private $streetShip;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        self::setShippingData();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        self::setShippingData();
+    }
+
+    /**
+     * If no separate shipping address is selected,
+     * data from personal fields will be mapped to shipping fields.
+     * 
+     */
+    public function setShippingData()
+    {
+        if(!$this->useShipping)
+        {
+            $this->firstNameShip = $this->firstName;
+            $this->lastNameShip = $this->lastName;
+            $this->streetShip = $this->street;
+        }
+    }
+}
+
+
+
+

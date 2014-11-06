@@ -117,4 +117,13 @@ class GroupUserService {
 		$count = $this->getRepository()->count($groupID);
 		return $count;
 	}
+
+	/**
+	 * get member
+	 * @author Alex
+	 * @return array $members
+	 */
+	public function getMembers() {
+		return $this->getRepository()->getMembers();
+	}
 }

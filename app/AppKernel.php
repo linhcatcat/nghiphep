@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Wincofood\ApplicationBundle\WincofoodApplicationBundle(),
             new Application\EmailTemplateBundle\ApplicationEmailTemplateBundle(),
             new Wincofood\SaleBundle\WincofoodSaleBundle(),
+            new Application\TaskBundle\ApplicationTaskBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

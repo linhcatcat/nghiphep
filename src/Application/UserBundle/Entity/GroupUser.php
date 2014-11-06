@@ -4,6 +4,7 @@ namespace Application\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Application\UserBundle\Entity
@@ -23,12 +24,13 @@ class GroupUser {
 
 	/**
 	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="GroupUser")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+	 * @Assert\NotBlank(message="User not empty!")
 	 */
 	protected $user;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\Group", mappedBy="GroupUser")
+	 * @ORM\ManyToOne(targetEntity="Application\UserBundle\Entity\Group", inversedBy="GroupUser")
 	 * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=true)
 	 */
 	protected $group;
@@ -82,7 +84,7 @@ class GroupUser {
 	 * Set group
 	 *
 	 * @param \Application\UserBundle\Entity\Group $group
-	 * @return CompanyJob
+	 * @return groupUser
 	 */
 	public function setGroup(\Application\UserBundle\Entity\Group $group = null) {
 		$this->group = $group;

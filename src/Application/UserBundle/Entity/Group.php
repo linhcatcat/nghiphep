@@ -53,9 +53,15 @@ class Group {
 	protected $enabled;
 
 	/**
+     * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\GroupUser", mappedBy="group", cascade={"remove"})
+     */
+	protected $member;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->member = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	public function __toString(){
@@ -186,4 +192,37 @@ class Group {
 	public function getEnabled() {
 		return $this->enabled;
 	}
+
+	/**
+     * Add member
+     *
+     * @param \Application\UserBundle\Entity\User $member
+     * @return member
+     */
+    public function addMember(\Application\UserBundle\Entity\User $member)
+    {
+        $this->member[] = $member;
+    
+        return $this;
+    }
+
+    /**
+     * Remove member
+     *
+     * @param \Application\UserBundle\Entity\User $member
+     */
+    public function removeMember(\Application\UserBundle\Entity\User $member)
+    {
+        $this->member->removeElement($member);
+    }
+
+    /**
+     * Get member
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->member;
+    }
 }

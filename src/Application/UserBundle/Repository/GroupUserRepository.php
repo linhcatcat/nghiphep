@@ -53,4 +53,16 @@ class GroupUserRepository extends EntityRepository {
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;
 	}
+
+	/**
+	 * Count all
+	 * @author Alex
+	 * Return members
+	 */
+	public function getMembers() {
+		$qb = $this->createQueryBuilder('gu');
+		//$qb->distinct('gu.user_id');
+    	$results = $qb->getQuery()->getResult();
+		return $results;
+	}
 }

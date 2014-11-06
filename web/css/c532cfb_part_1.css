@@ -1341,7 +1341,7 @@ body {
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	background: url("../../application/images/bg.png") repeat left top;
+	background: url("../../application/web/images/bg.png") repeat left top;
 	font-family: 'Myriad Pro 1167301';
 	font-size: 14px;
 	position: relative;
@@ -1502,7 +1502,7 @@ header .container .login .btn:active {
 .button_collapse_sidebar {
 	position: absolute;
 	left: 219px;
-	background: url("../../application/images/btn_left_sidebar.png") no-repeat left top;
+	background: url("../../web/application/images/btn_left_sidebar.png") no-repeat left top;
 	width: 14px;
 	height: 63px;
 	display: block;
@@ -1535,7 +1535,7 @@ header .container .login .btn:active {
 	left: 0;
 	top: 20px;
 	width: 219px;
-	background: url(../../application/images/bg_left_sidebar.png) repeat left top;
+	background: url(../../web/application/images/bg_left_sidebar.png) repeat left top;
 	height: 91.6%;
 	z-index: 1;
 	min-height: 740px;
@@ -1675,7 +1675,7 @@ header .container .login .btn:active {
 footer {
 	min-height: 47px;
 	width: 100%;
-	background-image: url('../../application/images/bg_footer.png');
+	background-image: url('../../web/application/images/bg_footer.png');
 	-moz-box-shadow: 1px 1px 6px #B9D1D3;
 	-webkit-box-shadow: 1px 1px 6px #B9D1D3;
 	box-shadow: 1px 1px 6px #B9D1D3;
@@ -2303,22 +2303,22 @@ footer .footer_menu li:first-child {
 
 @font-face {
 	font-family: 'icomoonfemale';
-	src:url('../../application/font-icomoon/icon-female/icomoon.eot');
-	src:url('../../application/font-icomoon/icon-female/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../../application/font-icomoon/icon-female/icomoon.woff') format('woff'),
-		url('../../application/font-icomoon/icon-female/icomoon.ttf') format('truetype'),
-		url('../../application/font-icomoon/icon-female/icomoon.svg#icomoon') format('svg');
+	src:url('../../web/application/font-icomoon/icon-female/icomoon.eot');
+	src:url('../../web/application/font-icomoon/icon-female/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../../web/application/font-icomoon/icon-female/icomoon.woff') format('woff'),
+		url('../../web/application/font-icomoon/icon-female/icomoon.ttf') format('truetype'),
+		url('../../web/application/font-icomoon/icon-female/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'icomoonmale';
-	src:url('../../application/font-icomoon/icon-male/icomoon.eot');
-	src:url('../../application/font-icomoon/icon-male/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../../application/font-icomoon/icon-male/icomoon.woff') format('woff'),
-		url('../../application/font-icomoon/icon-male/icomoon.ttf') format('truetype'),
-		url('../../application/font-icomoon/icon-male/icomoon.svg#icomoon') format('svg');
+	src:url('../../web/application/font-icomoon/icon-male/icomoon.eot');
+	src:url('../../web/application/font-icomoon/icon-male/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../../web/application/font-icomoon/icon-male/icomoon.woff') format('woff'),
+		url('../../web/application/font-icomoon/icon-male/icomoon.ttf') format('truetype'),
+		url('../../web/application/font-icomoon/icon-male/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -2507,22 +2507,22 @@ footer .footer_menu li:first-child {
 
 @font-face {
 	font-family: 'icomoonPDF';
-	src:url('../../application/font-icomoon/icon-pdf/icomoon.eot');
-	src:url('../../application/font-icomoon/icon-pdf/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../../application/font-icomoon/icon-pdf/icomoon.woff') format('woff'),
-		url('../../application/font-icomoon/icon-pdf/icomoon.ttf') format('truetype'),
-		url('../../application/font-icomoon/icon-pdf/icomoon.svg#icomoon') format('svg');
+	src:url('../../web/application/font-icomoon/icon-pdf/icomoon.eot');
+	src:url('../../web/application/font-icomoon/icon-pdf/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../../web/application/font-icomoon/icon-pdf/icomoon.woff') format('woff'),
+		url('../../web/application/font-icomoon/icon-pdf/icomoon.ttf') format('truetype'),
+		url('../../web/application/font-icomoon/icon-pdf/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'icomoonYoutube';
-	src:url('../../application/font-icomoon/icon-youtube/icomoon.eot');
-	src:url('../../application/font-icomoon/icon-youtube/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('../../application/font-icomoon/icon-youtube/icomoon.woff') format('woff'),
-		url('../../application/font-icomoon/icon-youtube/icomoon.ttf') format('truetype'),
-		url('../../application/font-icomoon/icon-youtube/icomoon.svg#icomoon') format('svg');
+	src:url('../../web/application/font-icomoon/icon-youtube/icomoon.eot');
+	src:url('../../web/application/font-icomoon/icon-youtube/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../../web/application/font-icomoon/icon-youtube/icomoon.woff') format('woff'),
+		url('../../web/application/font-icomoon/icon-youtube/icomoon.ttf') format('truetype'),
+		url('../../web/application/font-icomoon/icon-youtube/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -2567,320 +2567,7 @@ you can use the generic selector below, but it's slower:
 	content: "\e001";
 }
 
-.candidate-info ul {
-	margin: 0;
-	list-style: none;
-}
 
-.candidate-avatar .info {
-	text-align: left;
-}
-
-.candidate-avatar .info h1 {
-	color: #31859C;
-	font-family: "Myriad Pro 1167301";
-	font-size: 24px;
-	font-weight: 400;
-	margin: 0;
-	line-height: 32px;
-	padding-top: 10px;
-}
-
-.candidate-avatar .info span.position {
-	color: #1e1e1e;
-	font-family: "Myriad Pro 1167301";
-	font-size: 14px;
-	font-weight: 400;
-}
-
-.candidate-avatar .info p {
-	color: #131313;
-	font-family: "Arial";
-	font-size: 12px;
-	font-weight: 400;
-	padding-top: 8px;
-	padding-bottom: 26px;
-	margin: 0;
-	border-bottom: 1px solid #e3e3e3;
-}
-
-.candidate-avatar .info span.position {
-	color: #1e1e1e;
-	font-family: "Myriad Pro 1167301";
-	font-size: 16px;
-	font-weight: 400;
-}
-
-.candidate-profile .profile {
-	margin: 0 10px 10px 10px;
-	padding: 0;
-
-	border-top: none;
-	text-align: left;
-	border-radius: 0;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	background-color: #fff;
-}
-
-.candidate-profile .profile #timelineCollapse .span8 ul {
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 5px;
-}
-
-.candidate-profile .timeline.profile {
-	padding-left: 15px;
-	margin-bottom: 30px;
-}
-
-.candidate-profile .profile > h1 {
-	margin: 0;
-	color: #31859C;
-	font-family: "Myriad Pro 1167301";
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 48px;
-	padding-left: 15px;
-}
-
-.candidate-profile .timeline.profile div > h1 {
-	padding-left: 0;
-	margin: 0;
-	color: #31859C;
-	font-family: "Myriad Pro 1167301";
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 48px;
-	margin: 14px 0;
-}
-
-.candidate-profile .timeline.profile div > h1 > a.accordion-toggle {
-	color: #31859C;
-	font-family: "Myriad Pro 1167301";
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 48px;
-	display: block;
-	margin-bottom: 10px;
-}
-
-.timeline.profile.public-profile-image {
-	margin-top: 10px;
-}
-
-.candidate-profile .timeline.profile div > h1 > span {
-	display: block;
-	line-height: 26px;
-}
-
-.candidate-profile .timeline.profile div a.accordion-toggle {
-	text-decoration: none;
-	margin-top: 14px;
-	margin-right: 14px;
-	font-size: 30px;
-	line-height: 1;
-}
-
-.candidate-profile.timeline_candidate {
-	border-bottom: 1px solid #DBDBDB;
-}
-
-.candidate-profile .profile ul {
-	margin: 0;
-	list-style: none;
-}
-
-.candidate-profile .profile .radio_sex {
-	border-top: 1px solid #dbdbdb;
-	padding-bottom: 10px;
-	padding-top: 22px;
-}
-
-.candidate-profile .profile .radio_sex label {
-	margin: 0px;
-	line-height: 24px;
-}
-
-.candidate-profile .profile .radio_sex .dude,
-.candidate-profile .profile .radio_sex .dudette {
-	margin-left: 30px;
-}
-
-.candidate-profile .profile .address {
-	border-top: 1px solid #dbdbdb;
-}
-
-.candidate-profile .profile .address p {
-	margin: 0;
-	line-height: 50px;
-}
-
-.candidate-profile .profile .address li:first-child p {
-	padding-left: 20px;
-}
-
-.candidate-profile .profile .timeline {
-	border-top: 1px solid #dbdbdb;
-	padding-bottom: 15px;
-}
-
-.candidate-profile .profile .timeline > h1 {
-	margin: 0;
-	color: #131313;
-	font-family: "Arial";
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 46px;
-	padding-left: 15px;
-}
-
-.candidate-profile .profile .timeline p {
-	margin: 0;
-}
-
-.candidate-profile .profile .timeline > ul {
-	color: #131313;
-	font-family: "Arial";
-	font-size: 12px;
-	font-weight: 400;
-}
-
-.candidate-profile .profile .timeline .career li:first-child p,
-.candidate-profile .profile .timeline .education li:first-child p {
-	padding-left: 20px;
-	padding-top: 7px;
-}
-
-.candidate-profile .profile .timeline .career li:last-child ul li,
-.candidate-profile .profile .timeline .education li:last-child ul li {
-	line-height: 30px;
-}
-
-.candidate-profile .profile .languages {
-	border-top: 1px solid #dbdbdb;
-	padding-bottom: 15px;
-}
-
-.candidate-profile .profile .languages li > h1 {
-	margin: 0;
-	color: #131313;
-	font-family: "Arial";
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 46px;
-	padding-left: 15px;
-}
-
-.candidate-profile .profile .languages .select-language ul li:first-child,
-.candidate-profile .profile .languages .language ul li:first-child {
-	margin-top: 0;
-}
-
-.candidate-profile .profile .languages .select-language,
-.candidate-profile .profile .languages .language {
-	padding-top: 16px;
-}
-.profile .languages .select-language ul > li span.rating, 
-.profile .languages .rating-language span.rating {
-	display: block;
-	width: 115px;
-	background: url(../../application/images/rating_lang_2.png) no-repeat;
-	text-indent: -9999px;
-}
-
-.profile .languages .select-language ul > li span.rating-1 {
-	background-position: 0 0;
-}
-
-.profile .languages .select-language ul > li span.rating-2 {
-	background-position: 0 -20px;
-}
-
-.profile .languages .select-language ul > li span.rating-3 {
-	background-position: 0 -40px;
-}
-
-.profile .languages .select-language ul > li span.rating-4 {
-	background-position: 0 -60px;
-}
-
-.profile .languages .select-language ul > li span.rating-5 {
-	background-position: 0 -80px;
-}
-
-.candidate-profile .profile .languages .language ul li {
-	color: #131313;
-	font-family: "Arial";
-	font-size: 12px;
-	font-weight: 400;
-	height: 17px;
-	background-repeat: no-repeat;
-	padding-left: 32px;
-	margin-top: 10px;
-}
-
-.candidate-profile .profile .languages .select-language ul li {
-	margin-top: 6px;
-}
-
-.candidate-profile .profile .driving-licenese {
-	border-top: 1px solid #dbdbdb;
-}
-
-.candidate-profile .profile .driving-licenese li > h1 {
-	margin: 0;
-	color: #131313;
-	font-family: "Arial";
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 46px;
-	padding-left: 15px;
-}
-
-.candidate-profile .profile .driving-licenese li h2 {
-	color: #131313;
-	font-family: "Arial";
-	font-size: 12px;
-	font-weight: 400;
-	margin: 0;
-	line-height: 20px;
-}
-
-.candidate-profile .profile .driving-licenese .span4 {
-	padding-top: 15px;
-}
-
-.candidate-profile .profile .driving-licenese ul.span6 {
-	line-height: 20px;
-}
-
-.candidate-profile .profile .driving-licenese ul.span6 li:first-child {
-	padding-left: 0;
-}
-
-.candidate-profile .profile .driving-licenese ul.span6 li {
-	display: inline;
-	padding-left: 28px;
-}
-
-.candidate-citizen,
-.candidate-dude,
-.candidate-dudette {
-	padding-left: 34px;
-	background: url("../../application/images/radio_bg_2.png") no-repeat scroll 0 -23px transparent;
-}
-
-/*_________END OF EMPLOYER & CANDIDATE PROFILE_______*/
-
-/*_________COMPANY_______*/
-#employer-setup-profile {
-	padding-right: 14px;
-	border-top: 1px solid #e6e9eb;
-}
-#employer-setup-profile .alert {
-	margin-top: 10px;
-	margin-left: 14px;
-}
 
 .setup-profile {
 	padding-top: 19px;
