@@ -30,8 +30,14 @@
 	</script>
 	<script>
         $('#datepairExample .time').timepicker({
-            'showDuration': true,
-            'timeFormat': 'g:ia'
+            //'showDuration': true,
+            //'timeFormat': 'g:ia'
+            'minTime': '8:00',
+    		'maxTime': '17:00',
+            'timeFormat': 'H:i',
+            'disableTimeRanges': [
+		        ['12:00', '12:00'],
+		    ]
         });
 
         $('#datepairExample .date').datepicker({
