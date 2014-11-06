@@ -16,8 +16,6 @@
         <link type="text/css" href="{{ asset('web/application/css/jquery-ui.css')}}" rel="stylesheet" />
         <link type="text/css" href="{{ asset('web/application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
         <link type="text/css" href="{{ asset('web/application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="web/application/datimepicker/jquery.timepicker.css" />
-        <link rel="stylesheet" type="text/css" href="web/application/datimepicker/lib/bootstrap-datepicker.css" />
         {% endstylesheets %}
         <!--[if IE 7]>
         {% stylesheets '@application_shared_ie7_css' %}
@@ -61,14 +59,8 @@
     </div> <!-- /container -->
 
     <script src="{{ asset('web/application/js/libs/jquery.js')}}"></script>
-    
-
+    <script src="{{ asset('web/application/js/libs/jquery-ui.js')}}"></script>
     <script>window.jQuery || document.write('<script src="{{ asset('web/application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
-    <script type="text/javascript" src="web/application/datimepicker/jquery.timepicker.js"></script>
-    <script type="text/javascript" src="web/application/datimepicker/lib/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="web/application/datimepicker/datepair.js"></script>
-    <script type="text/javascript" src="web/application/datimepicker/jquery.datepair.js"></script>
-    
     <script src="{{ asset('web/bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
