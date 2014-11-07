@@ -6,10 +6,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>{% block title %}wincofood.com.vn{% endblock %}</title>
+		<title>{% block title %}Leave Management System{% endblock %}</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
-		<link rel="shortcut icon" href="{{ asset('web/application/images/favicon.ico')}}" />
+		<link rel="shortcut icon" href="{{ asset('application/images/favicon.ico')}}" />
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/138fefb8-90b9-432a-bed8-1e198f5f543d.css"/>
 		{% stylesheets '@application_backend_css' %}
 		<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
@@ -22,7 +22,7 @@
 
 		{% block stylesheet %} {% endblock %}
 
-		<script src="{{ asset('web/application/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+		<script src="{{ asset('application/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
 	</head>
 	<body>
 		<!--[if lt IE 7]>
@@ -32,13 +32,13 @@
 		<!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
 		<div class="background">
-			<img class="bg" src="{{ asset('web/application/images/thankyou_img.png') }}">
+			<img class="bg" src="{{ asset('application/images/thankyou_img.png') }}">
 		</div>
 		<div id="container">
 			<header>
 				<section class="container">
 					<a id="logo" href="{{ path('application_backend_index') }}">
-						<img src="{{ asset('web/application/images/logo.png') }}" alt="logo"/>
+						<img src="{{ asset('application/images/logo.png') }}" alt="logo"/>
 					</a>
 					{% if app.user.id is defined %}
 						<div class="btn-group login">
@@ -68,9 +68,9 @@
 	</div> <!-- /container -->
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="{{ asset('web/application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
+	<script>window.jQuery || document.write('<script src="{{ asset('application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
 
-	<script src="{{ asset('web/bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 	<script type="text/javascript">
 			var iLimitFileSize = {{ limit_file_size }};		</script>
@@ -81,7 +81,7 @@
 	{% endjavascripts %}
 
 	<!--[if IE 7]>
-	  <script src="{{ asset('web/application/js/script-ie7.js') }}"></script>
+	  <script src="{{ asset('application/js/script-ie7.js') }}"></script>
 	<![endif]-->
 	<script>
 		var _gaq = [['_setAccount', 'UA-48658771-1'], ['_trackPageview']];
@@ -91,11 +91,11 @@
 			s.parentNode.insertBefore(g, s)
 		}(document, 'script'));
 	</script>
-	<script src="{{ asset('web/bundles/applicationbackend/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('bundles/applicationbackend/ckeditor/ckeditor.js') }}"></script>
 	<script type="text/javascript">
 		CKEDITOR.replace( '{% block js_upload %}{% endblock %}', {
-			filebrowserBrowseUrl: '/web/bundles/applicationbackend/kcfinder/browse.php?type=Images',
-			filebrowserUploadUrl: '/web/bundles/applicationbackend/kcfinder/upload.php?type=Files'
+			filebrowserBrowseUrl: '/bundles/applicationbackend/kcfinder/browse.php?type=Images',
+			filebrowserUploadUrl: '/bundles/applicationbackend/kcfinder/upload.php?type=Files'
 		});
 	</script>
 	{% block javascript %} {% endblock %}

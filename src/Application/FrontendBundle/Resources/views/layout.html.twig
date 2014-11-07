@@ -13,9 +13,9 @@
         <link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/138fefb8-90b9-432a-bed8-1e198f5f543d.css"/>
         {% stylesheets '@application_frontend_css' %}
         <link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
-        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.css')}}" rel="stylesheet" />
-        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
-        <link type="text/css" href="{{ asset('web/application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('application/css/jquery-ui.css')}}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
         {% endstylesheets %}
         <!--[if IE 7]>
         {% stylesheets '@application_shared_ie7_css' %}
@@ -25,7 +25,7 @@
 
         {% block stylesheet %} {% endblock %}
 
-        <script src="{{ asset('web/application/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+        <script src="{{ asset('application/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -35,18 +35,25 @@
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
         <div class="background">
-            <img class="bg" src="{{ asset('web/application/images/thankyou_img.png') }}">
+            <img class="bg" src="{{ asset('application/images/thankyou_img.png') }}">
         </div>
-        <div id="container">
+        <div id="container" class="frontend">
             <header>
                 <section class="container">
-                    <a id="logo" href="{{ path('application_frontend_homepage') }}">
-                        <img src="{{ asset('web/application/images/logo.png') }}" alt="logo"/>
+                    <a id="logo" href="{{ path('application_backend_index') }}">
+                        <img src="{{ asset('application/images/logo.png') }}" alt="logo"/>
                     </a>
-                    {% if user %}
-                    <p class="pull-right">
-                        {% trans %}Hello{% endtrans %} {{ user.username }}! <a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
-                    </p>
+                    {% if app.user.id is defined %}
+                        <div class="btn-group login">
+                            <a class="btn" href="#"><i class="icon-lock"></i></a>
+                            <a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
+                        </div>
+                    {% else %}
+                        <div class="btn-group login">
+                            <a class="btn" href="#"><i class="icon-lock"></i></a>
+                            <a href="#" class="btn">{% trans %}Login{% endtrans %}</a>
+                        </div>
+
                     {% endif %}
                 </section>
             </header>
@@ -55,18 +62,18 @@
                 {% block content %}{% endblock %}
             </section>
         </div>
-        <footer>
+        {#<footer>
             <section class="container">
                 <p class="footer-left pull-left">{{'Copyright by abc. All rights reserved.'|trans}}</p>
                 <p class="footer-right pull-right">{{'Webbutveckling & design av'|trans}} abc Digital</p>
             </section>
-        </footer>
+        </footer>#}
     </div> <!-- /container -->
 
-    <script src="{{ asset('web/application/js/libs/jquery.js')}}"></script>
-    <script src="{{ asset('web/application/js/libs/jquery-ui.js')}}"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('web/application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('web/bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ asset('application/js/libs/jquery.js')}}"></script>
+    <script src="{{ asset('application/js/libs/jquery-ui.js')}}"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
             var iLimitFileSize = {{ limit_file_size }};     </script>
