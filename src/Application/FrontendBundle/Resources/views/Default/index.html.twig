@@ -4,47 +4,73 @@
 	Hello Chao {{ user.username }}!
 	<a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
 	<br/>
-	From: <input type="text" id="txtFromDate" />
-	To: <input type="text" id="txtToDate" />
-	<p id="datepairExample">
-		From <input type="text" class="date start" />
-		<input type="text" class="time start" /> To
-		<input type="text" class="time end" />
-		<input type="text" class="date end" />
-	</p>
+
+	<form class="add_user_admin_form" method="POST" enctype="multipart/form-data">
+		{#<input type="text" class="txtTaskDate" name="txtTaskDate[]" />
+		<input type="text" class="txtTaskDate" name="txtTaskDate[]" />#}
+		Start: <input type="text" id="txtStartDate" name="txtStartDate" />
+		<select name="txtStartTime">
+			<option value="08:00">08:00</option> 
+			<option value="08:30">08:30</option>
+			<option value="09:00">09:00</option>
+			<option value="09:30">09:30</option>
+			<option value="10:00">10:00</option>
+			<option value="10:30">10:30</option>
+			<option value="11:00">11:00</option>
+			<option value="11:30">11:30</option>
+			<option value="13:00">13:00</option>
+			<option value="13:30">13:30</option>
+			<option value="14:00">14:00</option>
+			<option value="14:30">14:30</option>
+			<option value="15:00">15:00</option>
+			<option value="15:30">15:30</option>
+			<option value="16:00">16:00</option>
+			<option value="16:30">16:30</option>
+		</select>
+		<br/>
+		End: <input type="text" id="txtEndDate" name="txtEndDate" />
+		<select name="txtEndTime">
+			<option value="08:00">08:00</option> 
+			<option value="08:30">08:30</option>
+			<option value="09:00">09:00</option>
+			<option value="09:30">09:30</option>
+			<option value="10:00">10:00</option>
+			<option value="10:30">10:30</option>
+			<option value="11:00">11:00</option>
+			<option value="11:30">11:30</option>
+			<option value="12:00">11:30</option>
+			<option value="13:30">13:30</option>
+			<option value="14:00">14:00</option>
+			<option value="14:30">14:30</option>
+			<option value="15:00">15:00</option>
+			<option value="15:30">15:30</option>
+			<option value="16:00">16:00</option>
+			<option value="16:30">16:30</option>
+			<option value="17:00">16:30</option>
+		</select>
+		<br/>
+		<input type="submit" value="Save" class="btn save-profile">
+	</form>
 {% endblock %}
 {% block javascript %}
 	<script type="text/javascript">
-		$("#txtFromDate").datepicker({
+		/*$(".txtTaskDate").datepicker({
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1
+		});*/
+		$("#txtStartDate").datepicker({
+			dateFormat: "yy-mm-dd",
 			numberOfMonths: 1,
 			onSelect: function(selected) {
-			  $("#txtToDate").datepicker("option","minDate", selected)
+			  $("#txtEndDate").datepicker("option","minDate", selected)
 			}
 		});
-		$("#txtToDate").datepicker({ 
+		$("#txtEndDate").datepicker({
+			dateFormat: "yy-mm-dd",
 			numberOfMonths: 1,
 			onSelect: function(selected) {
-			   $("#txtFromDate").datepicker("option","maxDate", selected)
+			   $("#txtStartDate").datepicker("option","maxDate", selected)
 			}
 		});
 	</script>
-	<script>
-        $('#datepairExample .time').timepicker({
-            //'showDuration': true,
-            //'timeFormat': 'g:ia'
-            'minTime': '8:00',
-    		'maxTime': '17:00',
-            'timeFormat': 'H:i',
-            'disableTimeRanges': [
-		        ['12:00', '12:00'],
-		    ]
-        });
-
-        $('#datepairExample .date').datepicker({
-            'format': 'm/d/yyyy',
-            'autoclose': true
-        });
-
-        $('#datepairExample').datepair();
-    </script>
 {% endblock %}

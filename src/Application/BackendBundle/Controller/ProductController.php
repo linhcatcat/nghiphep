@@ -83,7 +83,7 @@ class ProductController extends Controller
 		if(empty($oProduct))
 			throw $this->createNotFoundException($translator->trans('Email Template Not found'));
 		
-		$form = $this->createForm(new ProductType(), $oProduct);	
+		$form = $this->createForm(new ProductType(), $oProduct);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$checkRemoveImage = $request->get('check_remove_image');
