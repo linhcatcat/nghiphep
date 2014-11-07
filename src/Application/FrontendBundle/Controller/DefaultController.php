@@ -29,62 +29,39 @@ class DefaultController extends Controller
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$user = $this->container->get('security.context')->getToken()->getUser();
 			$startDate = strtotime('2014-11-05');
-			$startTime = '08:30';
+			$startTime = '08:00';
 			//---------
 			$timeStart = '08:00';
 			$timeEnd = '17:00';
 			$startTimeArr = array(
-				'08:00' => 0,
-				'08:30' => 30,
-				'09:00' => 60,
-				'09:30' => 90,
-				'10:00' => 120,
-				'10:30' => 150,
-				'11:00' => 180,
-				'11:30' => 210,
-				'13:00' => 240,
-				'13:30' => 270,
-				'14:00' => 300,
-				'14:30' => 330,
-				'15:00' => 360,
-				'15:30' => 390,
-				'16:00' => 420,
-				'16:30' => 450,
+				'08:00' => 0, '08:30' => 30, '09:00' => 60,'09:30' => 90,
+				'10:00' => 120, '10:30' => 150, '11:00' => 180, '11:30' => 210,
+				'13:00' => 240, '13:30' => 270, '14:00' => 300, '14:30' => 330,
+				'15:00' => 360, '15:30' => 390, '16:00' => 420, '16:30' => 450,
 			);
-			$endDate = strtotime('2014-11-12');
+			$endDate = strtotime('2014-11-05');
 			$endTimeArr = array(
-				'08:00' => 0,
-				'08:30' => 30,
-				'09:00' => 60,
-				'09:30' => 90,
-				'10:00' => 120,
-				'10:30' => 150,
-				'11:00' => 180,
-				'11:30' => 210,
-				'12:00' => 240,
-				'13:30' => 270,
-				'14:00' => 300,
-				'14:30' => 330,
-				'15:00' => 360,
-				'15:30' => 390,
-				'16:00' => 420,
-				'16:30' => 450,
+				'08:00' => 0, '08:30' => 30, '09:00' => 60, '09:30' => 90,
+				'10:00' => 120, '10:30' => 150, '11:00' => 180, '11:30' => 210,
+				'12:00' => 240, '13:30' => 270, '14:00' => 300, '14:30' => 330,
+				'15:00' => 360, '15:30' => 390, '16:00' => 420, '16:30' => 450,
 				'17:00' => 480,
 			);
-			$endTime = '16:30';
+			$endTime = '08:00';
 			if( $startDate < $endDate ) {
 				$time1 = $endTimeArr[$timeEnd] - $startTimeArr[$startTime];
 				$time2 = $endTimeArr[$endTime] - $endTimeArr[$timeStart];
-				var_dump($time1);
+				/*var_dump($time1);
 				var_dump('-');
 				var_dump($time2);
 				var_dump('-');
 				var_dump($time1 + $time2 );
-				var_dump($this->caculatorTime($startDate, $endDate));
+				var_dump($this->caculatorTime($startDate, $endDate));*/
 			} else {
-
+				$time = $endTimeArr[$endTime] - $startTimeArr[$startTime];
+				//var_dump($time);
 			}
-			var_dump(date("Y-m-d H:i:s w", strtotime('2014-11-08')));
+			//var_dump(date("Y-m-d H:i:s w", strtotime('2014-11-08')));
 
 			
 			/*$txtStartDate = $request->get('txtStartDate');
