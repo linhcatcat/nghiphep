@@ -2,6 +2,8 @@ http://www.jquerybyexample.net/2012/01/end-date-should-not-be-greater-than.html
 http://smartbossvn.com/chuc-nang/dang-ki-nghi-phep-online/
 http://nghiphep.beton6.com/login.aspx?Cul=vn
 
+http://www.intoweb.com/hr/module_leave.php
+
 OneToMany ...
 http://doctrine-orm.readthedocs.org/en/latest/reference/association-mapping.html
 

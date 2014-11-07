@@ -2,3 +2,6 @@ services:
 #    application_task.example:
 #        class: Application\TaskBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    application_task_service:
+        class: Application\TaskBundle\Service\TaskService
+        arguments: ["@doctrine.orm.entity_manager"]
