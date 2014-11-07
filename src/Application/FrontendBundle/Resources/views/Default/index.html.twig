@@ -1,9 +1,11 @@
 {% extends "ApplicationFrontendBundle::layout.html.twig" %}
+{% block title %}Leave Management System{% endblock %}
 {% block content %}
+
 	<div class="row-fluid">
 		<div class="well login-box" style="float:none !important;margin-left: auto !important;margin-right: auto !important;">
 			<div class="alert alert-info">
-				{{ 'Leave Management System'|trans }}
+				{{ 'Leave Application'|trans }}
 			</div>
 			<form class="add_user_admin_form" method="POST" enctype="multipart/form-data">
 				Start: <input type="text" id="txtStartDate" name="txtStartDate" />
