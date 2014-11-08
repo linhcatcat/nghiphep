@@ -4,6 +4,8 @@ namespace Application\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Application\FrontendBundle\Form\TaskType;
+use Application\TaskBundle\Entity\Task;
 
 class TaskController extends Controller
 {
@@ -70,7 +72,22 @@ class TaskController extends Controller
 				var_dump($txtEndDate);
 				var_dump($txtStartDate);exit();
 			}*/
-			return $this->render('ApplicationFrontendBundle:Task:index.html.twig', array('user' => $user));
+			$translator = $this->get('translator');
+			$task = new Task();
+			
+			$form = $this->createForm(new TaskType(), $task);
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()->getEntityManager();
+				$em->persist($task);
+				$em->flush();
+				$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('You leave application successfully'));
+				return $this->redirect($this->generateUrl('application_frontend_homepage'));
+			}
+			return $this->render('ApplicationFrontendBundle:Task:index.html.twig', array(
+				'user' => $user,
+				'form' => $form->createView()
+			));
 		} else {
 			return $this->redirect($this->generateUrl('application_frontend_login'));
 		}

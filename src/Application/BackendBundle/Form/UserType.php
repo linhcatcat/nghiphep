@@ -42,12 +42,12 @@ class UserType extends AbstractType {
 				'attr' => array('value' => empty($options['email']) ? '' : $options['email']),
 			))
 			->add( 'gender', 'choice',
-                array(
-                'expanded'   => true,
-                'choices'   => array(1 => 'Male', 0 => 'Female'),
-                'multiple'  => false,
-                'data' => isset($options['gender']) ? $options['gender'] : 1
-            ))
+				array(
+				'expanded'   => true,
+				'choices'   => array(1 => 'Male', 0 => 'Female'),
+				'multiple'  => false,
+				'data' => isset($options['gender']) ? $options['gender'] : 1
+			))
 			->add('role', 'choice', array(
 				'label' => 'Role',
 				'choices'   => array('ROLE_BOSS' => 'ROLE_BOSS', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', 'ROLE_EMPLOYEE' => 'ROLE_EMPLOYEE'),
