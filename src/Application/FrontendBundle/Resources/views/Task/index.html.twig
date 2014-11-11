@@ -245,5 +245,17 @@
 			strHtml = strHtml + '<option value="12:00">12:00</option>';
 			$(strClass).html( strHtml );
 		}
+
+		var arrStartHour = new Array();
+		arrStartHour['08:00'] = 0; arrStartHour['08:30'] = 30;
+		arrStartHour['09:00'] = 60; arrStartHour['09:30'] = 90;
+		arrStartHour['10:00'] = 120; arrStartHour['10:30'] = 150;
+		arrStartHour['11:00'] = 180; arrStartHour['11:30'] = 210;
+		arrStartHour['13:00'] = 240; arrStartHour['13:30'] = 270;
+		arrStartHour['14:00'] = 300; arrStartHour['14:30'] = 330;
+		arrStartHour['15:00'] = 360; arrStartHour['15:30'] = 390;
+		arrStartHour['16:00'] = 420; arrStartHour['16:30'] = 450;
+
+		console.log( arrStartHour['08:00'] );
 	</script>
 {% endblock %}
