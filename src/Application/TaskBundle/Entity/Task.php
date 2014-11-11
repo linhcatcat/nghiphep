@@ -35,6 +35,12 @@ class Task {
 	protected $start;
 
 	/**
+	 * @var time $startTime
+	 * @ORM\Column(name="startTime", type="time")
+	 */
+	protected $startTime;
+
+	/**
 	 * @var datetime $end
 	 * @ORM\Column(name="end", type="datetime")
 	 */
@@ -101,6 +107,52 @@ class Task {
 	}
 
 	/**
+	 * Set user
+	 *
+	 * @param string $user
+	 * @return Task
+	 */
+	public function setUser($user)
+	{
+		$this->user = $user;
+	
+		return $this;
+	}
+
+	/**
+	 * Get user
+	 *
+	 * @return string 
+	 */
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	/**
+	 * Set leaveType
+	 *
+	 * @param string $leaveType
+	 * @return Task
+	 */
+	public function setLeaveType($leaveType)
+	{
+		$this->leaveType = $leaveType;
+	
+		return $this;
+	}
+
+	/**
+	 * Get leaveType
+	 *
+	 * @return string 
+	 */
+	public function getLeaveType()
+	{
+		return $this->leaveType;
+	}
+
+	/**
 	 * Set note
 	 *
 	 * @param string $note
@@ -123,11 +175,71 @@ class Task {
 		return $this->note;
 	}
 
+    /**
+     * Set start
+     *
+     * @param \DateTime $start
+     * @return Task
+     */
+    public function setStart($start) {
+        $this->start = $start;
+        return $this;
+    }
+
+    /**
+     * Get start
+     *
+     * @return \DateTime 
+     */
+    public function getStart() {
+        return $this->start;
+    }
+
+    /**
+     * Set startTime
+     *
+     * @param \Time $startTime
+     * @return Task
+     */
+    public function setStartTime($startTime) {
+        $this->start = $start;
+        return $this;
+    }
+
+    /**
+     * Get startTime
+     *
+     * @return \Time 
+     */
+    public function getStartTime() {
+        return $this->startTime;
+    }
+
+    /**
+     * Set end
+     *
+     * @param \DateTime $end
+     * @return Task
+     */
+    public function setEnd($end) {
+        $this->end = $end;
+        return $this;
+    }
+
+    /**
+     * Get end
+     *
+     * @return \DateTime 
+     */
+    public function getEnd() {
+        return $this->end;
+    }
+
 	/**
 	 * Set created
 	 *
 	 * @param \DateTime $created
-	 * @return Product
+	 * @return Task
 	 */
 	public function setCreated($created) {
 		$this->created = $created;
@@ -142,6 +254,28 @@ class Task {
 	public function getCreated() {
 		return $this->created;
 	}
+
+
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Task
+     */
+    public function setUpdated($updated) {
+        $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated() {
+        return $this->updated;
+    }
 
 	/**
 	 * Set status

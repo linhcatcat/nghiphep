@@ -1,6 +1,10 @@
 application_frontend_homepage:
     path:     /
-    defaults: { _controller: ApplicationFrontendBundle:Default:index }
+    defaults: { _controller: ApplicationFrontendBundle:Task:index }
+
+application_frontend_task:
+    resource: "@ApplicationFrontendBundle/Resources/config/routes/task.yml"
+    prefix: /task
 
 application_frontend_errorpage:
     path:     /error

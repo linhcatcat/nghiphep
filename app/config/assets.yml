@@ -15,6 +15,7 @@ assetic:
                 - '%kernel.root_dir%/../web/application/css/jquery.fs.scroller.css'
                 - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.css'
                 - '%kernel.root_dir%/../web/application/css/colorbox.css'
+                - '%kernel.root_dir%/../web/application/css/main.css'
                 - '%kernel.root_dir%/../web/application/css/style.css'
 
         application_backend_css:
