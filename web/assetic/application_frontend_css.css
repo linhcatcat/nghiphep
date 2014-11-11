@@ -1867,3 +1867,6 @@ input.uniform-input, input.uniform-input:focus {
     width: 100%;
     z-index: -1;
 }
+header .container {
+	padding: 0 10px;
+}
