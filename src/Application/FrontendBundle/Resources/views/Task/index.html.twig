@@ -85,66 +85,44 @@
 <div class="main-content">
 	<div class="list-content">
 		<div class="content">
-			{% if app.session.getFlashBag().has( 'add_user_error' ) %}
+			{% if app.session.getFlashBag().has( 'edit_user_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'test_successfully' ) %}
 				<div class="alert alert-error">
 					<button class="close" data-dismiss="alert" type="button">×</button>
-						{% for message in app.session.getFlashBag().get('add_user_error')%}
+						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
 							{{message}}
 						{% endfor %}
 				</div>
 			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">
-				<li class="active"><a>{{ 'Leave Application'|trans|capitalize }}</a></li>
+				<li class="active"><a>{{ 'Đăng ký nghỉ'|trans|capitalize }}</a></li>
+				<li><a href="{{ path('application_frontend_user_edit', {'userID': user.id}) }}">{{ 'Thay đổi thông tin cá nhân'|trans|capitalize }}</a></li>
+				<li><a href="{{ path('application_frontend_task_index') }}">{{ 'Nhật ký nghỉ'|trans|capitalize }}</a></li>
 			</ul>
 
 			<div class="tab-content">
 				<div class="tab-pane active" id="user-admin">
-					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form">
-						{#Start: <input type="text" id="txtStartDate" name="txtStartDate" required="required" />
-						<select class="txtStartTime" name="txtStartTime">
-							<option value="08:00">08:00</option> 
-							<option value="08:30">08:30</option>
-							<option value="09:00">09:00</option>
-							<option value="09:30">09:30</option>
-							<option value="10:00">10:00</option>
-							<option value="10:30">10:30</option>
-							<option value="11:00">11:00</option>
-							<option value="11:30">11:30</option>
-							<option value="13:00">13:00</option>
-							<option value="13:30">13:30</option>
-							<option value="14:00">14:00</option>
-							<option value="14:30">14:30</option>
-							<option value="15:00">15:00</option>
-							<option value="15:30">15:30</option>
-							<option value="16:00">16:00</option>
-							<option value="16:30">16:30</option>
-						</select>
-						<br/>
-						End: <input type="text" id="txtEndDate" name="txtEndDate" required="required" />
-						<select class="txtEndTime" name="txtEndTime">
-							<option value="08:00">08:00</option> 
-							<option value="08:30">08:30</option>
-							<option value="09:00">09:00</option>
-							<option value="09:30">09:30</option>
-							<option value="10:00">10:00</option>
-							<option value="10:30">10:30</option>
-							<option value="11:00">11:00</option>
-							<option value="11:30">11:30</option>
-							<option value="12:00">12:00</option>
-							<option value="13:30">13:30</option>
-							<option value="14:00">14:00</option>
-							<option value="14:30">14:30</option>
-							<option value="15:00">15:00</option>
-							<option value="15:30">15:30</option>
-							<option value="16:00">16:00</option>
-							<option value="16:30">16:30</option>
-							<option value="17:00">17:00</option>
-						</select>#}
+					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
+						<div>
+			                <label class="required" for="TaskType_ho_ten">Nhân viên</label>
+						    <input type="text" name="TaskType[ho_ten]" value="{{ user.firstName }} {{ user.lastName }}" id="TaskType_ho_ten" class="ho_ten" readonly />
+						</div>
+						<div>
+			                <label class="required" for="TaskType_manv">Mã nhân viên</label>
+						    <input type="text" name="TaskType[manv]" value="{{ user.username }}" id="TaskType_manv" class="ho_ten" readonly />
+						</div>
 						<div>
 							{{ form_label(form.start) }}
 						    {{ form_errors(form.start) }}
 						    {{ form_widget(form.start) }}
-						    <select class="txtStartTime" name="txtStartTime">
+						    <select class="txtStartTime hour" name="txtStartTime">
 								<option value="08:00">08:00</option> 
 								<option value="08:30">08:30</option>
 								<option value="09:00">09:00</option>
@@ -167,7 +145,7 @@
 							{{ form_label(form.end) }}
 						    {{ form_errors(form.end) }}
 						    {{ form_widget(form.end) }}
-						    <select class="txtEndTime" name="txtEndTime">
+						    <select class="txtEndTime hour" name="txtEndTime">
 								<option value="08:00">08:00</option> 
 								<option value="08:30">08:30</option>
 								<option value="09:00">09:00</option>
@@ -191,11 +169,11 @@
 						<div class="submit-profile clearfix">
 							<div class="save-user-admin pull-left">
 								<i class="icon-save"></i>
-								<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+								<input class="btn save-profile" type="submit" value="{{ 'Đăng ký'|trans }}" />
 							</div>
-							<a href="{{ path('application_backend_user_index') }}" class="btn cancel pull-left">
+							<a href="{{ path('application_frontend_task_index') }}" class="btn cancel pull-left">
 								<i class="icon-long-arrow-left"></i>
-								{% trans %}Cancel{% endtrans %}
+								 {% trans %}Hủy{% endtrans %} 
 							</a>
 						</div>
 					</form>
@@ -219,7 +197,7 @@
 				$("#TaskType_end").datepicker("option","minDate", selected);
 				var d=new Date( $(this).val() );
 				if( d.getDay() == 0 ){
-					alert('Sunday is invalid date!');
+					alert('Ngày bắt đầu không thể chọn chủ nhật!');
 					$(this).val('');
 				}
 				if( d.getDay() == 6 ){
@@ -234,7 +212,7 @@
 				$("#TaskType_start").datepicker("option","maxDate", selected)
 				var d=new Date( $(this).val() );
 				if( d.getDay() == 0 ){
-					alert('Sunday is invalid date!');
+					alert('Ngày kết thúc không thể chọn chủ nhật!');
 					$(this).val('');
 				}
 				if( d.getDay() == 6 ){

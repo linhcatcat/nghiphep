@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Application\FrontendBundle\Form\TaskType;
 use Application\TaskBundle\Entity\Task;
+use Application\FrontendBundle\Form\UserType;
+use Application\UserBundle\Entity\User;
 
 class TaskController extends Controller
 {
@@ -89,11 +91,86 @@ class TaskController extends Controller
 				'form' => $form->createView()
 			));
 		} else {
+			return $this->redirect($this->generateUrl('application_frontend_task_index'));
+		}
+	}
+
+	/**
+	 * Edit user
+	 * @author Alex <alex@likipe.se>
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $userID
+	 * @return view
+	 * @throws type
+	 */
+	public function editUserAction(Request $request, $userID) {
+		$securityContext = $this->container->get('security.context');
+		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$userService = $this->get('Application_user.service');
+			$userManagerService = $this->get('fos_user.user_manager');
+			$translator = $this->get('translator');
+			
+			$user = $userManagerService->findUserBy(array('id' => $userID));
+			if (empty($user)) {
+				throw $this->createNotFoundException($translator->trans('No user found for id ' . $userID));
+			}
+			
+			$form = $this->createForm(
+				new UserType(false), array(),
+				array(
+					'first_name' => $user->getFirstName(),
+					'last_name' => $user->getLastName(),
+					'username' => $user->getUsername(),
+					'email' => $user->getEmail(),
+					'gender' => $user->getGender(),
+				)
+			);
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				$firstName = $form->get('first_name')->getData();
+				$lastName = $form->get('last_name')->getData();
+				$email = $form->get('email')->getData();
+				$gender = $form->get('gender')->getData();
+				$username = $form->get('username')->getData();
+				$userByEmail = $userManagerService->findUserByEmail($email);
+				if (!empty($userByEmail) && (int)$userID !== $userByEmail->getId()) {
+					$this->get('session')->getFlashBag()->add('add_user_error', $translator->trans('This email is existing in system'));
+				} else {
+					$data = array(
+						'first_name' => $firstName,
+						'last_name' => $lastName,
+						'username' => $username,
+						'email' => $email,
+						'gender' => $gender,
+						'role' => $user->getRoles(),
+						'user_plain_password' => $form->get('password')->getData(),
+					);
+					$userService->updateUser($user, $data);
+					$this->get('session')->getFlashBag()->add('edit_user_successfully', $translator->trans('Thay đổi thông tin cá nhân thành công'));
+
+					return $this->redirect($this->generateUrl('application_frontend_homepage'));
+				}
+			}
+			
+			return $this->render('ApplicationFrontendBundle:Task:user.html.twig', array(
+				'form' => $form->createView(),
+			));
+		} else {
 			return $this->redirect($this->generateUrl('application_frontend_login'));
 		}
 	}
 
-	public function errorAction() {
-		return $this->render('ApplicationFrontendBundle:Default:error.html.twig', array());
+	public function taskAction(Request $request)
+	{
+		$securityContext = $this->container->get('security.context');
+		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$user = $this->container->get('security.context')->getToken()->getUser();
+			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
+				'user' => $user,
+				'groups' => array()
+			));
+		} else {
+			return $this->redirect($this->generateUrl('application_frontend_login'));
+		}
 	}
 }

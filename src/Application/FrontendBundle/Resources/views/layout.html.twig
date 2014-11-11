@@ -40,18 +40,18 @@
         <div id="container" class="frontend">
             <header>
                 <section class="container">
-                    <a id="logo" href="{{ path('application_backend_index') }}">
+                    <a id="logo" href="{{ path('application_frontend_homepage') }}">
                         <img src="{{ asset('application/images/logo.png') }}" alt="logo"/>
                     </a>
                     {% if app.user.id is defined %}
                         <div class="btn-group login">
                             <a class="btn" href="#"><i class="icon-lock"></i></a>
-                            <a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
+                            <a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Đăng xuất{% endtrans %}</a>
                         </div>
                     {% else %}
                         <div class="btn-group login">
                             <a class="btn" href="#"><i class="icon-lock"></i></a>
-                            <a href="#" class="btn">{% trans %}Login{% endtrans %}</a>
+                            <a href="#" class="btn">{% trans %}Đăng nhập{% endtrans %}</a>
                         </div>
 
                     {% endif %}

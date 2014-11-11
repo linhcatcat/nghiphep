@@ -92,3 +92,16 @@ header .container {
 	width: 87px;
 	position: relative;
 }
+.form-frontend .hour {
+	width: 90px;
+}
+.form-frontend .note_task {
+	height: 100px;
+	width: 499px;
+}
+.form-frontend .ho_ten {
+	width: 299px;
+}
+.form-frontend .leave_type_task {
+	width: 313px;
+}

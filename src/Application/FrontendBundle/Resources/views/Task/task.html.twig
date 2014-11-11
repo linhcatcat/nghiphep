@@ -1,0 +1,66 @@
+{% extends "ApplicationFrontendBundle::layout.html.twig" %}
+{% block title %}Leave Management System{% endblock %}
+
+{% block content %}
+<div class="main-content">
+	<div class="list-content">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'edit_user_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'test_successfully' ) %}
+				<div class="alert alert-error">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li><a href="{{ path('application_frontend_homepage') }}">{{ 'Đăng ký nghỉ'|trans|capitalize }}</a></li>
+				<li><a href="{{ path('application_frontend_user_edit', {'userID': user.id}) }}">{{ 'Thay đổi thông tin cá nhân'|trans|capitalize }}</a></li>
+				<li class="active"><a>{{ 'Nhật ký nghỉ'|trans|capitalize }}</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="user-admin">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>{{ 'Name'|trans }}</th>
+								<th>{{ 'Boss'|trans }}</th>
+								<th>{{ 'Created'|trans }}</th>
+								<th>{{ 'Updated'|trans }}</th>
+								<th>{{ 'Action'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for group in groups %}
+							<tr>
+								<td>{{ group.name }}</td>
+								<td>{{ group.user.username }} - {{ group.user.firstName }} {{ group.user.lastName }}</td>
+								<td>{{ group.created|date('d-m-y') }}</td>
+								<td>{{ group.updated|date('d-m-y') }}</td>
+								<td>
+									<a href="{{ path('application_backend_group_edit',{'groupID' : group.id}) }}" class="edit-group">{{ 'Edit'|trans }}</a> | 
+									<a href="{{ path('application_backend_group_add_user',{'groupID' : group.id}) }}" class="add-group-user">{{ 'Add Employee'|trans }}</a> | <a href="{{ path('application_backend_group_show_user',{'groupID' : group.id}) }}" class="show-employee">{{ 'Show'|trans }} ({{ group.getMembers|length }}) {% if group.getMembers|length > 1 %} {{ ' Employees'|trans }} {% else %} {{ ' Employee'|trans }} {% endif %}</a> | 
+									<a onclick="return confirm('{% trans %}Are you sure you want to delete this group{% endtrans %}?');" href="{{ path('application_backend_group_delete',{'groupID' : group.id}) }}" class="delete_group">{{ 'Delete'|trans }}</a>
+								</td>
+							</tr>
+							{% else %}
+								<tr>
+									<td colspan="5">{{ 'No group found'|trans }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

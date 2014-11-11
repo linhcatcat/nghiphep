@@ -20,17 +20,17 @@ class GroupType extends AbstractType {
 		));
 
 		$builder->add("user","entity",array(
-            "label" => "Manger",
-            "class" => "ApplicationUserBundle:User",
-            "query_builder" => function(EntityRepository $er){
-                //return $er->createQueryBuilder("u")->where("u.enabled = 1 and u.username like 'nhathoa' and u.roles in ")->orderBy("u.username", "ASC");
-                return $er->createQueryBuilder("u")
-                	->where( "u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_SUPER_ADMIN")) ."'" )
-                	->orderBy("u.username", "DESC");
-            },
-        ));
+			"label" => "Manger",
+			"class" => "ApplicationUserBundle:User",
+			"query_builder" => function(EntityRepository $er){
+				//return $er->createQueryBuilder("u")->where("u.enabled = 1 and u.username like 'nhathoa' and u.roles in ")->orderBy("u.username", "ASC");
+				return $er->createQueryBuilder("u")
+					->where( "u.roles = '" . serialize(array("ROLE_BOSS")) . "' or u.roles = '" . serialize(array("ROLE_SUPER_ADMIN")) ."'" )
+					->orderBy("u.username", "DESC");
+			},
+		));
 
-        $builder->add('enabled', 'checkbox', array(
+		$builder->add('enabled', 'checkbox', array(
 			'mapped' => true,
 			'attr'	=> array('checked'   => 'checked'),
 			'required'  => false,

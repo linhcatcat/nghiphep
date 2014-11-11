@@ -30,13 +30,15 @@ class TaskType extends AbstractType {
 			'input'  => 'datetime',
 			'widget' => 'choice',
 		));*/
-		
+
 		$builder->add('start', 'date', array(
+			'label' => 'Ngày bắt đầu',
 			'widget' => 'single_text',
 			'format' => 'yyyy-MM-dd',
 		));
 
 		$builder->add('end', 'date', array(
+			'label' => 'Ngày kết thúc',
 			'widget' => 'single_text',
 			'format' => 'yyyy-MM-dd',
 		));
@@ -45,17 +47,18 @@ class TaskType extends AbstractType {
 			'attr'	=> array(
 				'class' => 'leave_type_task'
 			),
-			'label' => 'Leave type',
+			'label' => 'Loại nghỉ phép',
 			'choices'   => array(
-				0 => 'Nghi phep', 
-				1 => 'Nghi khong luong', 
-				2 => 'Nghi bu'
+				0 => 'Nghỉ phép', 
+				1 => 'Nghỉ không lương', 
+				2 => 'Nghỉ bù'
 			),
 			'empty_value' => false,
 			'data' => 0,
 		));
 
 		$builder->add('note', 'textarea', array(
+			'label' => 'Ghi chú',
 			'attr'	=> array(
 				'class' => 'note_task'
 			),

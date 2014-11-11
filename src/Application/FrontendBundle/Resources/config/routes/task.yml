@@ -1,0 +1,3 @@
+application_frontend_task_index:
+    path:     /
+    defaults: { _controller: ApplicationFrontendBundle:Task:task }

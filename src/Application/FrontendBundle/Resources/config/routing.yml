@@ -6,6 +6,10 @@ application_frontend_task:
     resource: "@ApplicationFrontendBundle/Resources/config/routes/task.yml"
     prefix: /task
 
+application_frontend_user:
+    resource: "@ApplicationFrontendBundle/Resources/config/routes/user.yml"
+    prefix: /user
+
 application_frontend_errorpage:
     path:     /error
     defaults: { _controller: ApplicationFrontendBundle:Default:error }

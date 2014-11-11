@@ -1688,7 +1688,7 @@ you can use the generic selector below, but it's slower:
 .popup-touch-devices .modal-footer .save-touch-devices,
 .submit-profile .sub_custom_btn_company_job,
 .submit-profile .save-profile {
-	width: 88px;
+	width: 100px;
 	height: 37px;
 	border: none;
 	text-shadow: none;
