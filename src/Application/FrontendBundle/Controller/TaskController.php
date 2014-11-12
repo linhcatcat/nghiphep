@@ -60,7 +60,7 @@ class TaskController extends Controller
 				var_dump($time2);
 				var_dump('-');
 				var_dump($time1 + $time2 );
-				var_dump($this->caculatorTime($startDate, $endDate));*/
+				var_dump($this->calculatorTime($startDate, $endDate));*/
 			} else {
 				$time = $endTimeArr[$endTime] - $startTimeArr[$startTime];
 				//var_dump($time);
@@ -76,11 +76,17 @@ class TaskController extends Controller
 			}*/
 			$translator = $this->get('translator');
 			$task = new Task();
-			
+			$task->setUser( $user );
 			$form = $this->createForm(new TaskType(), $task);
 			$form->handleRequest($request);
 			if ($form->isValid()) {
-				$em = $this->getDoctrine()->getEntityManager();
+				$em = $this->getDoctrine()->getManager();
+				$startTime = $request->get('txtStartTime');
+				$endTime = $request->get('txtEndTime');
+				
+				var_dump($startTime);
+				var_dump($endTime);
+				exit();
 				$em->persist($task);
 				$em->flush();
 				$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('You leave application successfully'));

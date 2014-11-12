@@ -24,7 +24,6 @@ class Task {
 	/**
 	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="Task")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-	 * @Assert\NotBlank(message="User not empty!")
 	 */
 	protected $user;
 
@@ -47,6 +46,12 @@ class Task {
 	protected $end;
 
 	/**
+	 * @var time $endTime
+	 * @ORM\Column(name="endTime", type="time")
+	 */
+	protected $endTime;
+
+	/**
 	 * @var int $leaveType
 	 * @ORM\Column(name="leave_type", type="int")
 	 */
@@ -59,8 +64,8 @@ class Task {
 	protected $note;
 
 	/**
-	 * @var boolean $status
-	 * @ORM\Column(name="status", type="boolean", nullable=true)
+	 * @var int $status
+	 * @ORM\Column(name="status", type="int")
 	 */
 	protected $status;
 
@@ -233,6 +238,26 @@ class Task {
      */
     public function getEnd() {
         return $this->end;
+    }
+
+    /**
+     * Set endTime
+     *
+     * @param \Time $endTime
+     * @return Task
+     */
+    public function setEndTime($endTime) {
+        $this->start = $start;
+        return $this;
+    }
+
+    /**
+     * Get endTime
+     *
+     * @return \Time 
+     */
+    public function getEndTime() {
+        return $this->endTime;
     }
 
 	/**

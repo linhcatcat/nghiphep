@@ -53,7 +53,6 @@ class TaskType extends AbstractType {
 				1 => 'Nghỉ không lương', 
 				2 => 'Nghỉ bù'
 			),
-			'empty_value' => false,
 			'data' => 0,
 		));
 
