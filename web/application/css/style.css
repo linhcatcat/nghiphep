@@ -100,8 +100,17 @@ header .container {
 	width: 499px;
 }
 .form-frontend .ho_ten {
-	width: 299px;
+	width: 328px;
 }
 .form-frontend .leave_type_task {
-	width: 313px;
+	width: 343px;
+}
+.ui-datepicker-trigger {
+    background-color: transparent;
+    border: 0;
+    margin: 0 5px;
+    padding: 0;
+}
+.ui-datepicker-trigger img {
+	width: 20px;
 }

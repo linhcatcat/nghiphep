@@ -32,9 +32,6 @@ class TaskController extends Controller
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$user = $this->container->get('security.context')->getToken()->getUser();
-			$startDate = strtotime('2014-11-05');
-			$startTime = '08:00';
-			//---------
 			$timeStart = '08:00';
 			$timeEnd = '17:00';
 			$startTimeArr = array(
@@ -43,7 +40,6 @@ class TaskController extends Controller
 				'13:00' => 240, '13:30' => 270, '14:00' => 300, '14:30' => 330,
 				'15:00' => 360, '15:30' => 390, '16:00' => 420, '16:30' => 450,
 			);
-			$endDate = strtotime('2014-11-05');
 			$endTimeArr = array(
 				'08:00' => 0, '08:30' => 30, '09:00' => 60, '09:30' => 90,
 				'10:00' => 120, '10:30' => 150, '11:00' => 180, '11:30' => 210,
@@ -51,29 +47,6 @@ class TaskController extends Controller
 				'15:00' => 360, '15:30' => 390, '16:00' => 420, '16:30' => 450,
 				'17:00' => 480,
 			);
-			$endTime = '08:00';
-			if( $startDate < $endDate ) {
-				$time1 = $endTimeArr[$timeEnd] - $startTimeArr[$startTime];
-				$time2 = $endTimeArr[$endTime] - $endTimeArr[$timeStart];
-				/*var_dump($time1);
-				var_dump('-');
-				var_dump($time2);
-				var_dump('-');
-				var_dump($time1 + $time2 );
-				var_dump($this->calculatorTime($startDate, $endDate));*/
-			} else {
-				$time = $endTimeArr[$endTime] - $startTimeArr[$startTime];
-				//var_dump($time);
-			}
-			//var_dump(date("Y-m-d H:i:s w", strtotime('2014-11-08')));
-
-			
-			/*$txtStartDate = $request->get('txtStartDate');
-			$txtEndDate = $request->get('txtEndDate');
-			if( $txtStartDate && $txtEndDate){
-				var_dump($txtEndDate);
-				var_dump($txtStartDate);exit();
-			}*/
 			$translator = $this->get('translator');
 			$task = new Task();
 			$task->setUser( $user );
@@ -81,15 +54,30 @@ class TaskController extends Controller
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
-				$startTime = $request->get('txtStartTime');
+				$startTime = $request->get('txtStartTime');;
 				$endTime = $request->get('txtEndTime');
-				
-				var_dump($startTime);
-				var_dump($endTime);
-				exit();
-				$em->persist($task);
-				$em->flush();
-				$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('You leave application successfully'));
+				$task->setStartTime( $startTime )->setEndTime( $endTime );
+				$startDate = $task->getStart()->getTimestamp();
+				$endDate = $task->getEnd()->getTimestamp();
+				$hour = 0;
+				if( date("w", $startDate) == 6 ){
+					$timeEnd = '12:00';
+				}
+				if( $startDate < $endDate ) {
+					$hour = $hour + ($endTimeArr[$timeEnd] - $startTimeArr[$startTime])/60;
+					$hour = $hour + ($endTimeArr[$endTime] - $endTimeArr[$timeStart])/60;
+					$hour = $hour + $this->calculatorTime($startDate, $endDate);
+				} else {
+					$hour = $hour + ($endTimeArr[$endTime] - $startTimeArr[$startTime])/60;
+				}
+				$task->setHour( $hour );
+				/*$em->persist($task);
+				$em->flush();*/
+				if( $hour <= 2 ) {
+					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
+				} else {
+					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công!'));
+				}
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
 			}
 			return $this->render('ApplicationFrontendBundle:Task:index.html.twig', array(

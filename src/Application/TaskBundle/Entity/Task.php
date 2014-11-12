@@ -58,6 +58,12 @@ class Task {
 	protected $leaveType;
 
 	/**
+	 * @var float $hour
+	 * @ORM\Column(name="hour", type="float")
+	 */
+	protected $hour;
+
+	/**
 	 * @var text $note
 	 * @ORM\Column(name="note", type="text", nullable=true)
 	 */
@@ -158,6 +164,29 @@ class Task {
 	}
 
 	/**
+	 * Set hour
+	 *
+	 * @param float $hour
+	 * @return Task
+	 */
+	public function setHour($hour)
+	{
+		$this->hour = $hour;
+	
+		return $this;
+	}
+
+	/**
+	 * Get hour
+	 *
+	 * @return float 
+	 */
+	public function getHour()
+	{
+		return $this->hour;
+	}
+
+	/**
 	 * Set note
 	 *
 	 * @param string $note
@@ -207,7 +236,7 @@ class Task {
      * @return Task
      */
     public function setStartTime($startTime) {
-        $this->start = $start;
+        $this->startTime = $startTime;
         return $this;
     }
 
@@ -247,7 +276,7 @@ class Task {
      * @return Task
      */
     public function setEndTime($endTime) {
-        $this->start = $start;
+        $this->endTime = $endTime;
         return $this;
     }
 

@@ -11,36 +11,23 @@ use Doctrine\ORM\EntityRepository;
 class TaskType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		
-		/*$builder->add('start', 'datetime', array(
-			'attr'	=> array(
-				'class' => 'start_task'
-			),
-			'label'	=> 'Start'
-		));*/
-
-		/*$builder->add('end', 'datetime', array(
-			'attr'	=> array(
-				'class' => 'end_task'
-			),
-			'label'	=> 'End'
-		));*/
-
-		/*$builder->add('startTime', 'time', array(
-			'input'  => 'datetime',
-			'widget' => 'choice',
-		));*/
 
 		$builder->add('start', 'date', array(
 			'label' => 'Ngày bắt đầu',
 			'widget' => 'single_text',
 			'format' => 'yyyy-MM-dd',
+			'attr'	=> array(
+				'readonly' => 'readonly'
+			),
 		));
 
 		$builder->add('end', 'date', array(
 			'label' => 'Ngày kết thúc',
 			'widget' => 'single_text',
 			'format' => 'yyyy-MM-dd',
+			'attr'	=> array(
+				'readonly' => 'readonly'
+			),
 		));
 
 		$builder->add('leaveType', 'choice', array(
