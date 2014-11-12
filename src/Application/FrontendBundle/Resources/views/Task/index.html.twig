@@ -109,7 +109,7 @@
 
 			<div class="tab-content">
 				<div class="tab-pane active" id="user-admin">
-					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
+					<form id="form-add-task" enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
 						<div>
 			                <label class="required" for="TaskType_ho_ten">Nhân viên</label>
 						    <input type="text" name="TaskType[ho_ten]" value="{{ user.firstName }} {{ user.lastName }}" id="TaskType_ho_ten" class="ho_ten" readonly />
@@ -169,7 +169,7 @@
 						<div class="submit-profile clearfix">
 							<div class="save-user-admin pull-left">
 								<i class="icon-save"></i>
-								<input class="btn save-profile" type="submit" value="{{ 'Đăng ký'|trans }}" />
+								<input class="btn save-profile save-task" type="submit" value="{{ 'Đăng ký'|trans }}" />
 							</div>
 							<a href="{{ path('application_frontend_task_index') }}" class="btn cancel pull-left">
 								<i class="icon-long-arrow-left"></i>
@@ -199,9 +199,10 @@
 				if( d.getDay() == 0 ){
 					alert('Ngày bắt đầu không thể chọn chủ nhật!');
 					$(this).val('');
-				}
-				if( d.getDay() == 6 ){
+				} else if( d.getDay() == 6 ){
 					saturdayStart('.txtStartTime');
+				} else {
+					otherdayStart('.txtStartTime');
 				}
 			}
 		});
@@ -214,12 +215,55 @@
 				if( d.getDay() == 0 ){
 					alert('Ngày kết thúc không thể chọn chủ nhật!');
 					$(this).val('');
-				}
-				if( d.getDay() == 6 ){
+				} else if( d.getDay() == 6 ){
 					saturdayEnd('.txtEndTime');
+				} else {
+					otherdayEnd('.txtEndTime');
 				}
 			}
 		});
+		function otherdayStart(strClass){
+			var strHtml = '';
+			strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			strHtml = strHtml + '<option value="13:00">13:00</option>';
+			strHtml = strHtml + '<option value="13:30">13:30</option>';
+			strHtml = strHtml + '<option value="14:00">14:00</option>';
+			strHtml = strHtml + '<option value="14:30">14:30</option>';
+			strHtml = strHtml + '<option value="15:00">15:00</option>';
+			strHtml = strHtml + '<option value="15:30">15:30</option>';
+			strHtml = strHtml + '<option value="16:00">16:00</option>';
+			strHtml = strHtml + '<option value="16:30">16:30</option>';
+			$(strClass).html( strHtml );
+		}
+		function otherdayEnd(strClass){
+			var strHtml = '';
+			strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			strHtml = strHtml + '<option value="12:00">12:00</option>';
+			strHtml = strHtml + '<option value="13:30">13:30</option>';
+			strHtml = strHtml + '<option value="14:00">14:00</option>';
+			strHtml = strHtml + '<option value="14:30">14:30</option>';
+			strHtml = strHtml + '<option value="15:00">15:00</option>';
+			strHtml = strHtml + '<option value="15:30">15:30</option>';
+			strHtml = strHtml + '<option value="16:00">16:00</option>';
+			strHtml = strHtml + '<option value="16:30">16:30</option>';
+			strHtml = strHtml + '<option value="17:00">17:00</option>';
+			$(strClass).html( strHtml );
+		}
+
 		function saturdayStart(strClass){
 			var strHtml = '';
 			strHtml = strHtml + '<option value="08:00">08:00</option>';
@@ -256,6 +300,30 @@
 		arrStartHour['15:00'] = 360; arrStartHour['15:30'] = 390;
 		arrStartHour['16:00'] = 420; arrStartHour['16:30'] = 450;
 
-		console.log( arrStartHour['08:00'] );
+		var arrEndHour = new Array();
+		arrEndHour['08:00'] = 0; arrEndHour['08:30'] = 30;
+		arrEndHour['09:00'] = 60; arrEndHour['09:30'] = 90;
+		arrEndHour['10:00'] = 120; arrEndHour['10:30'] = 150;
+		arrEndHour['11:00'] = 180; arrEndHour['11:30'] = 210;
+		arrEndHour['12:00'] = 240; arrEndHour['13:30'] = 270;
+		arrEndHour['14:00'] = 300; arrEndHour['14:30'] = 330;
+		arrEndHour['15:00'] = 360; arrEndHour['15:30'] = 390;
+		arrEndHour['16:00'] = 420; arrEndHour['16:30'] = 450;
+		arrEndHour['17:00'] = 480;
+
+		$('.save-task').on('click', function(e){
+			//e.preventDefault();
+			if( $('#TaskType_start').val() && $('#TaskType_end').val() && 
+				$('#TaskType_start').val() == $('#TaskType_end').val() ) {
+				var startTime = $('.txtStartTime').val();
+				var endTime = $('.txtEndTime').val();
+				var time = arrEndHour[endTime] - arrStartHour[startTime];
+				if( time < 120 ) {
+					alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
+					return false;
+				}
+			}
+		});
+		console.log( arrEndHour );
 	</script>
 {% endblock %}
