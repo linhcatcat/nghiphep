@@ -8,17 +8,25 @@
 			{% if app.session.getFlashBag().has( 'edit_user_successfully' ) %}
 				<div class="alert alert-success">
 					<button class="close" data-dismiss="alert" type="button">×</button>
-						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
-							{{message}}
-						{% endfor %}
+					{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+						{{message}}
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_task_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+					{% for message in app.session.getFlashBag().get('add_task_successfully')%}
+						{{message}}
+					{% endfor %}
 				</div>
 			{% endif %}
 			{% if app.session.getFlashBag().has( 'test_successfully' ) %}
 				<div class="alert alert-error">
 					<button class="close" data-dismiss="alert" type="button">×</button>
-						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
-							{{message}}
-						{% endfor %}
+					{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+						{{message}}
+					{% endfor %}
 				</div>
 			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">

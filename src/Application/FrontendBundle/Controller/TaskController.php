@@ -73,10 +73,11 @@ class TaskController extends Controller
 				$task->setHour( $hour );
 				/*$em->persist($task);
 				$em->flush();*/
-				if( $hour <= 2 ) {
-					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
+				if( $hour < 2 ) {
+					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans($hour.'Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
 				} else {
-					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công!'));
+					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ xác nhận!'));
+					return $this->redirect($this->generateUrl('application_frontend_task_index'));
 				}
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
 			}

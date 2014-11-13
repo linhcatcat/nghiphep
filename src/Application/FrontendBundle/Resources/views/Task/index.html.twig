@@ -194,10 +194,6 @@
 
 {% block javascript %}
 	<script type="text/javascript">
-		/*$(".txtTaskDate").datepicker({
-			dateFormat: "yy-mm-dd",
-			numberOfMonths: 1
-		});*/
 		$("#TaskType_start").datepicker({
 			showOn: "button",
 			buttonImage: "application/images/calendar.gif",
@@ -323,17 +319,37 @@
 		arrEndHour['15:00'] = 360; arrEndHour['15:30'] = 390;
 		arrEndHour['16:00'] = 420; arrEndHour['16:30'] = 450;
 		arrEndHour['17:00'] = 480;
-
+		
 		$('.save-task').on('click', function(e){
 			//e.preventDefault();
+			var startTime = $('.txtStartTime').val();
+			var endTime = $('.txtEndTime').val();
+			var time = 0;
 			if( $('#TaskType_start').val() && $('#TaskType_end').val() && 
 				$('#TaskType_start').val() == $('#TaskType_end').val() ) {
-				var startTime = $('.txtStartTime').val();
-				var endTime = $('.txtEndTime').val();
-				var time = arrEndHour[endTime] - arrStartHour[startTime];
+				time = arrEndHour[endTime] - arrStartHour[startTime];
 				if( time < 120 ) {
 					alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
 					return false;
+				}
+			} else if( $('#TaskType_start').val() && $('#TaskType_end').val() ) {
+				var startDateTimestemp = new Date( $('#TaskType_start').val() ).getTime()/1000;
+				var endDateTimestemp = new Date( $('#TaskType_end').val() ).getTime()/1000;
+				if( calculatorTime(startDateTimestemp, endDateTimestemp) == 0 ) {
+					var d = new Date(startDateTimestemp * 1000);
+					var day = d.getDay();
+					var timeStart = '08:00';
+					var timeEnd = '17:00';					
+					if( day == 6 ){
+						timeEnd = '12:00';
+					}
+					time = time + (arrEndHour[timeEnd] - arrStartHour[startTime]);
+					time = time + (arrEndHour[endTime] - arrEndHour[timeStart]);
+					alert( time );
+					if( time < 120 ) {
+						alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
+						return false;
+					}
 				}
 			}
 			if( !$('#TaskType_start').val() ) {
@@ -345,5 +361,25 @@
 				return false;
 			}
 		});
+
+		function calculatorTime(startDate, endDate) {
+			startDate = startDate + 86400;
+			hour = 0;
+			console.log(startDate);
+			console.log(endDate);
+			while(startDate < endDate) {
+				var d = new Date(startDate * 1000);
+				var day = d.getDay();
+				if( day ){
+					if( day == 6 ) {
+						hour = hour + 4;
+					} else {
+						hour = hour + 8;
+					}
+				}
+				startDate = startDate + 86400;
+			}
+			return hour;
+		}
 	</script>
 {% endblock %}
