@@ -3,6 +3,7 @@
 namespace Application\TaskBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 /**
  * Application\TaskBundle\Entity\Task
@@ -26,6 +27,11 @@ class Task {
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
 	 */
 	protected $user;
+	/**
+	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="Task")
+	 * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=false)
+	 */
+	protected $owner;
 
 	/**
 	 * @var datetime $start
@@ -35,7 +41,7 @@ class Task {
 
 	/**
 	 * @var time $startTime
-	 * @ORM\Column(name="startTime", type="time")
+	 * @ORM\Column(name="start_time", type="string")
 	 */
 	protected $startTime;
 
@@ -47,13 +53,13 @@ class Task {
 
 	/**
 	 * @var time $endTime
-	 * @ORM\Column(name="endTime", type="time")
+	 * @ORM\Column(name="end_time", type="string")
 	 */
 	protected $endTime;
 
 	/**
 	 * @var int $leaveType
-	 * @ORM\Column(name="leave_type", type="int")
+	 * @ORM\Column(name="leave_type", type="integer")
 	 */
 	protected $leaveType;
 
@@ -71,7 +77,7 @@ class Task {
 
 	/**
 	 * @var int $status
-	 * @ORM\Column(name="status", type="int")
+	 * @ORM\Column(name="status", type="integer")
 	 */
 	protected $status;
 
@@ -91,6 +97,18 @@ class Task {
 	 * Constructor
 	 */
 	public function __construct() {
+	}
+
+	public function trangThai() {
+		if( $this->status == 0 ){
+			return 'Đang chờ duyệt';
+		}
+		if( $this->status == 1 ){
+			return 'Đã duyệt';
+		}
+		if( $this->status == 2 ){
+			return 'Không duyệt';
+		}
 	}
 
 	/**
@@ -138,6 +156,29 @@ class Task {
 	public function getUser()
 	{
 		return $this->user;
+	}
+
+	/**
+	 * Set owner
+	 *
+	 * @param string $owner
+	 * @return Task
+	 */
+	public function setOwner($owner)
+	{
+		$this->owner = $owner;
+	
+		return $this;
+	}
+
+	/**
+	 * Get owner
+	 *
+	 * @return string 
+	 */
+	public function getOwner()
+	{
+		return $this->owner;
 	}
 
 	/**

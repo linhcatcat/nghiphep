@@ -50,10 +50,12 @@ class TaskController extends Controller
 			$translator = $this->get('translator');
 			$task = new Task();
 			$task->setUser( $user );
+			$task->setOwner( $user );
 			$form = $this->createForm(new TaskType(), $task);
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
+				//$em = $this->getDoctrine()->getEntityManager();
 				$startTime = $request->get('txtStartTime');;
 				$endTime = $request->get('txtEndTime');
 				$task->setStartTime( $startTime )->setEndTime( $endTime );
@@ -71,10 +73,13 @@ class TaskController extends Controller
 					$hour = $hour + ($endTimeArr[$endTime] - $startTimeArr[$startTime])/60;
 				}
 				$task->setHour( $hour );
-				/*$em->persist($task);
-				$em->flush();*/
+				$task->setStatus( 0 );
+				$task->setLeaveType((int)$task->getLeaveType());
+				//var_dump($task);exit();
+				$em->persist($task);
+				$em->flush();
 				if( $hour < 2 ) {
-					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans($hour.'Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
+					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
 				} else {
 					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ xác nhận!'));
 					return $this->redirect($this->generateUrl('application_frontend_task_index'));
@@ -160,9 +165,16 @@ class TaskController extends Controller
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$user = $this->container->get('security.context')->getToken()->getUser();
+			$taskService = $this->get('application_task_service');
+			$page = (int) $request->query->get('page', 1);
+			$limit = $this->container->getParameter('limit_items_per_page');
+			$offset = $limit * ($page - 1);
+			$totalTask = $taskService->countAll();
+			$aFilters = array('id' => 'DESC');
 			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
 				'user' => $user,
-				'groups' => array()
+				'tasks' =>	$taskService->filter($limit, $offset, $aFilters),
+				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalTask / $limit), array())
 			));
 		} else {
 			return $this->redirect($this->generateUrl('application_frontend_login'));

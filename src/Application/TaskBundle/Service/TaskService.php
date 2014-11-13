@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 
 //use \InvalidArgumentException;
 
-class ProductService {
+class TaskService {
 
 	private $em;
 

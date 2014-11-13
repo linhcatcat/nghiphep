@@ -126,6 +126,7 @@
 			                <label class="required" for="TaskType_manv">Mã nhân viên</label>
 						    <input type="text" name="manv" value="{{ user.username }}" id="TaskType_manv" class="ho_ten" readonly />
 						</div>
+						<hr/>
 						<div>
 							{{ form_label(form.start) }}
 						    {{ form_errors(form.start) }}
@@ -345,7 +346,6 @@
 					}
 					time = time + (arrEndHour[timeEnd] - arrStartHour[startTime]);
 					time = time + (arrEndHour[endTime] - arrEndHour[timeStart]);
-					alert( time );
 					if( time < 120 ) {
 						alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
 						return false;
