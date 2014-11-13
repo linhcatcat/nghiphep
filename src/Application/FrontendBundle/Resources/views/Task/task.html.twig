@@ -68,6 +68,9 @@
 							{% endfor %}
 						</tbody>
 					</table>
+					{% if tasks is not empty %}
+						{{ pagination|raw }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
