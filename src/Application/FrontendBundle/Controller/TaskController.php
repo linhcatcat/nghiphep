@@ -170,11 +170,19 @@ class TaskController extends Controller
 			$limit = $this->container->getParameter('limit_items_per_page');
 			$offset = $limit * ($page - 1);
 			$aFilters = array('id' => 'DESC');
-			
-			if( $securityContext->isGranted('ROLE_EMPLOYEE') ){
+			$groupService = $this->get('application_group_service');
+			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
 				$totalTask = $taskService->countByUser( $user );
 				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
 			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
+				$groups = $groupService->findByUser($user);
+				$userIds = array();
+				foreach ($groups as $group) {
+					foreach ($group->getMembers() as $member) {
+						$userIds[] = $member->getId();
+					}
+				}
+				var_dump($userIds);
 				$totalTask = $taskService->countByUser( $user );
 				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
 			} else {

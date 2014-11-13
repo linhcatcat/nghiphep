@@ -54,8 +54,19 @@ class GroupService {
 	}
 
 	/**
-	 * Find all Product
-	 * @author Harrison <alex@likipe.se>
+	 * Find by user
+	 * @author Alex <alex@likipe.se>
+	 * @return array
+	 */
+	public function findByUser($user) {
+		$result = $this->getRepository()->findBy(array('user'=>$user));
+
+		return $result;
+	}
+
+	/**
+	 * Find all group
+	 * @author Alex <alex@likipe.se>
 	 * @return array
 	 */
 	public function findAll() {

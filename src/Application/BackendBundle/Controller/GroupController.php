@@ -73,7 +73,7 @@ class GroupController extends Controller {
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			//var_dump($group->getUser()->getUsername());exit();
-			$group->addMember( $group->getUser() );
+			//$group->addMember( $group->getUser() );
 			//var_dump(count($group->getMembers()));exit();
 			$bUpdate = $groupService->update($group);
 			if($bUpdate) {

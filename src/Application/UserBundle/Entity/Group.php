@@ -196,10 +196,10 @@ class Group {
 	/**
      * Add member
      *
-     * @param \Application\UserBundle\Entity\User $member
+     * @param \Application\UserBundle\Entity\GroupUser $member
      * @return member
      */
-    public function addMember(\Application\UserBundle\Entity\User $member)
+    public function addMember(\Application\UserBundle\Entity\GroupUser $member)
     {
         $this->member[] = $member;
     
@@ -209,9 +209,9 @@ class Group {
     /**
      * Remove member
      *
-     * @param \Application\UserBundle\Entity\User $member
+     * @param \Application\UserBundle\Entity\GroupUser $member
      */
-    public function removeMember(\Application\UserBundle\Entity\User $member)
+    public function removeMember(\Application\UserBundle\Entity\GroupUser $member)
     {
         $this->member->removeElement($member);
     }
