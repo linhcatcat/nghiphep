@@ -96,7 +96,7 @@ class TaskService {
 	}
 
 	/**
-	 * Filter task with keyword/conditions/filter/paging
+	 * Filter 
 	 * @author Alex
 	 * @param array $aFilters
 	 * @param integer $limit
@@ -108,12 +108,35 @@ class TaskService {
 	}
 
 	/**
+	 * Filter by user
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function filterByUser($limit, $offset, $aFilters = array(), $user) {
+		$results = $this->getRepository()->filterByUser($limit, $offset, $aFilters, $user);
+		return $results;
+	}
+
+	/**
+	 * Count task by user
+	 * @author Alex
+	 * @param $user
+	 * @param $count
+	 */
+	public function countByUser($user) {
+		$count = $this->getRepository()->countByUser($user);
+		return $count;
+	}
+
+	/**
 	 * Count all with params & keyword
 	 * @author Alex
 	 * @param string $sKeyword
 	 * @param array $aParams
 	 */
-	public function countAll() {
+	public function count() {
 		$count = $this->getRepository()->count();
 		return $count;
 	}

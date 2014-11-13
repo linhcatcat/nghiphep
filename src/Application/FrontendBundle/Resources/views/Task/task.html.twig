@@ -41,9 +41,10 @@
 							<tr>
 								<th>{{ 'Mã NV'|trans }}</th>
 								<th>{{ 'Tên NV'|trans }}</th>
-								<th>{{ 'Ngày BD'|trans }}</th>
-								<th>{{ 'Ngày KT'|trans }}</th>
+								<th>{{ 'Từ ngày'|trans }}</th>
+								<th>{{ 'Tới ngày'|trans }}</th>
 								<th>{{ 'Số giờ nghỉ'|trans }}</th>
+								<th>{{ 'Loại'|trans }}</th>
 								<th>{{ 'Trang thái'|trans }}</th>
 								<th>{{ 'Ngày tạo'|trans }}</th>
 								<th>{{ 'Người tạo'|trans }}</th>
@@ -57,13 +58,14 @@
 								<td>{{ task.start|date('Y-m-d') }} {{ task.startTime }}</td>
 								<td>{{ task.end|date('Y-m-d') }}  {{ task.endTime }}</td>
 								<td>{{ task.hour }}</td>
+								<td>{{ task.loai }}</td>
 								<td>{{ task.trangThai }}</td>
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
 							</tr>
 							{% else %}
 								<tr>
-									<td colspan="5">{{ 'No task found'|trans }}</td>
+									<td colspan="9">{{ 'Bạn đang là nhân viên gương mẫu'|trans }}</td>
 								</tr>
 							{% endfor %}
 						</tbody>

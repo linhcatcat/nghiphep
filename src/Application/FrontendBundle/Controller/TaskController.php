@@ -169,12 +169,23 @@ class TaskController extends Controller
 			$page = (int) $request->query->get('page', 1);
 			$limit = $this->container->getParameter('limit_items_per_page');
 			$offset = $limit * ($page - 1);
-			$totalTask = $taskService->countAll();
 			$aFilters = array('id' => 'DESC');
+			
+			if( $securityContext->isGranted('ROLE_EMPLOYEE') ){
+				$totalTask = $taskService->countByUser( $user );
+				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
+			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
+				$totalTask = $taskService->countByUser( $user );
+				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
+			} else {
+				$totalTask = $taskService->count();
+				$tasks = $taskService->filter( $limit, $offset, $aFilters );
+			}
+
 			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
 				'user' => $user,
-				'tasks' =>	$taskService->filter($limit, $offset, $aFilters),
-				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalTask / $limit), array())
+				'tasks' => $tasks,
+				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
 			));
 		} else {
 			return $this->redirect($this->generateUrl('application_frontend_login'));

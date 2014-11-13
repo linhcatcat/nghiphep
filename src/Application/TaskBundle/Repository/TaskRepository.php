@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 class TaskRepository extends EntityRepository {
 
 	/**
-	 * Filter candidate with keyword/conditions/filter/paging
+	 * Filter 
 	 * @author Alex
 	 * @param array $aFilters
 	 * @param integer $limit
@@ -31,6 +31,45 @@ class TaskRepository extends EntityRepository {
 
 		$results = $qb->getQuery()->getResult();
 		return $results;
+	}
+
+	/**
+	 * Filter by user
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function filterByUser($limit, $offset, $aFilters, $user) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('t.user = :user');
+		$qb->setParameter('user', $user->getId());
+		$qb->setFirstResult($offset);
+		if (0 <= $limit) {
+			$qb->setMaxResults($limit);
+		}
+		if (isset($aFilters['id'])) {
+			$qb->orderBy('t.id', $aFilters['id']);
+		}
+		if (isset($aFilters['created'])) {
+			$qb->orderBy('t.created', $aFilters['created']);
+		}
+
+		$results = $qb->getQuery()->getResult();
+		return $results;
+	}
+
+	/**
+	 * Count all
+	 * @author Alex
+	 */
+	public function countByUser($user) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('t.user = :user');
+		$qb->setParameter('user', $user->getId());
+		$qb->select($qb->expr()->countDistinct('t.id'));
+		$count = $qb->getQuery()->getSingleScalarResult();
+		return $count;
 	}
 
 	/**

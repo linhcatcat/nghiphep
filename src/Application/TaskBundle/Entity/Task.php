@@ -111,6 +111,18 @@ class Task {
 		}
 	}
 
+	public function loai() {
+		if( $this->leaveType == 0 ){
+			return 'Nghỉ phép';
+		}
+		if( $this->leaveType == 1 ){
+			return 'Nghỉ không lương';
+		}
+		if( $this->leaveType == 2 ){
+			return 'Nghỉ bù';
+		}
+	}
+
 	/**
 	 * @ORM\PrePersist
 	 */
