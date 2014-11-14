@@ -31,6 +31,7 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$userService = $this->get('Application_user.service');
 			$user = $this->container->get('security.context')->getToken()->getUser();
 			$timeStart = '08:00';
 			$timeEnd = '17:00';
@@ -49,9 +50,27 @@ class TaskController extends Controller
 			);
 			$translator = $this->get('translator');
 			$task = new Task();
-			$task->setUser( $user );
+			$users = array();
+			$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
+			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
+				$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
+			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
+				$groupService = $this->get('application_group_service');
+				$groups = $groupService->findByUser($user);
+				foreach ($groups as $group) {
+					foreach ($group->getMembers() as $member) {
+						$users[$member->getUser()->getId()] = $member->getUser()->getUsername() .' - '. $member->getUser()->getFirstName() .' '.$member->getUser()->getLastName();
+					}
+				}
+			} else {
+				
+				$allUser = $userService->getRepository()->findAll();
+				foreach ($allUser as $user) {
+					$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
+				}
+			}
 			$task->setOwner( $user );
-			$form = $this->createForm(new TaskType(), $task);
+			$form = $this->createForm(new TaskType( $users ), $task);
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
@@ -61,6 +80,7 @@ class TaskController extends Controller
 				$task->setStartTime( $startTime )->setEndTime( $endTime );
 				$startDate = $task->getStart()->getTimestamp();
 				$endDate = $task->getEnd()->getTimestamp();
+				$task->setUser( $userService->getRepository()->find($task->getUser()) );
 				$hour = 0;
 				if( date("w", $startDate) == 6 ){
 					$timeEnd = '12:00';
@@ -81,7 +101,7 @@ class TaskController extends Controller
 				if( $hour < 2 ) {
 					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
 				} else {
-					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ xác nhận!'));
+					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
 					return $this->redirect($this->generateUrl('application_frontend_task_index'));
 				}
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
@@ -179,12 +199,11 @@ class TaskController extends Controller
 				$userIds = array();
 				foreach ($groups as $group) {
 					foreach ($group->getMembers() as $member) {
-						$userIds[] = $member->getId();
+						$userIds[] = $member->getUser()->getId();
 					}
 				}
-				var_dump($userIds);
-				$totalTask = $taskService->countByUser( $user );
-				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
+				$totalTask = $taskService->countByUserIds( $userIds );
+				$tasks = $taskService->filterByUserIds( $limit, $offset, $aFilters, $userIds );
 			} else {
 				$totalTask = $taskService->count();
 				$tasks = $taskService->filter( $limit, $offset, $aFilters );

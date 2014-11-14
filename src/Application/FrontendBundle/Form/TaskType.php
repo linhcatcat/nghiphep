@@ -10,6 +10,10 @@ use Doctrine\ORM\EntityRepository;
 
 class TaskType extends AbstractType {
 
+	protected $users = array();
+	public function __construct($users = array()){
+		$this->users = $users;
+	}
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 		$builder->add('start', 'date', array(
@@ -28,6 +32,15 @@ class TaskType extends AbstractType {
 			'attr'	=> array(
 				'readonly' => 'readonly'
 			),
+		));
+		
+		$builder->add('user', 'choice', array(
+			'attr'	=> array(
+				'class' => 'task_user'
+			),
+			'label' => 'Đăng ký cho',
+			'choices'   => $this->users,
+			'data' => 0,
 		));
 
 		$builder->add('leaveType', 'choice', array(

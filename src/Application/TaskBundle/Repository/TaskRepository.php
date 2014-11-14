@@ -60,6 +60,31 @@ class TaskRepository extends EntityRepository {
 	}
 
 	/**
+	 * Filter by user ids
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function filterByUserIds($limit, $offset, $aFilters, $userIds) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('t.user in ('. implode( ',', $userIds ) .')');
+		$qb->setFirstResult($offset);
+		if (0 <= $limit) {
+			$qb->setMaxResults($limit);
+		}
+		if (isset($aFilters['id'])) {
+			$qb->orderBy('t.id', $aFilters['id']);
+		}
+		if (isset($aFilters['created'])) {
+			$qb->orderBy('t.created', $aFilters['created']);
+		}
+
+		$results = $qb->getQuery()->getResult();
+		return $results;
+	}
+
+	/**
 	 * Count all
 	 * @author Alex
 	 */
@@ -67,6 +92,18 @@ class TaskRepository extends EntityRepository {
 		$qb = $this->createQueryBuilder('t');
 		$qb->where('t.user = :user');
 		$qb->setParameter('user', $user->getId());
+		$qb->select($qb->expr()->countDistinct('t.id'));
+		$count = $qb->getQuery()->getSingleScalarResult();
+		return $count;
+	}
+
+	/**
+	 * Count by userIds
+	 * @author Alex
+	 */
+	public function countByUserIds($userIds) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('t.user in ('. implode( ',', $userIds ) .')');
 		$qb->select($qb->expr()->countDistinct('t.id'));
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;

@@ -102,6 +102,7 @@ header .container {
 .form-frontend .ho_ten {
 	width: 328px;
 }
+.form-frontend .task_user,
 .form-frontend .leave_type_task {
 	width: 343px;
 }

@@ -120,6 +120,18 @@ class TaskService {
 	}
 
 	/**
+	 * Filter by userIds
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function filterByUserIds($limit, $offset, $aFilters = array(), $userIds) {
+		$results = $this->getRepository()->filterByUserIds($limit, $offset, $aFilters, $userIds);
+		return $results;
+	}
+
+	/**
 	 * Count task by user
 	 * @author Alex
 	 * @param $user
@@ -127,6 +139,17 @@ class TaskService {
 	 */
 	public function countByUser($user) {
 		$count = $this->getRepository()->countByUser($user);
+		return $count;
+	}
+
+	/**
+	 * Count task by userIds
+	 * @author Alex
+	 * @param $userIds
+	 * @param $count
+	 */
+	public function countByUserIds($userIds) {
+		$count = $this->getRepository()->countByUserIds($userIds);
 		return $count;
 	}
 

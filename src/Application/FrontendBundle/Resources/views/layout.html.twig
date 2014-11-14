@@ -46,7 +46,7 @@
 					{% if app.user.id is defined %}
 						<div class="pull-right hello-chao">
 							{% trans %}Xin chào{% endtrans %}: 
-							<a href="{{ path('application_frontend_user_edit', {'userID': app.user.id}) }}">{{ app.user.username }}</a>
+							<a href="{{ path('application_frontend_user_edit', {'userID': app.user.id}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
 						</div>
 						<div class="btn-group login">
 							<a class="btn" href="#"><i class="icon-lock"></i></a>

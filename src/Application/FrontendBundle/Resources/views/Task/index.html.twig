@@ -1,86 +1,6 @@
 {% extends "ApplicationFrontendBundle::layout.html.twig" %}
 {% block title %}Leave Management System{% endblock %}
 
-{#% block content %}
-	<div class="row-fluid">
-		<div class="well login-box" style="float:none !important;margin-left: auto !important;margin-right: auto !important;">
-			<div class="alert alert-info">
-				{{ 'Leave Application'|trans }}
-			</div>
-			<form class="add_user_admin_form" method="POST" enctype="multipart/form-data">
-				Start: <input type="text" id="txtStartDate" name="txtStartDate" required="required" />
-				<select class="txtStartTime" name="txtStartTime">
-					<option value="08:00">08:00</option> 
-					<option value="08:30">08:30</option>
-					<option value="09:00">09:00</option>
-					<option value="09:30">09:30</option>
-					<option value="10:00">10:00</option>
-					<option value="10:30">10:30</option>
-					<option value="11:00">11:00</option>
-					<option value="11:30">11:30</option>
-					<option value="13:00">13:00</option>
-					<option value="13:30">13:30</option>
-					<option value="14:00">14:00</option>
-					<option value="14:30">14:30</option>
-					<option value="15:00">15:00</option>
-					<option value="15:30">15:30</option>
-					<option value="16:00">16:00</option>
-					<option value="16:30">16:30</option>
-				</select>
-				<br/>
-				End: <input type="text" id="txtEndDate" name="txtEndDate" required="required" />
-				<select class="txtEndTime" name="txtEndTime">
-					<option value="08:00">08:00</option> 
-					<option value="08:30">08:30</option>
-					<option value="09:00">09:00</option>
-					<option value="09:30">09:30</option>
-					<option value="10:00">10:00</option>
-					<option value="10:30">10:30</option>
-					<option value="11:00">11:00</option>
-					<option value="11:30">11:30</option>
-					<option value="12:00">12:00</option>
-					<option value="13:30">13:30</option>
-					<option value="14:00">14:00</option>
-					<option value="14:30">14:30</option>
-					<option value="15:00">15:00</option>
-					<option value="15:30">15:30</option>
-					<option value="16:00">16:00</option>
-					<option value="16:30">16:30</option>
-					<option value="17:00">17:00</option>
-				</select>
-				<br/>
-				<input type="submit" value="Save" class="btn save-profile">
-			</form>
-			</div><!--/span-->
-	</div><!--/row-->
-	<center>
-		<div class="below_body">
-		<div id="clock">Loading...</div>
-		<script type="text/javascript">
-			function refrClock(){
-				var d=new Date("2014-11-02");
-				var s=d.getSeconds();
-				var m=d.getMinutes();
-				var h=d.getHours();
-				var day=d.getDay();
-				var date=d.getDate();
-				var month=d.getMonth();
-				var year=d.getFullYear();
-				var days=new Array("Chủ nhật","Thứ hai","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7");
-				var months=new Array("1","2","3","4","5","6","7","8","9","10","11","12");
-				var am_pm;
-				if (s<10) {s="0" + s}
-				if (m<10) {m="0" + m}
-				if (h>12) {h-=12;AM_PM = "PM"}
-				else {AM_PM="AM"}
-				if (h<10) {h="0" + h}
-				document.getElementById("clock").innerHTML= day + "--" + days[day] + " Ngày " + date + "/" +months[month] + "/" + year + " Bây giờ là "+ "  [" + h + ":" + m + ":" + s + "] " + AM_PM;
-				setTimeout("refrClock()",1000);
-			}
-			refrClock();
-		</script>
-	</center>
-{% endblock %#}
 {% block content %}
 <div class="main-content">
 	<div class="list-content">
@@ -118,15 +38,17 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="user-admin">
 					<form id="form-add-task" enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
-						<div>
+						{#<div>
 			                <label class="required" for="TaskType_ho_ten">Nhân viên</label>
 						    <input type="text" name="ho_ten" value="{{ user.firstName }} {{ user.lastName }}" id="TaskType_ho_ten" class="ho_ten" readonly />
 						</div>
 						<div>
 			                <label class="required" for="TaskType_manv">Mã nhân viên</label>
 						    <input type="text" name="manv" value="{{ user.username }}" id="TaskType_manv" class="ho_ten" readonly />
+						</div>#}
+						<div>
+							{{ form_row(form.user) }}
 						</div>
-						<hr/>
 						<div>
 							{{ form_label(form.start) }}
 						    {{ form_errors(form.start) }}
