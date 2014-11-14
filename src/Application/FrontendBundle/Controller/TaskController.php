@@ -230,7 +230,11 @@ class TaskController extends Controller
 		$id = $data['id'];
 		$task = $taskService->find($id);
 		$task->setStatus( 1 );
-		$taskService->update();
-		return new Response(json_encode(array('type' => 'Đã duyệt', 'data' => $data)), 200);
+		$rs = $taskService->update( $task );
+		if( $rs ) {
+			return new Response(json_encode(array('result' => 1, 'type' => $task->trangThai())), 200);
+		} else {
+			return new Response(json_encode(array('result' => 0, 'data' => 'Đã có lỗi xảy ra')), 300);
+		}
 	}
 }

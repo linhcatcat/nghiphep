@@ -107,7 +107,9 @@
 				dataType: 'json',
 				data: {id: id},
 				success: function(data){
-					$that.parent().parent().find('.type-text').text( data['type'] );
+					if( data['result'] ) {
+						$that.parent().parent().find('.type-text').text( data['type'] );
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown){
 					
