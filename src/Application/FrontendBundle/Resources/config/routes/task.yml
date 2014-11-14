@@ -1,3 +1,9 @@
 application_frontend_task_index:
     path:     /
     defaults: { _controller: ApplicationFrontendBundle:Task:task }
+
+application_frontend_task_confirm:
+    pattern:  /confirm
+    defaults: { _controller: ApplicationFrontendBundle:Task:confirm }
+    options:
+        expose: true

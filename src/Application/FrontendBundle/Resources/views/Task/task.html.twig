@@ -48,24 +48,37 @@
 								<th>{{ 'Trang thái'|trans }}</th>
 								<th>{{ 'Ngày tạo'|trans }}</th>
 								<th>{{ 'Người tạo'|trans }}</th>
+								{% if roleFlag %}
+									<th>{{ 'Duyệt'|trans }}</th>
+								{% endif %}
 							</tr>
 						</thead>
 						<tbody>
 							{% for task in tasks %}
-							<tr>
+							<tr class="item-{{ task.id }}">
 								<td>{{ task.user.username }}</td>
 								<td>{{ task.user.firstName }} {{ task.user.lastName }}</td>
 								<td>{{ task.start|date('Y-m-d') }} {{ task.startTime }}</td>
 								<td>{{ task.end|date('Y-m-d') }}  {{ task.endTime }}</td>
 								<td>{{ task.hour }}</td>
 								<td>{{ task.loai }}</td>
-								<td>{{ task.trangThai }}</td>
+								<td class="type-text">{{ task.trangThai }}</td>
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
+								{% if roleFlag %}
+									<td class="confirm-task">
+										<a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ 'Duyệt'|trans }}</span></a>
+										{#<a class="btn">{{ 'Không'|trans }}</a>#}
+									</td>
+								{% endif %}
 							</tr>
 							{% else %}
 								<tr>
-									<td colspan="9">{{ 'Bạn đang là nhân viên gương mẫu'|trans }}</td>
+									{% if roleFlag %}
+										<td colspan="9">{{ 'Bạn là nhân viên gương mẫu'|trans }}</td>
+									{% else %}
+										<td colspan="10">{{ 'Bạn là nhân viên gương mẫu'|trans }}</td>
+									{% endif %}
 								</tr>
 							{% endfor %}
 						</tbody>
@@ -78,4 +91,35 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$('.confirm-task').on('click', 'a', function(e) {
+			e.preventDefault();
+			$that = $(this);
+			if($(this).parent().find('.disabled').length){
+				return;
+			}
+			var id = $(this).data('id');
+			$.ajax({
+				type: 'POST',
+				url: Routing.generate('application_frontend_task_confirm'),
+				dataType: 'json',
+				data: {id: id},
+				success: function(data){
+					$that.parent().parent().find('.type-text').text( data['type'] );
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					
+				},
+				beforeSend: function() {
+					$that.addClass("disabled");
+					$that.prepend('<i class="icon-refresh icon-spin" style="margin-right: 5px;"></i>');
+				},
+				complete: function() {
+					$that.find('.icon-refresh').remove();
+				}
+			});
+		});
+	</script>
 {% endblock %}

@@ -42,7 +42,7 @@ class TaskService {
 	}
 
 	/**
-	 * Find one Product
+	 * Find one task
 	 * @author Harrison <alex@likipe.se>
 	 * @param array $args
 	 * @return array
@@ -54,7 +54,7 @@ class TaskService {
 	}
 
 	/**
-	 * Find all Product
+	 * Find all task
 	 * @author Harrison <alex@likipe.se>
 	 * @return array
 	 */
@@ -65,13 +65,13 @@ class TaskService {
 	}
 
 	/**
-	 * Update Product
+	 * Update task
 	 * @author Alex <alex@likipe.se>
 	 * @param object $oCompanyJob
 	 * @return boolean
 	 */
-	public function update($tasktask) {
-		if (empty($tasktask)) {
+	public function update($task) {
+		if (empty($task)) {
 			return false;
 		}
 		$this->em->flush();

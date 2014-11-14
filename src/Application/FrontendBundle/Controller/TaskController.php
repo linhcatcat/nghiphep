@@ -4,6 +4,7 @@ namespace Application\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Application\FrontendBundle\Form\TaskType;
 use Application\TaskBundle\Entity\Task;
 use Application\FrontendBundle\Form\UserType;
@@ -74,7 +75,6 @@ class TaskController extends Controller
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
-				//$em = $this->getDoctrine()->getEntityManager();
 				$startTime = $request->get('txtStartTime');;
 				$endTime = $request->get('txtEndTime');
 				$task->setStartTime( $startTime )->setEndTime( $endTime );
@@ -95,7 +95,6 @@ class TaskController extends Controller
 				$task->setHour( $hour );
 				$task->setStatus( 0 );
 				$task->setLeaveType((int)$task->getLeaveType());
-				//var_dump($task);exit();
 				$em->persist($task);
 				$em->flush();
 				if( $hour < 2 ) {
@@ -191,7 +190,9 @@ class TaskController extends Controller
 			$offset = $limit * ($page - 1);
 			$aFilters = array('id' => 'DESC');
 			$groupService = $this->get('application_group_service');
+			$roleFlag = true;
 			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
+				$roleFlag = false;
 				$totalTask = $taskService->countByUser( $user );
 				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
 			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
@@ -210,6 +211,7 @@ class TaskController extends Controller
 			}
 
 			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
+				'roleFlag' => $roleFlag,
 				'user' => $user,
 				'tasks' => $tasks,
 				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
@@ -217,5 +219,18 @@ class TaskController extends Controller
 		} else {
 			return $this->redirect($this->generateUrl('application_frontend_login'));
 		}
+	}
+
+	public function confirmAction(Request $req) {
+		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			throw new AccessDeniedException();
+		}
+		$taskService = $this->get('application_task_service');
+		$data = $req->request->all();
+		$id = $data['id'];
+		$task = $taskService->find($id);
+		$task->setStatus( 1 );
+		$taskService->update();
+		return new Response(json_encode(array('type' => 'Đã duyệt', 'data' => $data)), 200);
 	}
 }

@@ -121,3 +121,7 @@ header .container {
     margin-right: 165px;
     margin-top: 12px;
 }
+.confirm-task a.btn {
+	padding: 8px;
+	width: 60px;
+}
