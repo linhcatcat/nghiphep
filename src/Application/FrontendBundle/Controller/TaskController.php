@@ -3,12 +3,14 @@
 namespace Application\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Application\FrontendBundle\Form\TaskType;
 use Application\TaskBundle\Entity\Task;
 use Application\FrontendBundle\Form\UserType;
 use Application\UserBundle\Entity\User;
+
 
 class TaskController extends Controller
 {
@@ -125,15 +127,20 @@ class TaskController extends Controller
 	public function editUserAction(Request $request, $userID) {
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$userService = $this->get('Application_user.service');
 			$userManagerService = $this->get('fos_user.user_manager');
-			$translator = $this->get('translator');
-			
+			$currentUser = $securityContext->getToken()->getUser();
 			$user = $userManagerService->findUserBy(array('id' => $userID));
+			$userService = $this->get('Application_user.service');
+			$translator = $this->get('translator');
 			if (empty($user)) {
 				throw $this->createNotFoundException($translator->trans('No user found for id ' . $userID));
 			}
-			
+			if( $currentUser->getId() != $user->getId() ){
+				throw new AccessDeniedException();
+				//throw $this->createAccessDeniedException('Unable to access this page!');
+				//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+				//throw new AccessDeniedException();
+			}
 			$form = $this->createForm(
 				new UserType(false), array(),
 				array(
@@ -198,6 +205,7 @@ class TaskController extends Controller
 			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
 				$groups = $groupService->findByUser($user);
 				$userIds = array();
+				$userIds[] = $user->getId();
 				foreach ($groups as $group) {
 					foreach ($group->getMembers() as $member) {
 						$userIds[] = $member->getUser()->getId();
