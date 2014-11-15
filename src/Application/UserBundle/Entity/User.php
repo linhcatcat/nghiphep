@@ -40,6 +40,12 @@ class User extends BaseUser {
     protected $lastName;
 
     /**
+     * @var float $entitled
+     * @ORM\Column(name="entitled", type="float")
+     */
+    protected $entitled;
+
+    /**
      * @var boolean $gender
      * @ORM\Column(name="gender", type="boolean", nullable=true)
      */
@@ -133,6 +139,29 @@ class User extends BaseUser {
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set entitled
+     *
+     * @param float $entitled
+     * @return user
+     */
+    public function setentitled($entitled)
+    {
+        $this->entitled = $entitled;
+    
+        return $this;
+    }
+
+    /**
+     * Get entitled
+     *
+     * @return float 
+     */
+    public function getEntitled()
+    {
+        return $this->entitled;
     }
 
     /**

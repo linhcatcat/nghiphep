@@ -51,7 +51,7 @@ class UserService {
 			$oUser->setConfirmationToken($data['confirmtoken']);
 		}
 		$oUser->setEnabled($data['enabled']);
-		$oUser->setUsername($data['email']);
+		$oUser->setUsername($data['username']);
 		$oUser->setEmail($data['email']);
 		$oUser->setPlainPassword($data['plainPassword']);
 		$oUser->addRole($data['role_user']);
@@ -194,6 +194,7 @@ class UserService {
 		$user->setLastName($data['last_name']);
 		$user->setUsername($data['username']);
 		$user->setEmail($data['email']);
+		$user->setEntitled($data['entitled']);
 		$user->setGender($data['gender']);
 		$user->setPlainPassword($data['user_plain_password']);
 		$user->setRoles($data['role']);
@@ -217,6 +218,7 @@ class UserService {
 		$user->setLastName($data['last_name']);
 		$user->setUsername($data['username']);
 		$user->setEmail($data['email']);
+		$user->setEntitled($data['entitled']);
 		$user->setGender($data['gender']);
 		if (!empty($data['user_plain_password'])) {
 			$user->setPlainPassword($data['user_plain_password']);

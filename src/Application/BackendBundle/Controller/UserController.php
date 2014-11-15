@@ -54,6 +54,7 @@ class UserController extends Controller
 				'last_name' => $user->getLastName(),
 				'username' => $user->getUsername(),
 				'email' => $user->getEmail(),
+				'entitled' => $user->getEntitled(),
 				'gender' => $user->getGender(),
 				'role' => $user->getRoles(),
 			)
@@ -63,6 +64,7 @@ class UserController extends Controller
 			$firstName = $form->get('first_name')->getData();
 			$lastName = $form->get('last_name')->getData();
 			$email = $form->get('email')->getData();
+			$entitled = $form->get('entitled')->getData();
 			$gender = $form->get('gender')->getData();
 			$username = $form->get('username')->getData();
 			$userByEmail = $userManagerService->findUserByEmail($email);
@@ -74,6 +76,7 @@ class UserController extends Controller
 					'last_name' => $lastName,
 					'username' => $username,
 					'email' => $email,
+					'entitled' => $entitled,
 					'gender' => $gender,
 					'role' => $form->get('role')->getData(),
 					'user_plain_password' => $form->get('password')->getData(),
@@ -108,6 +111,7 @@ class UserController extends Controller
 		if ($form->isValid()) {
 			$username = $form->get('username')->getData();
 			$email = $form->get('email')->getData();
+			$entitled = $form->get('entitled')->getData();
 			$firstName = $form->get('first_name')->getData();
 			$lastName = $form->get('last_name')->getData();
 			$gender = $form->get('gender')->getData();
@@ -120,6 +124,7 @@ class UserController extends Controller
 					'last_name' => $lastName,
 					'username' => $username,
 					'email' => $email,
+					'entitled' => $entitled,
 					'gender' => $gender,
 					'role' => $form->get('role')->getData(),
 					'user_plain_password' => $form->get('password')->getData(),

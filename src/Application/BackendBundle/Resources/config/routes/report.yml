@@ -1,0 +1,3 @@
+application_backend_report_index:
+    pattern:  /
+    defaults: { _controller: "ApplicationBackendBundle:Report:index" }

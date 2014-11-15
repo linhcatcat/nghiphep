@@ -17,3 +17,15 @@ application_backend_user:
 application_backend_group:
     resource: "@ApplicationBackendBundle/Resources/config/routes/group.yml"
     prefix:   /group
+
+application_backend_task:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/task.yml"
+    prefix:   /task
+
+application_backend_log:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/log.yml"
+    prefix:   /log
+
+application_backend_report:
+    resource: "@ApplicationBackendBundle/Resources/config/routes/report.yml"
+    prefix:   /report

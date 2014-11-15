@@ -41,6 +41,10 @@ class UserType extends AbstractType {
 				'label' => 'E-mail',
 				'attr' => array('value' => empty($options['email']) ? '' : $options['email']),
 			))
+			->add('entitled', 'text', array(
+				'label' => 'Entitled',
+				'attr' => array('value' => empty($options['entitled']) ? '' : $options['entitled']),
+			))
 			->add( 'gender', 'choice',
 				array(
 				'expanded'   => true,
@@ -50,9 +54,9 @@ class UserType extends AbstractType {
 			))
 			->add('role', 'choice', array(
 				'label' => 'Role',
-				'choices'   => array('ROLE_BOSS' => 'ROLE_BOSS', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN', 'ROLE_EMPLOYEE' => 'ROLE_EMPLOYEE'),
+				'choices'   => array('ROLE_EMPLOYEE' => 'ROLE_EMPLOYEE', 'ROLE_BOSS' => 'ROLE_BOSS', 'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN'),
 				//'empty_value' => false,
-				'data' => empty($options['role']) ? array() : $options['role'],
+				'data' => empty($options['role']) ? array('ROLE_EMPLOYEE') : $options['role'],
 				'multiple' => true,
 				'expanded' => true,
 			))
@@ -74,6 +78,7 @@ class UserType extends AbstractType {
 			'last_name' => null,
 			'username' => null,
 			'email' => null,
+			'entitled' => 96,
 			'gender' => null,
 			'role' => null,
 			'csrf_protection' => false

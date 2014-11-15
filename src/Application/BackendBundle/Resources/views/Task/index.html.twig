@@ -1,0 +1,119 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_task %}active{% endblock %}
+{% endembed %}
+<div class="main-content">
+	<div class="list-content list_cms_page">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'all_user_added_to_group' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('all_user_added_to_group')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'edit_group_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_group_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_group_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_group_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li><a class="btn" href="{{ path('application_backend_group_add') }}">{{ 'Add'|trans }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="cms-page">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>{{ 'Mã NV'|trans }}</th>
+								<th>{{ 'Tên NV'|trans }}</th>
+								<th>{{ 'Từ ngày'|trans }}</th>
+								<th>{{ 'Tới ngày'|trans }}</th>
+								<th>{{ 'Số giờ nghỉ'|trans }}</th>
+								<th>{{ 'Loại'|trans }}</th>
+								<th>{{ 'Trang thái'|trans }}</th>
+								<th>{{ 'Ngày tạo'|trans }}</th>
+								<th>{{ 'Người tạo'|trans }}</th>
+								<th>{{ 'Duyệt'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for task in tasks %}
+							<tr class="item-{{ task.id }}">
+								<td>{{ task.user.username }}</td>
+								<td>{{ task.user.firstName }} {{ task.user.lastName }}</td>
+								<td>{{ task.start|date('Y-m-d') }} {{ task.startTime }}</td>
+								<td>{{ task.end|date('Y-m-d') }}  {{ task.endTime }}</td>
+								<td>{{ task.hour }}</td>
+								<td>{{ task.loai }}</td>
+								<td class="type-text">{{ task.trangThai }}</td>
+								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
+								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
+								<td class="confirm-task">
+									<a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ 'Duyệt'|trans }}</span></a>
+								</td>
+							</tr>
+							{% else %}
+								<tr>
+									<td colspan="10">{{ 'Bạn là nhân viên gương mẫu'|trans }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{% if tasks is not empty %}
+						{{ pagination | raw }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$('.confirm-task').on('click', 'a', function(e) {
+			e.preventDefault();
+			$that = $(this);
+			if($(this).parent().find('.disabled').length){
+				return;
+			}
+			var id = $(this).data('id');
+			$.ajax({
+				type: 'POST',
+				url: Routing.generate('application_frontend_task_confirm'),
+				dataType: 'json',
+				data: {id: id},
+				success: function(data){
+					if( data['result'] ) {
+						$that.parent().parent().find('.type-text').text( data['type'] );
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					
+				},
+				beforeSend: function() {
+					$that.addClass("disabled");
+					$that.prepend('<i class="icon-refresh icon-spin" style="margin-right: 5px;"></i>');
+				},
+				complete: function() {
+					$that.find('.icon-refresh').remove();
+				}
+			});
+		});
+	</script>
+{% endblock %}
