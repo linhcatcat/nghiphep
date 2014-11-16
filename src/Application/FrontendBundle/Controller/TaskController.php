@@ -99,15 +99,30 @@ class TaskController extends Controller
 				$task->setHour( $hour );
 				$task->setStatus( 0 );
 				$task->setLeaveType((int)$task->getLeaveType());
-				$userReg->setPending($hour + $userReg->getPending());
-				$userManage->updateUser( $userReg );
-				$em->persist($task);
-				$em->flush();
+				
+				
 				if( $hour < 2 ) {
 					$this->get('session')->getFlashBag()->add('add_task_error', $translator->trans('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!'));
 				} else {
-					$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
-					return $this->redirect($this->generateUrl('application_frontend_task_index'));
+					if( ($hour + $userReg->getPending()) > $userReg->balance() ) {
+
+						if( $userReg->getPending() ) {
+							$total = $hour + $userReg->getPending();
+							$this->get('session')->getFlashBag()
+							->add('add_task_error', $translator->trans('Giờ đăng ký ' . $hour . ' + giờ đang chờ duyệt '. $userReg->getPending() .' = '. $total . ' không được lơn giờ còn lại '.$userReg->balance().'!'));
+						} else {
+							$this->get('session')->getFlashBag()
+							->add('add_task_error', $translator->trans('Giờ đăng ký ' . $hour . ' không được lơn giờ còn lại '.$userReg->balance().'!'));
+						}
+						
+					} else {
+						$userReg->setPending($hour + $userReg->getPending());
+						$userManage->updateUser( $userReg );
+						$em->persist($task);
+						$em->flush();
+						$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
+						return $this->redirect($this->generateUrl('application_frontend_task_index'));
+					}
 				}
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
 			}
@@ -238,10 +253,16 @@ class TaskController extends Controller
 			throw new AccessDeniedException();
 		}
 		$taskService = $this->get('application_task_service');
+		$userManage = $this->get('fos_user.user_manager');
+		
 		$data = $req->request->all();
 		$id = $data['id'];
 		$task = $taskService->find($id);
 		$task->setStatus( 1 );
+		$userReg = $task->getUser();
+		$userReg->setPending( $userReg->getPending() - $task->getHour() ) ;
+		$userReg->setTaken( $userReg->getTaken() + $task->getHour() );
+		$userManage->updateUser( $userReg );
 		$rs = $taskService->update( $task );
 		if( $rs ) {
 			return new Response(json_encode(array('result' => 1, 'type' => $task->trangThai())), 200);

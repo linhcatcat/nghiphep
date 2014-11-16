@@ -102,7 +102,7 @@ class Task {
 
 	public function trangThai() {
 		if( $this->status == 0 ){
-			return 'Đang chờ duyệt';
+			return 'Chờ duyệt';
 		}
 		if( $this->status == 1 ){
 			return 'Đã duyệt';
