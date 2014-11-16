@@ -45,8 +45,22 @@
 					</a>
 					{% if app.user.id is defined %}
 						<div class="pull-right hello-chao">
-							{% trans %}Xin chào{% endtrans %}: 
-							<a href="{{ path('application_frontend_user_edit', {'userID': app.user.id}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
+							<div >
+								{% trans %}Xin chào{% endtrans %}: 
+								<a href="{{ path('application_frontend_user_edit', {'userID': app.user.id}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
+							</div>
+							<div >
+								{% trans %}Giờ phép{% endtrans %}: 
+								<a>{{ app.user.entitled }}</a> {% trans %}Giờ{% endtrans %}
+							</div>
+							<div >
+								{% trans %}Đã nghỉ{% endtrans %}: 
+								<a>{{ app.user.taken }}</a> {% trans %}Giờ{% endtrans %}
+							</div>
+							<div >
+								{% trans %}Còn lại{% endtrans %}: 
+								<a>{{ app.user.balance }}</a> {% trans %}Giờ{% endtrans %}
+							</div>
 						</div>
 						<div class="btn-group login">
 							<a class="btn" href="#"><i class="icon-lock"></i></a>
@@ -90,14 +104,6 @@
 	<!--[if IE 7]>
 	  <script src="{{ asset('application/js/script-ie7.js') }}"></script>
 	<![endif]-->
-	<script>
-		var _gaq = [['_setAccount', 'UA-48658771-1'], ['_trackPageview']];
-		(function(d, t) {
-			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-			g.src = '//www.google-analytics.com/ga.js';
-			s.parentNode.insertBefore(g, s)
-		}(document, 'script'));
-	</script>
 
 	{% block javascript %} {% endblock %}
 </body>

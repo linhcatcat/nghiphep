@@ -46,6 +46,18 @@ class User extends BaseUser {
     protected $entitled;
 
     /**
+     * @var float $taken
+     * @ORM\Column(name="taken", type="float")
+     */
+    protected $taken;
+
+    /**
+     * @var float $pending
+     * @ORM\Column(name="pending", type="float")
+     */
+    protected $pending;
+
+    /**
      * @var boolean $gender
      * @ORM\Column(name="gender", type="boolean", nullable=true)
      */
@@ -147,7 +159,7 @@ class User extends BaseUser {
      * @param float $entitled
      * @return user
      */
-    public function setentitled($entitled)
+    public function setEntitled($entitled)
     {
         $this->entitled = $entitled;
     
@@ -162,6 +174,52 @@ class User extends BaseUser {
     public function getEntitled()
     {
         return $this->entitled;
+    }
+
+    /**
+     * Set taken
+     *
+     * @param float $taken
+     * @return user
+     */
+    public function setTaken($taken)
+    {
+        $this->taken = $taken;
+    
+        return $this;
+    }
+
+    /**
+     * Get taken
+     *
+     * @return float 
+     */
+    public function getTaken()
+    {
+        return $this->taken;
+    }
+
+    /**
+     * Set pending
+     *
+     * @param float $pending
+     * @return user
+     */
+    public function setPending($pending)
+    {
+        $this->pending = $pending;
+    
+        return $this;
+    }
+
+    /**
+     * Get pending
+     *
+     * @return float 
+     */
+    public function getPending()
+    {
+        return $this->pending;
     }
 
     /**
@@ -254,5 +312,9 @@ class User extends BaseUser {
     public function getUpdatedDate()
     {
         return $this->updatedDate;
+    }
+
+    public function balance(){
+        return $this->entitled - $this->taken;
     }
 }

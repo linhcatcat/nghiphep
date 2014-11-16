@@ -77,12 +77,14 @@ class TaskController extends Controller
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
+				$userManage = $this->get('fos_user.user_manager');
 				$startTime = $request->get('txtStartTime');;
 				$endTime = $request->get('txtEndTime');
 				$task->setStartTime( $startTime )->setEndTime( $endTime );
 				$startDate = $task->getStart()->getTimestamp();
 				$endDate = $task->getEnd()->getTimestamp();
-				$task->setUser( $userService->getRepository()->find($task->getUser()) );
+				$userReg = $userService->getRepository()->find($task->getUser());
+				$task->setUser( $userReg );
 				$hour = 0;
 				if( date("w", $startDate) == 6 ){
 					$timeEnd = '12:00';
@@ -97,6 +99,8 @@ class TaskController extends Controller
 				$task->setHour( $hour );
 				$task->setStatus( 0 );
 				$task->setLeaveType((int)$task->getLeaveType());
+				$userReg->setPending($hour + $userReg->getPending());
+				$userManage->updateUser( $userReg );
 				$em->persist($task);
 				$em->flush();
 				if( $hour < 2 ) {

@@ -119,9 +119,13 @@ header .container {
     color: #2989d8;
     font-size: 18px;
     margin-right: 165px;
-    margin-top: 12px;
+    line-height: 22px;
 }
 .confirm-task a.btn {
 	padding: 8px;
 	width: 60px;
+}
+header .container .login {
+	top: 36px;
+	right: 0;
 }

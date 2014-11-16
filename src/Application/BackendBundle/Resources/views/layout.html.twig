@@ -83,14 +83,7 @@
 	<!--[if IE 7]>
 	  <script src="{{ asset('application/js/script-ie7.js') }}"></script>
 	<![endif]-->
-	<script>
-		var _gaq = [['_setAccount', 'UA-48658771-1'], ['_trackPageview']];
-		(function(d, t) {
-			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-			g.src = '//www.google-analytics.com/ga.js';
-			s.parentNode.insertBefore(g, s)
-		}(document, 'script'));
-	</script>
+	
 	<script src="{{ asset('bundles/applicationbackend/ckeditor/ckeditor.js') }}"></script>
 	<script type="text/javascript">
 		CKEDITOR.replace( '{% block js_upload %}{% endblock %}', {
