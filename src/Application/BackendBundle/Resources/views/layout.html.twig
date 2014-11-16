@@ -85,12 +85,12 @@
 	<![endif]-->
 	
 	<script src="{{ asset('bundles/applicationbackend/ckeditor/ckeditor.js') }}"></script>
-	<script type="text/javascript">
+	{#<script type="text/javascript">
 		CKEDITOR.replace( '{% block js_upload %}{% endblock %}', {
 			filebrowserBrowseUrl: '/bundles/applicationbackend/kcfinder/browse.php?type=Images',
 			filebrowserUploadUrl: '/bundles/applicationbackend/kcfinder/upload.php?type=Files'
 		});
-	</script>
+	</script>#}
 	{% block javascript %} {% endblock %}
 </body>
 </html>

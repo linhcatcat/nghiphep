@@ -95,10 +95,10 @@ jQuery(document).ready(function($) {
 	}
 	
 	/*____BOOTSTRAP FILE INPUT____*/ 
-	var $file_input = $('input[type=file]');
+	/*var $file_input = $('input[type=file]');
 	if ($file_input.length > 0) {
 		$('input[type=file]').bootstrapFileInput();
-	}
+	}*/
 	/*____END OF BOOTSTRAP FILE INPUT____*/ 
 	
 	//Call jCarousel

@@ -25,6 +25,7 @@
 			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">
 				<li><a class="btn" href="{{ path('application_backend_user_add') }}">{{ 'Add'|trans }}</a></li>
+				<li><form id="uploadUser" method="POST" enctype="multipart/form-data" action="{{ path('application_backend_user_import') }}"><input type="file" name="userFile" id="userFile"></form></li>
 			</ul>
 
 			<div class="tab-content">
@@ -78,4 +79,18 @@
 		</div>
 	</div>
 </div>
+{% block stylesheet %}
+	<style>
+	.file-input-wrapper {
+		display: inline-block !important;
+	}
+	</style>
+{% endblock %}
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+	$('#userFile').change(function (e) {
+		$('#uploadUser').submit();
+	});
+	</script>
 {% endblock %}

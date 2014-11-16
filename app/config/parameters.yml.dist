@@ -23,3 +23,4 @@ parameters:
     mailer_sender_name: 'Videocv Resetting'
     video_cv_bg_url: 'http://video.cv/image-bg/'
     limit_file_size: 3
+    limit_items_per_page: 20

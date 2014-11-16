@@ -105,6 +105,7 @@ assetic:
                 - '%kernel.root_dir%/../web/application/js/libs/hammer.min.js'
                 - '%kernel.root_dir%/../web/application/js/libs/hammer.fakemultitouch.js'
                 - '%kernel.root_dir%/../web/application/js/libs/hammer.showtouches.js'
+                - '%kernel.root_dir%/../web/application/js/libs/ajaxupload.3.5.js'
                 - '%kernel.root_dir%/../web/application/js/plugins.js'
                 - '%kernel.root_dir%/../web/application/js/main.js'
                 - '%kernel.root_dir%/../web/application/js/js-template/backend/candidate/edit.js'

@@ -24,7 +24,7 @@ for ($i = 0; $i < count($parts) - 4; $i++) {
     $dir .= $parts[$i] . '/' ;
 }
 
-$url = "http://" . $dir . "upload/";
+$url = "https://" . $dir . "upload/";
 
 $_CONFIG = array(
 

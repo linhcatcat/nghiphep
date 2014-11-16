@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Application\EmailTemplateBundle\ApplicationEmailTemplateBundle(),
             new Wincofood\SaleBundle\WincofoodSaleBundle(),
             new Application\TaskBundle\ApplicationTaskBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

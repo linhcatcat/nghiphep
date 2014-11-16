@@ -5,6 +5,7 @@ namespace Application\BackendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Application\BackendBundle\Form\UserType;
 use Application\UserBundle\Entity\User;
 
@@ -161,5 +162,27 @@ class UserController extends Controller
 		$this->get('session')->getFlashBag()->add('delete_user_successfully', $translator->trans('Deleted successfully'));
 
 		return $this->redirect($this->generateUrl('application_backend_user_index'));
+	}
+
+	public function importAction(Request $req) {
+		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			throw new AccessDeniedException();
+		}
+		$userService = $this->get('Application_user.service');
+		$userManage = $this->get('fos_user.user_manager');
+		
+		$request = $this->getRequest();
+
+        /* @var UploadedFile */
+        $uploadedFile = $request->files->get('userFile');
+        //$this->get('xls.service_xls2007');
+        //xls.service_xls2007
+        //xls.load_xls5
+        $excelObj = $this->get('xls.load_xls5')->load($uploadedFile->getPathname());
+        $sheetData = $excelObj->getActiveSheet()->toArray();
+        var_dump($sheetData);
+        array_shift($sheetData); //remove the header
+        var_dump($sheetData);
+        return new Response(json_encode($sheetData));
 	}
 }

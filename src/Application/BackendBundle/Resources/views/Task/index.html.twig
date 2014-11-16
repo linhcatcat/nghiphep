@@ -61,7 +61,11 @@
 								<td>{{ task.end|date('Y-m-d') }}  {{ task.endTime }}</td>
 								<td>{{ task.hour }}</td>
 								<td>{{ task.loai }}</td>
-								<td class="type-text">{{ task.trangThai }}</td>
+								{% if task.status == 0 %}
+									<td class="type-text"><strong>{{ task.trangThai }}</strong></td>
+								{% else %}
+									<td class="type-text">{{ task.trangThai }}</td>
+								{% endif %}
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
 								<td class="confirm-task">

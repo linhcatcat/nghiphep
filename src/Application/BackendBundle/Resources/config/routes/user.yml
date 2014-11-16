@@ -13,3 +13,9 @@ application_backend_user_edit:
 application_backend_user_delete:
     pattern:  /{userID}/delete
     defaults: { _controller: "ApplicationBackendBundle:User:delete" }
+
+application_backend_user_import:
+    pattern:  /import
+    defaults: { _controller: ApplicationBackendBundle:User:import }
+    options:
+        expose: true
