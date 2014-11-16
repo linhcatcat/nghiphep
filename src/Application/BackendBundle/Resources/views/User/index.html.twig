@@ -23,9 +23,22 @@
 						{% endfor %}
 				</div>
 			{% endif %}
+			{% if app.session.getFlashBag().has( 'import_user_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('import_user_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">
 				<li><a class="btn" href="{{ path('application_backend_user_add') }}">{{ 'Add'|trans }}</a></li>
-				<li><form id="uploadUser" method="POST" enctype="multipart/form-data" action="{{ path('application_backend_user_import') }}"><input type="file" name="userFile" id="userFile"></form></li>
+				<li>
+					<form id="uploadUser" method="POST" enctype="multipart/form-data" action="{{ path('application_backend_user_import') }}">
+					{#<input type="file" name="userFile" id="userFile">#}
+					<a class="file-input-wrapper btn">Import<input type="file" id="userFile" name="userFile" style=""></a>{#<span class="file-input-name">userList.xls</span>#}
+					</form>
+				</li>
 			</ul>
 
 			<div class="tab-content">
@@ -83,6 +96,9 @@
 	<style>
 	.file-input-wrapper {
 		display: inline-block !important;
+	}
+	#uploadUser {
+		margin-bottom: 0;
 	}
 	</style>
 {% endblock %}
