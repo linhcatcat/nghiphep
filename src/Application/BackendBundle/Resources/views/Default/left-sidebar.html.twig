@@ -22,7 +22,7 @@
 				<span class="icon_arrow pull-right"><i class="icon-chevron-right"></i></span>
 			</a>
 		</li>
-		<li class="clearfix cms_page {#% block active_class_task %}{% endblock %#}">
+		<li class="clearfix cms_page {% block active_class_report %}{% endblock %}">
 			<a href="{{ path('application_backend_report_index') }}" class="clearfix">
 				<span class="icon_menu"><i class="icon-print"></i></span>
 				<span class="title_menu">{{ 'Report'|trans }}</span>
@@ -30,7 +30,7 @@
 			</a>
 		</li>
 
-		<li class="clearfix cms_page {#% block active_class_task %}{% endblock %#}">
+		<li class="clearfix cms_page {% block active_class_log %}{% endblock %}">
 			<a href="{{ path('application_backend_log_index') }}" class="clearfix">
 				<span class="icon_menu"><i class="icon-book"></i></span>
 				<span class="title_menu">{{ 'Log'|trans }}</span>

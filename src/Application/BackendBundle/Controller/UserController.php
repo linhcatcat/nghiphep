@@ -25,8 +25,8 @@ class UserController extends Controller
 		$totalUser = $userService->count();
 		$aFilters = array('id' => 'DESC');
 		return $this->render('ApplicationBackendBundle:User:index.html.twig',array(
-			'users'	=>	$userService->filter($limit, $offset, $aFilters),
-			'pagination'	=>	$this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalUser / $limit), array()),
+			'users'	=> $userService->filter($limit, $offset, $aFilters),
+			'pagination' => $this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalUser / $limit), array()),
 		));
 	}
 
@@ -212,42 +212,5 @@ class UserController extends Controller
 			}
 		}
 		return $this->redirect($this->generateUrl('application_backend_index'));
-	}
-
-	public function exportAction(Request $req) {
-		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw new AccessDeniedException();
-		}
-
-		$excelService = $this->get('xls.service_xls5');
-		// or $this->get('xls.service_pdf');
-		// or create your own is easy just modify services.yml
-
-
-		// create the object see http://phpexcel.codeplex.com documentation
-		$excelService->excelObj->getProperties()->setCreator("Maarten Balliauw")
-							->setLastModifiedBy("Maarten Balliauw")
-							->setTitle("Office 2005 XLSX Test Document")
-							->setSubject("Office 2005 XLSX Test Document")
-							->setDescription("Test document for Office 2005 XLSX, generated using PHP classes.")
-							->setKeywords("office 2005 openxml php")
-							->setCategory("Test result file");
-		$excelService->excelObj->setActiveSheetIndex(0)
-					->setCellValue('A1', 'Hello')
-					->setCellValue('B1', 'world!');
-		$excelService->excelObj->getActiveSheet()->setTitle('Simple');
-		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-		$excelService->excelObj->setActiveSheetIndex(0);
- 
-		//create the response
-		$response = $excelService->getResponse();
-		$response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
-		$response->headers->set('Content-Disposition', 'attachment;filename=stdream2.xls');
-		
-		// If you are using a https connection, you have to set those two headers and use sendHeaders() for compatibility with IE <9
-		$response->headers->set('Pragma', 'public');
-		$response->headers->set('Cache-Control', 'maxage=1');
-		$response->sendHeaders();
-		return $response;
 	}
 }

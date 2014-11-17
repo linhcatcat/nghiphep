@@ -11,21 +11,20 @@ use Application\TaskBundle\Entity\Task;
 
 class LogController extends Controller {
 	/**
-	 * List task
+	 * List Log
 	 * @author Alex <alex@likipe.se>
-	 * @return view, array task
+	 * @return view, array log
 	 */
 	public function indexAction(Request $request) {
-		/*$taskService = $this->get('application_task_service');
+		$userService = $this->get('Application_user.service');
 		$page = (int) $request->query->get('page', 1);
 		$limit = $this->container->getParameter('limit_items_per_page');
 		$offset = $limit * ($page - 1);
+		$totalUser = $userService->count();
 		$aFilters = array('id' => 'DESC');
-		$totalTask = $taskService->count();
-		$tasks = $taskService->filter( $limit, $offset, $aFilters );
-		return $this->render('ApplicationBackendBundle:Task:index.html.twig',array(
-			'tasks' => $tasks,
-			'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
-		));*/
+		return $this->render('ApplicationBackendBundle:Log:index.html.twig',array(
+			'users'	=> $userService->filter($limit, $offset, $aFilters),
+			'pagination' => $this->get("wincofood_pagination_service")->renderPaginations($page, ceil($totalUser / $limit), array()),
+		));
 	}
 }
