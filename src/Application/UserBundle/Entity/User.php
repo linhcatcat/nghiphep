@@ -81,6 +81,18 @@ class User extends BaseUser {
 	 */
 	protected $updatedDate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Application\TaskBundle\Entity\Task", mappedBy="user")
+     */
+    protected $task;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->task = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 	/**
 	 * @ORM\PrePersist
 	 */
@@ -316,5 +328,38 @@ class User extends BaseUser {
 
     public function balance(){
         return $this->entitled - $this->taken;
+    }
+
+    /**
+     * Add task
+     *
+     * @param \Application\TaskBundle\Entity\Task $task
+     * @return task
+     */
+    public function addTask(\Application\TaskBundle\Entity\Task $task)
+    {
+        $this->task[] = $task;
+    
+        return $this;
+    }
+
+    /**
+     * Remove task
+     *
+     * @param \Application\TaskBundle\Entity\Task $task
+     */
+    public function removeTask(\Application\TaskBundle\Entity\Task $task)
+    {
+        $this->task->removeElement($task);
+    }
+
+    /**
+     * Get task
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->task;
     }
 }
