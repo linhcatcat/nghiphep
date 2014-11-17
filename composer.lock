@@ -4,8 +4,58 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80d74f9254d8f87e55ec8e86f8539bd6",
+    "hash": "77a0c150b4a0c5dc5c268b69a7144ffa",
     "packages": [
+        {
+            "name": "codeplex/phpexcel",
+            "version": "1.7.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/markushausammann/PHPExcel.git",
+                "reference": "6236b1e1513dda38a68a5ac22bbab5fc2b7942fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/markushausammann/PHPExcel/zipball/6236b1e1513dda38a68a5ac22bbab5fc2b7942fd",
+                "reference": "6236b1e1513dda38a68a5ac22bbab5fc2b7942fd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Erit Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Create Excel2007 documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet"
+            ],
+            "time": "2012-11-21 10:55:52"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.1",
@@ -971,6 +1021,54 @@
             "time": "2013-12-07 10:10:39"
         },
         {
+            "name": "irongit/symfony2-stream-response",
+            "version": "v1.0",
+            "target-dir": "n3b/Bundle/Util/HttpFoundation/StreamResponse",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/toretto460/Symfony2-StreamResponse.git",
+                "reference": "3e5082e7beec9c9130e30e49bad44e1e99ab33b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/toretto460/Symfony2-StreamResponse/zipball/3e5082e7beec9c9130e30e49bad44e1e99ab33b1",
+                "reference": "3e5082e7beec9c9130e30e49bad44e1e99ab33b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "n3b\\Bundle\\Util\\HttpFoundation\\StreamResponse": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "n3b",
+                    "email": "mail@n3b.ru",
+                    "homepage": "http://n3b.ru/"
+                },
+                {
+                    "name": "Simone Di Maulo",
+                    "homepage": "https://github.com/toretto460"
+                }
+            ],
+            "description": "Symfony2 StreamResponse Bundle",
+            "homepage": "https://github.com/toretto460/Symfony2-StreamResponse",
+            "keywords": [
+                "StreamResponse",
+                "file",
+                "stream"
+            ],
+            "time": "2012-08-07 09:27:11"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "v1.2.17",
             "source": {
@@ -1096,39 +1194,26 @@
         },
         {
             "name": "liuggio/ExcelBundle",
-            "version": "v2.0.1",
+            "version": "v1.0.4",
             "target-dir": "Liuggio/ExcelBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liuggio/ExcelBundle.git",
-                "reference": "dce33eb948ba01303c15b9c3bd17390afe37407c"
+                "reference": "bcb4e448d594065e1565fbab2a97d5a6be0f07e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liuggio/ExcelBundle/zipball/dce33eb948ba01303c15b9c3bd17390afe37407c",
-                "reference": "dce33eb948ba01303c15b9c3bd17390afe37407c",
+                "url": "https://api.github.com/repos/liuggio/ExcelBundle/zipball/bcb4e448d594065e1565fbab2a97d5a6be0f07e8",
+                "reference": "bcb4e448d594065e1565fbab2a97d5a6be0f07e8",
                 "shasum": ""
             },
             "require": {
+                "codeplex/phpexcel": "1.7.8",
+                "irongit/symfony2-stream-response": ">=1.0",
                 "php": ">=5.3.2",
-                "phpoffice/phpexcel": "~1.8.0",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "sensio/framework-extra-bundle": "~2.1",
-                "symfony/browser-kit": "~2.1",
-                "symfony/class-loader": "~2.1",
-                "symfony/finder": "~2.0",
-                "symfony/form": "~2.1",
-                "symfony/validator": "~2.1"
+                "symfony/framework-bundle": "2.*"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Liuggio\\ExcelBundle": ""
@@ -1140,12 +1225,13 @@
             ],
             "authors": [
                 {
-                    "name": "ExcelBundle Contributors",
-                    "homepage": "https://github.com/liuggio/ExcelBundle#contributors"
+                    "name": "liuggio",
+                    "email": "liuggio@gmail.com",
+                    "homepage": "http://www.welcometothebundle.com"
                 },
                 {
-                    "name": "Giulio De Donato",
-                    "email": "liuggio@gmail.com"
+                    "name": "ExcelBundle Contributors",
+                    "homepage": "https://github.com/liuggio/ExcelBundle#contributors"
                 }
             ],
             "description": "This is a Symfony2 Bundle helps you to read and write Excel files (including pdf, xlsx, odt), thanks to the PHPExcel library",
@@ -1156,7 +1242,7 @@
                 "excel",
                 "xls"
             ],
-            "time": "2014-06-11 13:07:44"
+            "time": "2013-02-21 12:59:18"
         },
         {
             "name": "monolog/monolog",
@@ -1232,21 +1318,20 @@
         },
         {
             "name": "phpoffice/phpexcel",
-            "version": "1.8.0",
+            "version": "1.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPExcel.git",
-                "reference": "e69a5e4d0ffa7fb6f171859e0a04346e580df30b"
+                "reference": "7a7634fba664249a04fc771df677a9b9f755d7ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/e69a5e4d0ffa7fb6f171859e0a04346e580df30b",
-                "reference": "e69a5e4d0ffa7fb6f171859e0a04346e580df30b",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/7a7634fba664249a04fc771df677a9b9f755d7ec",
+                "reference": "7a7634fba664249a04fc771df677a9b9f755d7ec",
                 "shasum": ""
             },
             "require": {
                 "ext-xml": "*",
-                "ext-xmlwriter": "*",
                 "php": ">=5.2.0"
             },
             "type": "library",
@@ -1285,7 +1370,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2014-03-02 15:22:49"
+            "time": "2013-05-24 11:57:42"
         },
         {
             "name": "psliwa/pdf-bundle",

@@ -23,7 +23,10 @@
         "liuggio/excelbundle": ">=1.0.4",
         "psliwa/pdf-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "0.13.*@dev",
-        "escapestudios/wsse-authentication-bundle": "2.3.x-dev"
+        "escapestudios/wsse-authentication-bundle": "2.3.x-dev",
+        "liuggio/excelbundle":                   "1.0.4",
+        "irongit/symfony2-stream-response":      "1.0",
+        "phpoffice/phpexcel":                    "1.7.9"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
