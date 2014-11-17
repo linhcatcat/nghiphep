@@ -1,18 +1,8 @@
 
 .container .btn {
 	border: none;
-	background-color: #31859C;
-	-moz-box-shadow: 1px 2px 2px rgba(0,0,0,.29), inset 0 1px 0 rgba(255,255,255,.25);
-	-webkit-box-shadow: 1px 2px 2px rgba(0,0,0,.29), inset 0 1px 0 rgba(255,255,255,.25);
-	box-shadow: 1px 2px 2px rgba(0,0,0,.29), inset 0 1px 0 rgba(255,255,255,.25);
-	background: #31859c; /* Old browsers */
-	background: -moz-linear-gradient(top,  #31859c 0%, #31859c 100%, #2989d8 100%, #207cca 100%, #31859c 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#31859c), color-stop(100%,#31859c), color-stop(100%,#2989d8), color-stop(100%,#207cca), color-stop(100%,#31859c)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #31859c 0%,#31859c 100%,#2989d8 100%,#207cca 100%,#31859c 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #31859c 0%,#31859c 100%,#2989d8 100%,#207cca 100%,#31859c 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #31859c 0%,#31859c 100%,#2989d8 100%,#207cca 100%,#31859c 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #31859c 0%,#31859c 100%,#2989d8 100%,#207cca 100%,#31859c 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31859c', endColorstr='#31859c',GradientType=0 ); /* IE6-9 */
+	background-color: #0096e0;
+	background-image: none;
 	color: #fefefe;
 	font-family: "Myriad Pro 1167301";
 	font-size: 16px;
@@ -29,16 +19,8 @@
 .container .btn:hover,
 .container .btn:focus {
 	background-position: 0 0;
-	background: #3da4b5; /* Old browsers */
-	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIzYTFkNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyM2ExZDYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMjA3Y2NhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFlNTc5OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyOTg5ZDgiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMjRhNWRhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-	background: -moz-linear-gradient(top,  #3da4b5 0%, #3da4b5 100%, #3da4b5 100%, #3da4b5 100%, #3da4b5 100%, #3da4b5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3da4b5), color-stop(100%,#3da4b5), color-stop(100%,#3da4b5), color-stop(100%,#3da4b5), color-stop(100%,#3da4b5), color-stop(100%,#3da4b5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #3da4b5 0%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #3da4b5 0%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #3da4b5 0%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #3da4b5 0%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%,#3da4b5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3da4b5', endColorstr='#3da4b5',GradientType=0 ); /* IE6-8 */
+	background-color: #0096e0;
+	background-image: none;
 }
 
 
@@ -116,11 +98,21 @@ header .container {
 .ui-datepicker-trigger img {
 	width: 20px;
 }
-.hello-chao{
-    color: #2989d8;
-    font-size: 18px;
+.hello-chao {
+    color: #fff;
+    font-size: 16px;
     margin-right: 165px;
     line-height: 22px;
+}
+.hello-chao a {
+	color: #063b63;
+}
+.hello-chao div strong {
+	color: #f8ff32;
+}
+.hello-chao .icon-arrow-right {
+	font-size: 10px;
+	margin-right: 5px;
 }
 .confirm-task a.btn {
 	padding: 8px;
@@ -129,4 +121,30 @@ header .container {
 header .container .login {
 	top: 36px;
 	right: 0;
+}
+.list-content .content .nav.nav-tabs > li.active a {
+	background-color: #0096e0;
+}
+.list-content .content .table thead {
+	background-color: #bae4ee;
+}
+header .container .login .btn {
+	background: none repeat scroll 0 0 #bae4ee;
+	color: #063b63;
+}
+.list-content .content .nav.nav-tabs > li a {
+	color: #063b63;
+}
+.list-content .content .table thead tr th {
+	line-height: 1.3;
+	vertical-align: middle;
+	border-left: 1px solid #fff;
+}
+.list-content .content .table tbody tr td {
+	line-height: 1.3;
+	vertical-align: middle;
+}
+header .container .login .btn:hover, header .container .login .btn:focus {
+	background: none repeat scroll 0 0 #0096e0;
+	color: #fff;
 }
