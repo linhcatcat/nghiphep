@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Application\BackendBundle\Form\GroupType;
 use Application\BackendBundle\Form\GroupUserType;
 use Application\TaskBundle\Entity\Task;
+use Application\UserBundle\Entity\Log;
 
 class ReportController extends Controller {
 	/**
@@ -110,6 +111,15 @@ class ReportController extends Controller {
 		$response->headers->set('Pragma', 'public');
 		$response->headers->set('Cache-Control', 'maxage=1');
 		$response->sendHeaders();
+
+		//log
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$log = new Log('Export', 'Export '. $row .' Users', $user);
+		$em->persist( $log );
+		$em->flush();
+		//End log
+
 		return $response;
 	}
 }

@@ -24,3 +24,6 @@ services:
         class: Application\UserBundle\Security\Authentication\Handler\LoginSuccessHandler
         public: false
         arguments:  ["@router", "@security.context", @Application_user.service, @session]
+    application_log_service:
+        class: Application\UserBundle\Service\LogService
+        arguments: ["@doctrine.orm.entity_manager"]

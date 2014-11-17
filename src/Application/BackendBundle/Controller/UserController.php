@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Application\BackendBundle\Form\UserType;
 use Application\UserBundle\Entity\User;
+use Application\UserBundle\Entity\Log;
 
 class UserController extends Controller
 {
@@ -83,7 +84,16 @@ class UserController extends Controller
 					'user_plain_password' => $form->get('password')->getData(),
 				);
 				$userService->updateUser($user, $data);
-				$this->get('session')->getFlashBag()->add('edit_user_successfully', $translator->trans('Your profile was saved'));
+
+				//log
+				$em = $this->getDoctrine()->getManager();
+				$currentUser = $this->container->get('security.context')->getToken()->getUser();
+				$log = new Log('Update', 'Update '. $username .' with id = '. $user->getId(), $currentUser);
+				$em->persist( $log );
+				$em->flush();
+				//End log
+
+				$this->get('session')->getFlashBag()->add('edit_user_successfully', $translator->trans('User info was saved'));
 
 				return $this->redirect($this->generateUrl('application_backend_user_index'));
 			}
