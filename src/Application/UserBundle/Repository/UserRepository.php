@@ -55,4 +55,18 @@ class UserRepository extends EntityRepository {
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;
 	}
+
+	/**
+	 * Count by username
+	 * @author Alex
+	 * Return count
+	 */
+	public function countByUsername($username) {
+		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.username = :username');
+		$qb->setParameter('username', $username);
+		$qb->select($qb->expr()->countDistinct('u.id'));
+		$count = $qb->getQuery()->getSingleScalarResult();
+		return $count;
+	}
 }

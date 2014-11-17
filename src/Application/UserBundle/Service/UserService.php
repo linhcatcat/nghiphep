@@ -264,4 +264,13 @@ class UserService {
 		$results = $this->getRepository()->filter($limit, $offset, $aFilters);
 		return $results;
 	}
+
+	/**
+	 * Check user exist
+	 * @author Alex
+	 */
+	public function checkUserExist($username) {
+		$count = $this->getRepository()->countByUsername($username);
+		return $count?true:false;
+	}
 }

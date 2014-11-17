@@ -27,7 +27,7 @@
 				<div class="alert alert-success">
 					<button class="close" data-dismiss="alert" type="button">×</button>
 						{% for message in app.session.getFlashBag().get('import_user_successfully')%}
-							{{message}}
+							{{message|raw}}
 						{% endfor %}
 				</div>
 			{% endif %}

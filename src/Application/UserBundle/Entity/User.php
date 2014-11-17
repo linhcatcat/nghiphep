@@ -49,13 +49,13 @@ class User extends BaseUser {
      * @var float $taken
      * @ORM\Column(name="taken", type="float")
      */
-    protected $taken;
+    protected $taken = 0;
 
     /**
      * @var float $pending
      * @ORM\Column(name="pending", type="float")
      */
-    protected $pending;
+    protected $pending = 0;
 
     /**
      * @var boolean $gender

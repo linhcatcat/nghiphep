@@ -170,7 +170,6 @@ class UserController extends Controller
 		}
 		$translator = $this->get('translator');
 		$userService = $this->get('Application_user.service');
-		$userManage = $this->get('fos_user.user_manager');
 		
 		$request = $this->getRequest();
 
@@ -180,11 +179,47 @@ class UserController extends Controller
 		//xls.service_xls2007
 		//xls.load_xls5
 		$excelObj = $this->get('xls.load_xls5')->load($uploadedFile->getPathname());
-		$sheetData = $excelObj->getActiveSheet()->toArray();
-		array_shift($sheetData);
+		$sheetDatas = $excelObj->getActiveSheet()->toArray();
+		array_shift($sheetDatas);
+		$count = 0;
+		$userExist = array();
+		foreach ($sheetDatas as $sheetData) {
+			$data = array(
+				'first_name' => $sheetData[2],
+				'last_name' => $sheetData[3],
+				'username' => $sheetData[0],
+				'email' => $sheetData[5],
+				'entitled' => $sheetData[7],
+				'gender' => $sheetData[4],
+				'role' => array($sheetData[6] => $sheetData[6]),
+				'user_plain_password' => $sheetData[1],
+			);
+			if( $userService->checkUserExist( $sheetData[0] ) ) {
+				$userExist[] = $sheetData[0];
+			} else {
+				$userService->insertUser($data);
+				$count++;
+			}
+		}
+		if( count($userExist) ) {
+			$this->get('session')->getFlashBag()->add('import_user_successfully', $translator->trans('Username ('. implode(', ', $userExist) .') existed'));
+		}
+		if( $count ) {
+			if( count($userExist) ) {
+				$this->get('session')->getFlashBag()->add('import_user_successfully', $translator->trans('<br/>Import '. $count .' users successfully'));
+			} else {
+				$this->get('session')->getFlashBag()->add('import_user_successfully', $translator->trans('Import '. $count .' users successfully'));
+			}
+		}
+		return $this->redirect($this->generateUrl('application_backend_index'));
+	}
 
+	public function exportAction(Request $req) {
+		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			throw new AccessDeniedException();
+		}
 
-		/*$excelService = $this->get('xls.service_xls5');
+		$excelService = $this->get('xls.service_xls5');
 		// or $this->get('xls.service_pdf');
 		// or create your own is easy just modify services.yml
 
@@ -213,10 +248,6 @@ class UserController extends Controller
 		$response->headers->set('Pragma', 'public');
 		$response->headers->set('Cache-Control', 'maxage=1');
 		$response->sendHeaders();
-		return $response;*/
-		
-		$this->get('session')->getFlashBag()->add('import_user_successfully', $translator->trans('Import '. count($sheetData) .' users successfully'));
-
-		return $this->redirect($this->generateUrl('application_backend_index'));
+		return $response;
 	}
 }
