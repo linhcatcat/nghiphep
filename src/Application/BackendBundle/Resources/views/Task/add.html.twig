@@ -1,0 +1,338 @@
+{% extends "ApplicationBackendBundle::layout.html.twig" %}
+
+{% block content %}
+{% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
+	{% block active_class_task %}active{% endblock %}
+{% endembed %}
+
+<div class="main-content">
+	<div class="list-content">
+		<div class="content">
+			{% if app.session.getFlashBag().has( 'edit_user_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('edit_user_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_task_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_task_successfully')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			{% if app.session.getFlashBag().has( 'add_task_error' ) %}
+				<div class="alert alert-error">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_task_error')%}
+							{{message}}
+						{% endfor %}
+				</div>
+			{% endif %}
+			<ul class="nav nav-tabs" id="list-tabs">
+				<li><a class="btn" href="{{ path('application_backend_task_index') }}">{{ 'Task'|trans }}</a></li>
+				<li  class="active"><a class="btn">{{ 'Add'|trans }}</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="user-admin">
+					<form id="form-add-task" enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
+						<div>
+							{{ form_row(form.user) }}
+						</div>
+						<div>
+							{{ form_label(form.start) }}
+							{{ form_errors(form.start) }}
+							{{ form_widget(form.start) }}
+							<select class="txtStartTime hour" name="txtStartTime">
+								<option value="08:00">08:00</option> 
+								<option value="08:30">08:30</option>
+								<option value="09:00">09:00</option>
+								<option value="09:30">09:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+							</select>
+						</div>
+						<div>
+							{{ form_label(form.end) }}
+							{{ form_errors(form.end) }}
+							{{ form_widget(form.end) }}
+							<select class="txtEndTime hour" name="txtEndTime">
+								{# <option value="08:00">08:00</option> #}
+								<option value="08:30">08:30</option>
+								<option value="09:00">09:00</option>
+								<option value="09:30">09:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+							</select>
+						</div>
+						{{ form_widget(form) }}
+						<div class="submit-profile clearfix">
+							<div class="save-user-admin pull-left">
+								<i class="icon-save"></i>
+								<input class="btn save-profile save-task" type="submit" value="{{ 'Đăng ký'|trans }}" />
+							</div>
+							<a href="{{ path('application_frontend_task_index') }}" class="btn cancel-edit-cmspage pull-left">
+								<i class="icon-long-arrow-left"></i>
+								 {% trans %}Hủy{% endtrans %} 
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block stylesheet %}
+	<style>
+	.submit-profile .btn {
+		line-height: 17px;
+	}
+	.submit-profile .cancel {
+		margin-left: 10px;
+		width: 87px;
+		position: relative;
+	}
+	.form-frontend .hour {
+		width: 90px;
+	}
+	.form-frontend .note_task {
+		height: 100px;
+		width: 499px;
+	}
+	.form-frontend .ho_ten {
+		width: 328px;
+	}
+	.form-frontend .task_user,
+	.form-frontend .leave_type_task {
+		width: 343px;
+	}
+	.ui-datepicker-trigger {
+	    background-color: transparent;
+	    border: 0;
+	    margin: 0 5px;
+	    padding: 0;
+	}
+	.ui-datepicker-trigger img {
+		width: 20px;
+	}
+	.list-content .content .nav.nav-tabs > li.active a {
+		background-image: none;
+	}
+	</style>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$("#TaskType_start").datepicker({
+			showOn: "button",
+			buttonImage: "/application/images/calendar.gif",
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+				$("#TaskType_end").datepicker("option","minDate", selected);
+				var d=new Date( $(this).val() );
+				if( d.getDay() == 0 ){
+					alert('Ngày bắt đầu không thể chọn chủ nhật!');
+					$(this).val('');
+				} else if( d.getDay() == 6 ){
+					saturdayStart('.txtStartTime');
+				} else {
+					otherdayStart('.txtStartTime');
+				}
+			}
+		});
+		//.datepicker("setDate", new Date());
+		$("#TaskType_end").datepicker({
+			showOn: "button",
+			buttonImage: "/application/images/calendar.gif",
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+				$("#TaskType_start").datepicker("option","maxDate", selected)
+				var d=new Date( $(this).val() );
+				if( d.getDay() == 0 ){
+					alert('Ngày kết thúc không thể chọn chủ nhật!');
+					$(this).val('');
+				} else if( d.getDay() == 6 ){
+					saturdayEnd('.txtEndTime');
+				} else {
+					otherdayEnd('.txtEndTime');
+				}
+			}
+		});
+		function otherdayStart(strClass){
+			var strHtml = '';
+			strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			strHtml = strHtml + '<option value="13:00">13:00</option>';
+			strHtml = strHtml + '<option value="13:30">13:30</option>';
+			strHtml = strHtml + '<option value="14:00">14:00</option>';
+			strHtml = strHtml + '<option value="14:30">14:30</option>';
+			strHtml = strHtml + '<option value="15:00">15:00</option>';
+			strHtml = strHtml + '<option value="15:30">15:30</option>';
+			strHtml = strHtml + '<option value="16:00">16:00</option>';
+			strHtml = strHtml + '<option value="16:30">16:30</option>';
+			$(strClass).html( strHtml );
+		}
+		function otherdayEnd(strClass){
+			var strHtml = '';
+			//strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			strHtml = strHtml + '<option value="12:00">12:00</option>';
+			strHtml = strHtml + '<option value="13:30">13:30</option>';
+			strHtml = strHtml + '<option value="14:00">14:00</option>';
+			strHtml = strHtml + '<option value="14:30">14:30</option>';
+			strHtml = strHtml + '<option value="15:00">15:00</option>';
+			strHtml = strHtml + '<option value="15:30">15:30</option>';
+			strHtml = strHtml + '<option value="16:00">16:00</option>';
+			strHtml = strHtml + '<option value="16:30">16:30</option>';
+			strHtml = strHtml + '<option value="17:00">17:00</option>';
+			$(strClass).html( strHtml );
+		}
+
+		function saturdayStart(strClass){
+			var strHtml = '';
+			strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			$(strClass).html( strHtml );
+		}
+		function saturdayEnd(strClass){
+			var strHtml = '';
+			strHtml = strHtml + '<option value="08:00">08:00</option>';
+			strHtml = strHtml + '<option value="08:30">08:30</option>';
+			strHtml = strHtml + '<option value="09:00">09:00</option>';
+			strHtml = strHtml + '<option value="09:30">09:30</option>';
+			strHtml = strHtml + '<option value="10:00">10:00</option>';
+			strHtml = strHtml + '<option value="10:30">10:30</option>';
+			strHtml = strHtml + '<option value="11:00">11:00</option>';
+			strHtml = strHtml + '<option value="11:30">11:30</option>';
+			strHtml = strHtml + '<option value="12:00">12:00</option>';
+			$(strClass).html( strHtml );
+		}
+
+		var arrStartHour = new Array();
+		arrStartHour['08:00'] = 0; arrStartHour['08:30'] = 30;
+		arrStartHour['09:00'] = 60; arrStartHour['09:30'] = 90;
+		arrStartHour['10:00'] = 120; arrStartHour['10:30'] = 150;
+		arrStartHour['11:00'] = 180; arrStartHour['11:30'] = 210;
+		arrStartHour['13:00'] = 240; arrStartHour['13:30'] = 270;
+		arrStartHour['14:00'] = 300; arrStartHour['14:30'] = 330;
+		arrStartHour['15:00'] = 360; arrStartHour['15:30'] = 390;
+		arrStartHour['16:00'] = 420; arrStartHour['16:30'] = 450;
+
+		var arrEndHour = new Array();
+		arrEndHour['08:00'] = 0; arrEndHour['08:30'] = 30;
+		arrEndHour['09:00'] = 60; arrEndHour['09:30'] = 90;
+		arrEndHour['10:00'] = 120; arrEndHour['10:30'] = 150;
+		arrEndHour['11:00'] = 180; arrEndHour['11:30'] = 210;
+		arrEndHour['12:00'] = 240; arrEndHour['13:30'] = 270;
+		arrEndHour['14:00'] = 300; arrEndHour['14:30'] = 330;
+		arrEndHour['15:00'] = 360; arrEndHour['15:30'] = 390;
+		arrEndHour['16:00'] = 420; arrEndHour['16:30'] = 450;
+		arrEndHour['17:00'] = 480;
+		
+		$('.save-task').on('click', function(e){
+			//e.preventDefault();
+			var startTime = $('.txtStartTime').val();
+			var endTime = $('.txtEndTime').val();
+			var time = 0;
+			if( $('#TaskType_start').val() && $('#TaskType_end').val() && 
+				$('#TaskType_start').val() == $('#TaskType_end').val() ) {
+				time = arrEndHour[endTime] - arrStartHour[startTime];
+				if( time < 120 ) {
+					alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
+					return false;
+				}
+			} else if( $('#TaskType_start').val() && $('#TaskType_end').val() ) {
+				var startDateTimestemp = new Date( $('#TaskType_start').val() ).getTime()/1000;
+				var endDateTimestemp = new Date( $('#TaskType_end').val() ).getTime()/1000;
+				if( calculatorTime(startDateTimestemp, endDateTimestemp) == 0 ) {
+					var d = new Date(startDateTimestemp * 1000);
+					var day = d.getDay();
+					var timeStart = '08:00';
+					var timeEnd = '17:00';					
+					if( day == 6 ){
+						timeEnd = '12:00';
+					}
+					time = time + (arrEndHour[timeEnd] - arrStartHour[startTime]);
+					time = time + (arrEndHour[endTime] - arrEndHour[timeStart]);
+					if( time < 120 ) {
+						alert('Giờ nghỉ tối thiểu phải lớn hơn hoặc bằng 2 giờ!');
+						return false;
+					}
+				}
+			}
+			if( !$('#TaskType_start').val() ) {
+				alert('Vui lòng chọn ngày bắt đầu!');
+				return false;
+			}
+			if( !$('#TaskType_end').val() ) {
+				alert('Vui lòng chọn ngày kết thúc!');
+				return false;
+			}
+		});
+
+		function calculatorTime(startDate, endDate) {
+			startDate = startDate + 86400;
+			hour = 0;
+			console.log(startDate);
+			console.log(endDate);
+			while(startDate < endDate) {
+				var d = new Date(startDate * 1000);
+				var day = d.getDay();
+				if( day ){
+					if( day == 6 ) {
+						hour = hour + 4;
+					} else {
+						hour = hour + 8;
+					}
+				}
+				startDate = startDate + 86400;
+			}
+			return hour;
+		}
+	</script>
+{% endblock %}

@@ -1,3 +1,7 @@
 application_backend_task_index:
     pattern:  /
     defaults: { _controller: "ApplicationBackendBundle:Task:index" }
+
+application_backend_task_add:
+    pattern:  /add
+    defaults: { _controller: "ApplicationBackendBundle:Task:add" }

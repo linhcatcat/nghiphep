@@ -13,6 +13,9 @@
 		<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/138fefb8-90b9-432a-bed8-1e198f5f543d.css"/>
 		{% stylesheets '@application_backend_css' %}
 		<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+		<link type="text/css" href="{{ asset('application/css/jquery-ui.css')}}" rel="stylesheet" />
+		<link type="text/css" href="{{ asset('application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
+		<link type="text/css" href="{{ asset('application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
 		{% endstylesheets %}
 		<!--[if IE 7]>
 		{% stylesheets '@application_shared_ie7_css' %}
@@ -66,8 +69,9 @@
 			</section>
 		</footer>
 	</div> <!-- /container -->
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	
+	<script src="{{ asset('application/js/libs/jquery.js')}}"></script>
+	<script src="{{ asset('application/js/libs/jquery-ui.js')}}"></script>
 	<script>window.jQuery || document.write('<script src="{{ asset('application/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

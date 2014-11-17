@@ -35,7 +35,7 @@ class TaskController extends Controller
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$userService = $this->get('Application_user.service');
-			$user = $this->container->get('security.context')->getToken()->getUser();
+			$currentUser = $this->container->get('security.context')->getToken()->getUser();
 			$timeStart = '08:00';
 			$timeEnd = '17:00';
 			$startTimeArr = array(
@@ -54,12 +54,12 @@ class TaskController extends Controller
 			$translator = $this->get('translator');
 			$task = new Task();
 			$users = array();
-			$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
+			$users[$currentUser->getId()] = $currentUser->getUsername() .' - '. $currentUser->getFirstName() .' '. $currentUser->getLastName();
 			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
-				$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
+				$users[$currentUser->getId()] = $currentUser->getUsername() .' - '. $currentUser->getFirstName() .' '. $currentUser->getLastName();
 			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
 				$groupService = $this->get('application_group_service');
-				$groups = $groupService->findByUser($user);
+				$groups = $groupService->findByUser($currentUser);
 				foreach ($groups as $group) {
 					foreach ($group->getMembers() as $member) {
 						$users[$member->getUser()->getId()] = $member->getUser()->getUsername() .' - '. $member->getUser()->getFirstName() .' '.$member->getUser()->getLastName();
@@ -72,7 +72,7 @@ class TaskController extends Controller
 					$users[$user->getId()] = $user->getUsername() .' - '. $user->getFirstName() .' '. $user->getLastName();
 				}
 			}
-			$task->setOwner( $user );
+			$task->setOwner( $currentUser );
 			$form = $this->createForm(new TaskType( $users ), $task);
 			$form->handleRequest($request);
 			if ($form->isValid()) {
@@ -127,7 +127,7 @@ class TaskController extends Controller
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
 			}
 			return $this->render('ApplicationFrontendBundle:Task:index.html.twig', array(
-				'user' => $user,
+				'user' => $currentUser,
 				'form' => $form->createView()
 			));
 		} else {
