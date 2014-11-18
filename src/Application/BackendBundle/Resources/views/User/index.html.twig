@@ -36,7 +36,7 @@
 				<li>
 					<form id="uploadUser" method="POST" enctype="multipart/form-data" action="{{ path('application_backend_user_import') }}">
 					{#<input type="file" name="userFile" id="userFile">#}
-					<a class="file-input-wrapper btn">Import<input type="file" id="userFile" name="userFile" style=""></a>{#<span class="file-input-name">userList.xls</span>#}
+					<a class="file-input-wrapper btn">{% trans %}Import{% endtrans %}<input type="file" id="userFile" name="userFile" style=""></a>{#<span class="file-input-name">userList.xls</span>#}
 					</form>
 				</li>
 			</ul>

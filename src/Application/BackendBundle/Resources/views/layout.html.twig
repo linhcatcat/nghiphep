@@ -17,6 +17,12 @@
 		<link type="text/css" href="{{ asset('application/css/jquery-ui.structure.css')}}" rel="stylesheet" />
 		<link type="text/css" href="{{ asset('application/css/jquery-ui.theme.css')}}" rel="stylesheet" />
 		{% endstylesheets %}
+		<style type="text/css">
+			#user_panel {
+			    margin-right: 135px;
+    			margin-top: 10px;
+			}
+		</style>
 		<!--[if IE 7]>
 		{% stylesheets '@application_shared_ie7_css' %}
   <link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
@@ -44,6 +50,16 @@
 						<img src="{{ asset('application/images/logo.png') }}" alt="logo"/>
 					</a>
 					{% if app.user.id is defined %}
+						<ul id="user_panel" class="inline pull-right">
+							<li>
+								<a href="{{ path('application_locale_set',{'lang': 'vi' }) }}">
+									<img title="VietNam" src="{{ asset('application/images/vi.png') }}" />
+								</a>
+								<a href="{{ path('application_locale_set',{'lang': 'en' }) }}">
+									<img title="English" src="{{ asset('application/images/en.png') }}" />
+								</a>
+							</li>
+						</ul>
 						<div class="btn-group login">
 							<a class="btn" href="#"><i class="icon-lock"></i></a>
 							<a href="{{ path('application_frontend_logout') }}" class="btn">{% trans %}Logout{% endtrans %}</a>
