@@ -26,8 +26,8 @@ class Task {
 	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="Task")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
 	 */
-	
 	protected $user;
+
 	/**
 	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="Task")
 	 * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", nullable=false)

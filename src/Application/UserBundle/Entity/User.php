@@ -82,7 +82,7 @@ class User extends BaseUser {
 	protected $updatedDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="Application\TaskBundle\Entity\Task", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Application\TaskBundle\Entity\Task", mappedBy="user", cascade={"remove"})
      */
     protected $task;
 
