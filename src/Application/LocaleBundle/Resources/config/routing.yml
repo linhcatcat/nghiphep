@@ -1,0 +1,3 @@
+application_locale_set:
+    pattern:  /locale/{lang}
+    defaults: { _controller: ApplicationLocaleBundle:Default:locale }
