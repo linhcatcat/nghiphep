@@ -16,41 +16,40 @@ use \Symfony\Component\Routing\Generator\UrlGenerator;
 
 class LocaleListener
 {
-    private $defaultLocale;
-    private $container;
+	private $defaultLocale;
+	private $container;
 
-      /**
-     * construct function
-     * @author : Alex <alex@likipe.se>
-     * @param object $container
-     * @param object $defaultLocale
-     */
-    public function __construct($container, $defaultLocale = 'vi')
-    {
-        $this->defaultLocale = $defaultLocale;
-        $this->container = $container;
-    }
+	  /**
+	 * construct function
+	 * @author : Alex <alex@likipe.se>
+	 * @param object $container
+	 * @param object $defaultLocale
+	 */
+	public function __construct($container, $defaultLocale = 'vi')
+	{
+		$this->defaultLocale = $defaultLocale;
+		$this->container = $container;
+	}
 
-    /**
-    * listener event Request.
-    * @author Alex <alex@likipe.se>
-    * @param $event
-    */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $request = $event->getRequest();
-        if (!$request->hasPreviousSession()) {
-            return;
-        }
+	/**
+	* listener event Request.
+	* @author Alex <alex@likipe.se>
+	* @param $event
+	*/
+	public function onKernelRequest(GetResponseEvent $event)
+	{
+		$request = $event->getRequest();
+		if (!$request->hasPreviousSession()) {
+			return;
+		}
 
-        $this->container->get( 'session' )->setFlash( 'pathInfo', $request->getPathInfo() );
-        if ($locale = $request->attributes->get('_locale')) {
-            $request->getSession()->set('_locale', $locale);
-            var_dump(123);exit();
-        } else {
-            $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
-            var_dump(321);exit();
-        }
+		//$this->container->get( 'session' )->setFlash( 'pathInfo', $request->getPathInfo() );
+		if ($locale = $request->getSession()->get('_locale')) {
+			$request->getSession()->set('_locale', $locale);
+			$request->setLocale($locale);
+		} else {
+			$request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
+		}
 
-    }
+	}
 }

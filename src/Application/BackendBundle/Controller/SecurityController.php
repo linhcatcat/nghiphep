@@ -13,9 +13,9 @@ class SecurityController extends Controller {
 		/** @var $session \Symfony\Component\HttpFoundation\Session\Session */
 		$session = $request->getSession();
 		
-		if( $session->get('_locale') ) {
+		/*if( $session->get('_locale') ) {
 			$this->getRequest()->setLocale( $session->get('_locale') );
-		}
+		}*/
 
 		// get the error if any (works with forward and redirect -- see below)
 		if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
