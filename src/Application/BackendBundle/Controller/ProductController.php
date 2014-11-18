@@ -5,6 +5,8 @@ namespace Application\BackendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\Expr;
 use Application\BackendBundle\Form\ProductType;
 use Wincofood\ProductBundle\Entity\Product;
 
@@ -16,6 +18,62 @@ class ProductController extends Controller
 	 * @return view, array product
 	 */
 	public function indexAction(Request $request) {
+
+		//----------------------------------------------
+		$repository = $this->getDoctrine()->getRepository('WincofoodProductBundle:Product');
+		$em = $this->getDoctrine()->getManager();
+		/*$product = $repository->find(2);
+		var_dump($product->getTitle());*/
+
+		/*$products = $repository->findBy(array());
+		var_dump(count($products));*/
+
+		/*$products = $repository->findBy(array('title'=>'123'));
+		foreach ($products as $key => $product) {
+			var_dump($product->getId());
+		}*/
+
+		/*$product = $repository->findOneById(3);
+		var_dump($product->getTitle());*/
+
+		/*$product = $repository->findOneByTitle('123');
+		var_dump($product->getTitle());*/
+
+		/*$product = $repository->findOneBySlug('hello-chao');
+		var_dump($product->getTitle());*/
+
+		/*$products = $repository->findAll();
+		var_dump(count($products));*/
+
+		/*$em = $this->getDoctrine()->getManager();
+		$query = $em->createQuery('SELECT p FROM WincofoodProductBundle:Product p WHERE p.title = :title ORDER BY p.slug ASC')
+					->setParameter('title', 'Hello Chao');
+		$products = $query->getResult();
+		foreach ($products as $product) {
+			var_dump($product->getSlug());
+		}
+		var_dump(count($products));*/
+
+		/*$query = $this->getDoctrine()->getManager()
+			->createQuery(
+				'SELECT u FROM ApplicationUserBundle:User u
+				WHERE u.id = :id'
+			)->setParameter('id', 8);
+		$rs = $query->getSingleResult();
+		var_dump($rs->getId());*/
+
+	 	/*$qb->add('select', new Expr\Select(array('u')))
+   			->add('from', new Expr\From('ApplicationUserBundle:User', 'u'))
+   			->add('where', $qb->expr()->orX(
+       			$qb->expr()->eq('u.id', 1),
+       			$qb->expr()->like('u.username', 'nqthanh')
+   			))
+   			->add('orderBy', new Expr\OrderBy('u.username', 'ASC'));
+		$results = $qb->getQuery()->getResult();
+		var_dump(count($results));*/
+
+		//----------------------------------------------
+
 		//$user = $this->container->get('security.context')->getToken()->getUser();
 		$productService = $this->get('wincofood_product_service');
 		$page = (int) $request->query->get('page', 1);
