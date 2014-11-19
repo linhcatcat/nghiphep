@@ -20,7 +20,6 @@ parameters:
     debug_redirects:        false
     use_assetic_controller: true
     mailer_sender_email: f4knight@gmail.com
-    mailer_sender_name: 'Videocv Resetting'
-    video_cv_bg_url: 'http://video.cv/image-bg/'
+    mailer_sender_name: 'Linh Tran'
     limit_file_size: 3
     limit_items_per_page: 20

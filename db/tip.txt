@@ -6,6 +6,9 @@ http://doctrine-orm.readthedocs.org/en/latest/reference/basic-mapping.html
 
 http://www.intoweb.com/hr/module_leave.php
 
+http://phpdox.de/demo/Symfony2/classes/Swift_Message.xhtml
+http://swiftmailer.org/docs/messages.html
+
 OneToMany ...
 http://doctrine-orm.readthedocs.org/en/latest/reference/association-mapping.html
 

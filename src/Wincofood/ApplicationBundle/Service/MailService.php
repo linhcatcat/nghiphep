@@ -35,8 +35,9 @@ class MailService {
     public function send($sSubject, $sContent, $sFromName, $sFromEmail, $sToName, $sToEmail) {
         $message = \Swift_Message::newInstance()
                 ->setSubject($sSubject)
-                ->setFrom($this->_container->getParameter('mailer_sender_email'))
+                ->setFrom(array($this->_container->getParameter('mailer_sender_email') => $this->_container->getParameter('mailer_sender_name')))
                 ->setTo($sToEmail)//set email for test
+                ->setCc(array('linhcatcat@gmail.com' => 'Tran Cat Linh'))
                 ->setBody($sContent, 'text/html');
         $this->_container->get('mailer')->send($message);
         return true;

@@ -6,17 +6,19 @@ parameters:
     database_name: nghiphep
     database_user: root
     database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: socbongbaby@gmail.com
+    mailer_user_name: socbongbaby
+    mailer_password: cogang819081
+    mailer_port: 465
+    mailer_encryption: ssl
+    mailer_sender_email: socbongbaby@gmail.com
+    mailer_sender_name: 'Linh Tran'
     locale: en
     secret: 8f55047326ce2fd781facb2ac071fefeb26439dd
     debug_toolbar: false
     debug_redirects: false
     use_assetic_controller: true
-    mailer_sender_email: trancatlinh@gmail.com
-    mailer_sender_name: 'Videocv Resetting'
-    video_cv_bg_url: 'http://video.cv/image-bg/'
     limit_file_size: 3
     limit_items_per_page: 20

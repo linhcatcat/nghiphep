@@ -34,6 +34,10 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$mailService = $this->get('wincofood_mail_service');
+			//$body = $this->renderView('ApplicationFrontendBundle:Email:test.html.twig',array('data' => 'Hello Chao'));
+			//$rs = $mailService->send('Test 123456', $body, 'From name', 'trancatlinh@gmail.com', 'To name', 'trancatlinh@gmail.com');
+			//var_dump($rs);
 			$flag = true;
 			if($securityContext->isGranted('ROLE_EMPLOYEE')){
 				$flag = false;

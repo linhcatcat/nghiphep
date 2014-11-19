@@ -30,7 +30,6 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        video_cv_bg_url: %video_cv_bg_url%
         limit_file_size: %limit_file_size%
     exception_controller: application.frontend.exception_controller:redirectToErrorPageAction
 
