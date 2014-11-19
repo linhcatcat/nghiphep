@@ -33,7 +33,9 @@
 				<li class="active"><a>{{ 'Đăng ký nghỉ'|trans|capitalize }}</a></li>
 				<li><a href="{{ path('application_frontend_user_edit', {'userID': user.id}) }}">{{ 'Thay đổi thông tin cá nhân'|trans|capitalize }}</a></li>
 				<li><a href="{{ path('application_frontend_task_index') }}">{{ 'Nhật ký nghỉ'|trans|capitalize }}</a></li>
-				<li><a href="{{ path('application_frontend_task_manage') }}">{{ 'Quản lý nghỉ phép'|trans|capitalize }}</a></li>
+				{% if flag %}
+					<li><a href="{{ path('application_frontend_task_manage') }}">{{ 'Quản lý nghỉ phép'|trans|capitalize }}</a></li>
+				{% endif %}
 			</ul>
 
 			<div class="tab-content">

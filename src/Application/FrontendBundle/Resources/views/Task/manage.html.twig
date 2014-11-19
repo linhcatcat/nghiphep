@@ -70,11 +70,7 @@
 							</tr>
 							{% else %}
 								<tr>
-									{% if roleFlag %}
-										<td colspan="9">{{ 'Bạn là nhân viên gương mẫu'|trans }}</td>
-									{% else %}
-										<td colspan="10">{{ 'Bạn là nhân viên gương mẫu'|trans }}</td>
-									{% endif %}
+									<td colspan="9">{{ 'Hiện chưa có nhân viên nghỉ'|trans }}</td>
 								</tr>
 							{% endfor %}
 						</tbody>

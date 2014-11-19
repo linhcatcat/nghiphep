@@ -34,6 +34,10 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$flag = true;
+			if($securityContext->isGranted('ROLE_EMPLOYEE')){
+				$flag = false;
+			}
 			$userService = $this->get('Application_user.service');
 			$currentUser = $this->container->get('security.context')->getToken()->getUser();
 			$timeStart = '08:00';
@@ -127,6 +131,7 @@ class TaskController extends Controller
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));
 			}
 			return $this->render('ApplicationFrontendBundle:Task:index.html.twig', array(
+				'flag' => $flag,
 				'user' => $currentUser,
 				'form' => $form->createView()
 			));
@@ -146,6 +151,10 @@ class TaskController extends Controller
 	public function editUserAction(Request $request, $userID) {
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$flag = true;
+			if($securityContext->isGranted('ROLE_EMPLOYEE')){
+				$flag = false;
+			}
 			$userManagerService = $this->get('fos_user.user_manager');
 			$currentUser = $securityContext->getToken()->getUser();
 			$user = $userManagerService->findUserBy(array('id' => $userID));
@@ -198,6 +207,7 @@ class TaskController extends Controller
 			}
 			
 			return $this->render('ApplicationFrontendBundle:Task:user.html.twig', array(
+				'flag' => $flag,
 				'form' => $form->createView(),
 			));
 		} else {
@@ -209,6 +219,10 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$flag = true;
+			if($securityContext->isGranted('ROLE_EMPLOYEE')){
+				$flag = false;
+			}
 			$user = $this->container->get('security.context')->getToken()->getUser();
 			$taskService = $this->get('application_task_service');
 			$page = (int) $request->query->get('page', 1);
@@ -219,6 +233,7 @@ class TaskController extends Controller
 			$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
 
 			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
+				'flag' => $flag,
 				'user' => $user,
 				'tasks' => $tasks,
 				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
@@ -232,6 +247,9 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			if($securityContext->isGranted('ROLE_EMPLOYEE')){
+				throw new AccessDeniedException();
+			}
 			$user = $this->container->get('security.context')->getToken()->getUser();
 			$taskService = $this->get('application_task_service');
 			$page = (int) $request->query->get('page', 1);
@@ -239,18 +257,14 @@ class TaskController extends Controller
 			$offset = $limit * ($page - 1);
 			$aFilters = array('id' => 'DESC');
 			$groupService = $this->get('application_group_service');
-			$roleFlag = true;
-			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
-				$roleFlag = false;
-				$totalTask = $taskService->countByUser( $user );
-				$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
-			} elseif( $securityContext->isGranted('ROLE_BOSS') ) {
+			if( $securityContext->isGranted('ROLE_BOSS') ) {
 				$groups = $groupService->findByUser($user);
 				$userIds = array();
-				$userIds[] = $user->getId();
 				foreach ($groups as $group) {
 					foreach ($group->getMembers() as $member) {
-						$userIds[] = $member->getUser()->getId();
+						if( $user->getId() != $member->getUser()->getId() ){
+							$userIds[] = $member->getUser()->getId();
+						}
 					}
 				}
 				$totalTask = $taskService->countByUserIds( $userIds );
@@ -261,7 +275,6 @@ class TaskController extends Controller
 			}
 
 			return $this->render('ApplicationFrontendBundle:Task:manage.html.twig', array(
-				'roleFlag' => $roleFlag,
 				'user' => $user,
 				'tasks' => $tasks,
 				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
