@@ -35,6 +35,12 @@ class Task {
 	protected $owner;
 
 	/**
+	 * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="Task")
+	 * @ORM\JoinColumn(name="approve_id", referencedColumnName="id", nullable=true)
+	 */
+	protected $approve;
+
+	/**
 	 * @var datetime $start
 	 * @ORM\Column(name="start", type="datetime")
 	 */
@@ -93,6 +99,12 @@ class Task {
 	 * @ORM\Column(name="updated", type="datetime")
 	 */
 	protected $updated;
+
+	/**
+	 * @var datetime $approveDate
+	 * @ORM\Column(name="approve_date", type="datetime")
+	 */
+	protected $approveDate;
 
 	/**
 	 * Constructor
@@ -195,6 +207,29 @@ class Task {
 	}
 
 	/**
+	 * Set approve
+	 *
+	 * @param string $approve
+	 * @return Task
+	 */
+	public function setApprove($approve)
+	{
+		$this->approve = $approve;
+	
+		return $this;
+	}
+
+	/**
+	 * Get approve
+	 *
+	 * @return string 
+	 */
+	public function getApprove()
+	{
+		return $this->approve;
+	}
+
+	/**
 	 * Set leaveType
 	 *
 	 * @param string $leaveType
@@ -263,85 +298,85 @@ class Task {
 		return $this->note;
 	}
 
-    /**
-     * Set start
-     *
-     * @param \DateTime $start
-     * @return Task
-     */
-    public function setStart($start) {
-        $this->start = $start;
-        return $this;
-    }
+	/**
+	 * Set start
+	 *
+	 * @param \DateTime $start
+	 * @return Task
+	 */
+	public function setStart($start) {
+		$this->start = $start;
+		return $this;
+	}
 
-    /**
-     * Get start
-     *
-     * @return \DateTime 
-     */
-    public function getStart() {
-        return $this->start;
-    }
+	/**
+	 * Get start
+	 *
+	 * @return \DateTime 
+	 */
+	public function getStart() {
+		return $this->start;
+	}
 
-    /**
-     * Set startTime
-     *
-     * @param \Time $startTime
-     * @return Task
-     */
-    public function setStartTime($startTime) {
-        $this->startTime = $startTime;
-        return $this;
-    }
+	/**
+	 * Set startTime
+	 *
+	 * @param \Time $startTime
+	 * @return Task
+	 */
+	public function setStartTime($startTime) {
+		$this->startTime = $startTime;
+		return $this;
+	}
 
-    /**
-     * Get startTime
-     *
-     * @return \Time 
-     */
-    public function getStartTime() {
-        return $this->startTime;
-    }
+	/**
+	 * Get startTime
+	 *
+	 * @return \Time 
+	 */
+	public function getStartTime() {
+		return $this->startTime;
+	}
 
-    /**
-     * Set end
-     *
-     * @param \DateTime $end
-     * @return Task
-     */
-    public function setEnd($end) {
-        $this->end = $end;
-        return $this;
-    }
+	/**
+	 * Set end
+	 *
+	 * @param \DateTime $end
+	 * @return Task
+	 */
+	public function setEnd($end) {
+		$this->end = $end;
+		return $this;
+	}
 
-    /**
-     * Get end
-     *
-     * @return \DateTime 
-     */
-    public function getEnd() {
-        return $this->end;
-    }
+	/**
+	 * Get end
+	 *
+	 * @return \DateTime 
+	 */
+	public function getEnd() {
+		return $this->end;
+	}
 
-    /**
-     * Set endTime
-     *
-     * @param \Time $endTime
-     * @return Task
-     */
-    public function setEndTime($endTime) {
-        $this->endTime = $endTime;
-        return $this;
-    }
+	/**
+	 * Set endTime
+	 *
+	 * @param \Time $endTime
+	 * @return Task
+	 */
+	public function setEndTime($endTime) {
+		$this->endTime = $endTime;
+		return $this;
+	}
 
-    /**
-     * Get endTime
-     *
-     * @return \Time 
-     */
-    public function getEndTime() {
-        return $this->endTime;
-    }
+	/**
+	 * Get endTime
+	 *
+	 * @return \Time 
+	 */
+	public function getEndTime() {
+		return $this->endTime;
+	}
 
 	/**
 	 * Set created
@@ -365,25 +400,46 @@ class Task {
 
 
 
-    /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     * @return Task
-     */
-    public function setUpdated($updated) {
-        $this->updated = $updated;
-        return $this;
-    }
+	/**
+	 * Set updated
+	 *
+	 * @param \DateTime $updated
+	 * @return Task
+	 */
+	public function setUpdated($updated) {
+		$this->updated = $updated;
+		return $this;
+	}
 
-    /**
-     * Get updated
-     *
-     * @return \DateTime 
-     */
-    public function getUpdated() {
-        return $this->updated;
-    }
+	/**
+	 * Get updated
+	 *
+	 * @return \DateTime 
+	 */
+	public function getUpdated() {
+		return $this->updated;
+	}
+
+	/**
+	 * Set approveDate
+	 *
+	 * @param \DateTime $approveDate
+	 * @return Task
+	 */
+	public function setApproveDate() {
+		$this->approveDate = new \DateTime("now");
+		return $this;
+	}
+
+	/**
+	 * Get approveDate
+	 *
+	 * @return \DateTime 
+	 */
+	public function getApproveDate() {
+		return $this->approveDate;
+	}
+
 
 	/**
 	 * Set status

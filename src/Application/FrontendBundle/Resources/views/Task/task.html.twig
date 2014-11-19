@@ -50,6 +50,8 @@
 								<th>{{ 'Loại'|trans }}</th>
 								<th>{{ 'Ngày tạo'|trans }}</th>
 								<th>{{ 'Người tạo'|trans }}</th>
+								<th>{{ 'Ngày duyệt'|trans }}</th>
+								<th>{{ 'Người duyệt'|trans }}</th>
 								<th>{{ 'Trang thái'|trans }}</th>
 							</tr>
 						</thead>
@@ -64,6 +66,12 @@
 								<td>{{ task.loai }}</td>
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
+								<td>{{ task.approveDate?task.approveDate|date('Y-m-d h:i:s'):'' }}</td>
+								{% if task.approve %}
+									<td>{{ task.approve.firstName }} {{ task.approve.lastName }}</td>
+								{% else %}
+									<td></td>
+								{% endif %}
 								{% if task.status == 0 %}
 									<td class="type-text"><strong>{{ task.trangThai }}</strong></td>
 								{% else %}

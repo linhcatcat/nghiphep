@@ -292,6 +292,10 @@ class TaskController extends Controller
 		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw new AccessDeniedException();
 		}
+		if($this->get('security.context')->isGranted('ROLE_EMPLOYEE')){
+			throw new AccessDeniedException();
+		}
+		$currentUser = $this->container->get('security.context')->getToken()->getUser();
 		$taskService = $this->get('application_task_service');
 		$userManage = $this->get('fos_user.user_manager');
 		
@@ -299,13 +303,15 @@ class TaskController extends Controller
 		$id = $data['id'];
 		$task = $taskService->find($id);
 		$task->setStatus( 1 );
+		$task->setApprove( $currentUser );
+		$task->setApproveDate();
 		$userReg = $task->getUser();
 		$userReg->setPending( $userReg->getPending() - $task->getHour() ) ;
 		$userReg->setTaken( $userReg->getTaken() + $task->getHour() );
 		$userManage->updateUser( $userReg );
 		$rs = $taskService->update( $task );
 		if( $rs ) {
-			return new Response(json_encode(array('result' => 1, 'type' => $task->trangThai())), 200);
+			return new Response(json_encode(array('result' => 1, 'type' => $task->trangThai(), 'approve-date' => $task->getApproveDate()->format('Y-m-d h:i:s'), 'approve' => $currentUser->getFirstName().' '.$currentUser->getLastName())), 200);
 		} else {
 			return new Response(json_encode(array('result' => 0, 'data' => 'Đã có lỗi xảy ra')), 300);
 		}

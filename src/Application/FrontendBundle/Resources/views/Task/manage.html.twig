@@ -48,6 +48,8 @@
 								<th>{{ 'Loại'|trans }}</th>
 								<th>{{ 'Ngày tạo'|trans }}</th>
 								<th>{{ 'Người tạo'|trans }}</th>
+								<th>{{ 'Ngày duyệt'|trans }}</th>
+								<th>{{ 'Người duyệt'|trans }}</th>
 								<th>{{ 'Trang thái'|trans }}</th>
 							</tr>
 						</thead>
@@ -62,6 +64,12 @@
 								<td>{{ task.loai }}</td>
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
+								<td class="approve-date">{{ task.approveDate?task.approveDate|date('Y-m-d h:i:s'):'' }}</td>
+								{% if task.approve %}
+									<td class="approve">{{ task.approve.firstName }} {{ task.approve.lastName }}</td>
+								{% else %}
+									<td class="approve"></td>
+								{% endif %}
 								{% if task.status == 0 %}
 									<td class="confirm-task"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><strong><span>{{ task.trangThai }}</span></strong></a></td>
 								{% else %}
@@ -101,6 +109,8 @@
 				success: function(data){
 					if( data['result'] ) {
 						$that.text( data['type'] );
+						$that.parent().parent().find('.approve-date').text( data['approve-date'] );
+						$that.parent().parent().find('.approve').text( data['approve'] );
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown){
