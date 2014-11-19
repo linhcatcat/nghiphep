@@ -215,6 +215,29 @@ class TaskController extends Controller
 			$limit = $this->container->getParameter('limit_items_per_page');
 			$offset = $limit * ($page - 1);
 			$aFilters = array('id' => 'DESC');
+			$totalTask = $taskService->countByUser( $user );
+			$tasks = $taskService->filterByUser( $limit, $offset, $aFilters, $user );
+
+			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
+				'user' => $user,
+				'tasks' => $tasks,
+				'pagination' => $this->get("wincofood_pagination_service")->renderPaginations( $page, ceil($totalTask / $limit), array() )
+			));
+		} else {
+			return $this->redirect($this->generateUrl('application_frontend_login'));
+		}
+	}
+
+	public function taskManageAction(Request $request)
+	{
+		$securityContext = $this->container->get('security.context');
+		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$user = $this->container->get('security.context')->getToken()->getUser();
+			$taskService = $this->get('application_task_service');
+			$page = (int) $request->query->get('page', 1);
+			$limit = $this->container->getParameter('limit_items_per_page');
+			$offset = $limit * ($page - 1);
+			$aFilters = array('id' => 'DESC');
 			$groupService = $this->get('application_group_service');
 			$roleFlag = true;
 			if( $securityContext->isGranted('ROLE_EMPLOYEE') ) {
@@ -237,7 +260,7 @@ class TaskController extends Controller
 				$tasks = $taskService->filter( $limit, $offset, $aFilters );
 			}
 
-			return $this->render('ApplicationFrontendBundle:Task:task.html.twig', array(
+			return $this->render('ApplicationFrontendBundle:Task:manage.html.twig', array(
 				'roleFlag' => $roleFlag,
 				'user' => $user,
 				'tasks' => $tasks,
