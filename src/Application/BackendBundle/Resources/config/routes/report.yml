@@ -5,3 +5,7 @@ application_backend_report_index:
 application_backend_report_export:
     pattern:  /export
     defaults: { _controller: "ApplicationBackendBundle:Report:export" }
+
+application_backend_report_export_day:
+    pattern:  /export-day
+    defaults: { _controller: "ApplicationBackendBundle:Report:exportDay" }
