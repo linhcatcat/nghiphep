@@ -38,11 +38,11 @@ class ReportController extends Controller {
 	public function indexAction(Request $request) {
 		$userService = $this->get('Application_user.service');
 		//test
-		$startDate = new \DateTime("2014-11-19");
+		/*$startDate = new \DateTime("2014-11-19");
 		$startTime = '09:00';
 		$endDate = new \DateTime("2014-11-24");
 		$endTime = '13:30';
-		var_dump($this->calculatorDay($startDate, $startTime, $endDate, $endTime));
+		var_dump($this->calculatorDay($startDate, $startTime, $endDate, $endTime));*/
 		//end test
 		$page = (int) $request->query->get('page', 1);
 		$limit = $this->container->getParameter('limit_items_per_page');
