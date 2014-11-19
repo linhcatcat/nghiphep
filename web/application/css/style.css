@@ -101,11 +101,17 @@ header .container {
 .hello-chao {
     color: #fff;
     font-size: 16px;
-    margin-right: 165px;
     line-height: 22px;
 }
 .hello-chao a {
-	color: #063b63;
+    color: #f8ff32;
+    font-weight: 700;
+}
+.hello-chao .info-user {
+	text-align: right;
+}
+.hello-chao .info-leave {
+	padding-top: 50px;
 }
 .hello-chao div strong {
 	color: #f8ff32;
@@ -113,10 +119,11 @@ header .container {
 .hello-chao .icon-arrow-right {
 	font-size: 10px;
 	margin-right: 5px;
+	margin-left: 5px;
 }
 .confirm-task a.btn {
 	padding: 8px;
-	width: 60px;
+	width: 100px;
 }
 header .container .login {
 	top: 36px;

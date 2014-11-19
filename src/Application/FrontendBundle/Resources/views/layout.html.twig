@@ -45,20 +45,16 @@
 					</a>
 					{% if app.user.id is defined %}
 						<div class="pull-right hello-chao">
-							<div >
+							<div class="info-user">
 								{% trans %}XIN CHÀO {% endtrans %}
 								<a href="{{ path('application_frontend_user_edit', {'userID': app.user.id}) }}"><strong>{{ app.user.firstName }} {{ app.user.lastName }}</strong></a>
 							</div>
-							<div >
-								<span class="icon-arrow-right"></span>{% trans %}Giờ phép{% endtrans %} : 
+							<div class="info-leave">
+								<span class="icon-arrow-right"></span>{% trans %}Giờ phép{% endtrans %}: 
 								<a>{{ app.user.entitled }}</a> {% trans %}Giờ{% endtrans %}
-							</div>
-							<div >
-								<span class="icon-arrow-right"></span>{% trans %}Đã nghỉ{% endtrans %} : 
+								<span class="icon-arrow-right"></span>{% trans %}Đã nghỉ{% endtrans %}: 
 								<a>{{ app.user.taken }}</a> {% trans %}Giờ{% endtrans %}
-							</div>
-							<div >
-								<span class="icon-arrow-right"></span>{% trans %}Còn lại{% endtrans %} : 
+								<span class="icon-arrow-right"></span>{% trans %}Còn lại{% endtrans %}: 
 								<a>{{ app.user.balance }}</a> {% trans %}Giờ{% endtrans %}
 							</div>
 						</div>

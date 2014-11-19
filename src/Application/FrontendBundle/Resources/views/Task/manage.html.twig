@@ -63,9 +63,9 @@
 								<td>{{ task.created|date('Y-m-d h:i:s') }}</td>
 								<td>{{ task.owner.firstName }} {{ task.owner.lastName }}</td>
 								{% if task.status == 0 %}
-									<td class="type-text"><strong><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ task.trangThai }}</span></a></strong></td>
+									<td class="confirm-task"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><strong><span>{{ task.trangThai }}</span></strong></a></td>
 								{% else %}
-									<td class="type-text"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ task.trangThai }}</span></a></td>
+									<td class="confirm-task"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ task.trangThai }}</span></a></td>
 								{% endif %}
 							</tr>
 							{% else %}
@@ -100,7 +100,7 @@
 				data: {id: id},
 				success: function(data){
 					if( data['result'] ) {
-						$that.parent().parent().find('.type-text').text( data['type'] );
+						$that.text( data['type'] );
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown){
