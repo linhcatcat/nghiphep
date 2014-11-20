@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2014 at 10:05 AM
--- Server version: 5.5.25a
+-- Generation Time: Nov 20, 2014 at 03:44 AM
+-- Server version: 5.5.27
 -- PHP Version: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -174,22 +174,6 @@ CREATE TABLE IF NOT EXISTS `task` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
 
---
--- Dumping data for table `task`
---
-
-INSERT INTO `task` (`id`, `user_id`, `owner_id`, `approve_id`, `start`, `start_time`, `end`, `end_time`, `leave_type`, `hour`, `note`, `status`, `created`, `updated`, `approve_date`) VALUES
-(11, 8, 7, 7, '2014-11-17 00:00:00', '08:00', '2014-11-19 00:00:00', '17:00', 0, 24, NULL, 1, '2014-11-17 13:32:13', '2014-11-17 13:32:37', '2014-11-19 00:00:00'),
-(12, 8, 7, 7, '2014-11-18 00:00:00', '08:00', '2014-11-20 00:00:00', '12:00', 0, 20, NULL, 1, '2014-11-17 13:33:08', '2014-11-17 13:33:11', '2014-11-19 00:00:00'),
-(13, 6, 2, NULL, '2014-11-19 00:00:00', '08:00', '2014-11-20 00:00:00', '17:00', 0, 16, NULL, 1, '2014-11-17 13:33:32', '2014-11-17 13:33:36', NULL),
-(14, 3, 2, NULL, '2014-11-20 00:00:00', '08:00', '2014-11-22 00:00:00', '12:00', 0, 20, NULL, 1, '2014-11-17 13:33:56', '2014-11-17 13:34:03', NULL),
-(17, 5, 1, NULL, '2014-11-17 00:00:00', '08:00', '2014-11-22 00:00:00', '12:00', 0, 44, 'Xin chào ngày mới!', 1, '2014-11-17 17:02:24', '2014-11-19 10:59:27', NULL),
-(18, 6, 1, 2, '2014-11-17 00:00:00', '08:00', '2014-11-18 00:00:00', '17:00', 0, 16, 'Đăng ký giùm cho vợ!', 1, '2014-11-17 17:05:40', '2014-11-19 15:30:47', '2014-11-19 15:30:47'),
-(19, 2, 2, 1, '2014-11-19 00:00:00', '08:00', '2014-11-19 00:00:00', '17:00', 0, 8, 'Hey ya', 1, '2014-11-19 10:01:10', '2014-11-19 15:32:41', '2014-11-19 15:32:41'),
-(20, 2, 2, 1, '2014-11-22 00:00:00', '08:00', '2014-11-24 00:00:00', '17:00', 0, 12, '121212', 1, '2014-11-19 10:02:12', '2014-11-19 15:32:33', '2014-11-19 15:32:33'),
-(21, 2, 2, 1, '2014-11-19 00:00:00', '08:00', '2014-11-19 00:00:00', '17:00', 0, 8, 'A B C', 1, '2014-11-19 14:52:19', '2014-11-19 15:41:11', '2014-11-19 15:41:11'),
-(22, 1, 1, NULL, '2014-11-19 00:00:00', '08:00', '2014-11-19 00:00:00', '17:00', 0, 8, 'Hello Chao', 0, '2014-11-19 15:41:55', '2014-11-19 15:41:55', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -231,16 +215,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `username_canonical`, `email`, `email_canonical`, `entitled`, `taken`, `pending`, `gender`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `is_deleted`, `created_date`, `updated_date`) VALUES
-(1, 'Linh', 'Tran', 'admin', 'admin', 'admin@likipe.se', 'admin@likipe.se', 96, 0, 52, 1, 1, 'k80xkn8lt9sss0csss840c8k4s4ko8g', 'x7EQADRYJOoM55zrZuplqk1Pbcxu8aogh/Gx3/Z7TPD7BL+jCMydNo+LoeVksU0FuV5PNLn4oY5/xdfnmRPpIw==', '2014-11-19 15:33:04', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}', 0, NULL, NULL, '2014-01-21 13:52:16', '2014-11-19 15:41:55'),
-(2, 'Thanh', 'Nguyen', 'nqthanh', 'nqthanh', 'nqthanh@wincofood.com.vn', 'nqthanh@wincofood.com.vn', 96, 28, 8, 1, 1, 't4ih61t6lvk4wgoo0gw0s8ok84c0044', 'IexHddMsl7KCuWE8toxz//xy+RhX4iL6btEBD0SCihB5ddrXfpUMJAFFp9Ps6aUFAmhm6OVMVKncnlmSZo4CPg==', '2014-11-19 14:09:26', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:9:"ROLE_BOSS";}', 0, NULL, NULL, '2014-11-03 09:27:37', '2014-11-19 15:41:11'),
-(3, 'Nhat', 'Hoa', 'nhathoa', 'nhathoa', 'nhathoa@gmail.com', 'nhathoa@gmail.com', 96, 20, 0, 1, 1, '646w7lugnts0owkgkcgkocssgo0goc8', '3TGUvbzxcWCwij99V0F17py8uAFhHxDAYECe9BjA9iHTZFLM1e8OtfWRrgnfCI96yzv4FNMMy7/54xusXd5JKg==', '2014-11-19 10:22:02', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-04 04:28:25', '2014-11-19 10:22:02'),
-(5, 'Alex', 'Tran', 'alextran', 'alextran', 'alex@likipe.se', 'alex@likipe.se', 96, 44, 0, 1, 1, '5oswq8zo9d8ogsko4ksgskko08s0cs0', 'lxgXw5oqlI5v2ymxEjERUudtLmRzS/8NQklQTCuggbt8VyOEWzsDMajI5rGQT2MXWbJf1/hqobR9ojMcUrfw1Q==', '2014-11-13 22:35:45', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-05 09:51:24', '2014-11-19 10:59:27'),
-(6, 'Dung1', 'Nguyen', 'dungnguyen', 'dungnguyen', 'dungnguyen@gmail.com', 'dungnguyen@gmail.com', 96, 80, -48, 1, 1, 'mo0iu4o1o3kwg404csc0cw484c00gs0', 'hxNBf/uDOSeS2prhl34MMN0HbppFXAQkZ3oaTfDWtYXluGcTL++lKjUu+3jb6oagRZJpFkWptRUUvjB+U0rYhw==', '2014-11-19 15:31:23', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-05 09:52:46', '2014-11-19 15:31:23'),
-(7, 'Vinh', 'Dang', 'vinhdang', 'vinhdang', 'vinhdang@gmail.com', 'vinhdang@gmail.com', 96, 20, 0, 1, 1, 'gf21hmta9nkkwc0g0cwkwko04kw0s0g', 'Qa3Ea7VZPzU2XiYEOuzWal/9kkaSYogK/wFzsZLeRPMbECf2Z5sKecKT6ADEYdNLYiKZ0l3XDJiRGEGqH2jj6A==', '2014-11-17 13:31:46', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:9:"ROLE_BOSS";}', 0, NULL, NULL, '2014-11-05 09:54:06', '2014-11-17 13:33:11'),
-(8, '12', '34', '1234', '1234', '1234@gmail.com', '1234@gmail.com', 96, 24, 0, 1, 1, 'p39rf60d2i8sc8socokw8840oo4g4os', 'FXFIjqDHMGgRwsrKekMfYWxnKRKhnachOCg8vOw9nq3Wxl8sw2qly52A8qCwW2k7uFweZhNfhel/lnArWJ6fPw==', '2014-11-16 15:33:53', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-15 15:56:08', '2014-11-17 13:32:37'),
-(25, 'Tran', 'Linh', '654321', '654321', 'cba@gmail.com', 'cba@gmail.com', 96, 0, 0, 0, 1, 'kxjosm3au2owwg8gkkwcs004kgoco00', '+45ZLG7veq6BIWxgOcG/X1R83LB/17WG5kzcbiZhk+evTHuw+5EhcClpkFxs7AfJtO6MrX5P/QJSRSaYAlpMmA==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-17 11:33:31', '2014-11-17 11:33:31'),
-(27, 'Linh', 'Tran', '123456', '123456', 'abc@gmail.com', 'abc@gmail.com', 96, 0, 0, 1, 1, 'id930heumrs4s0w8oogkc0kkgwswok0', 'ZiSchWBIeqfVMU8S3Qn1lZ4ilqLewSxgdbFodgvTo5ffALjHkSzDQg5sCcvfeaVNQ/OxrnId5AVaBzyJbaKQRA==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-19 09:11:19', '2014-11-19 09:11:19'),
-(28, 'ab', 'cd', 'abcd', 'abcd', 'abcd@gmail.com', 'abcd@gmail.com', 96, 0, 0, 1, 1, 'j79t2hi0cyog4w00ggwk0sgkc88g0sc', 'Bbq8OhV8/QLe+8q10ktJ6bUj7mXd/pRRxSzvBFSdQ4PQRMzIPoDg/vyJ6V8Sg/wHzq9tzDwOUnEmYWrSNlMBEQ==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-19 09:11:19', '2014-11-19 09:11:19');
+(1, 'Linh', 'Tran', 'admin', 'admin', 'admin@likipe.se', 'admin@likipe.se', 96, 0, 0, 1, 1, 'k80xkn8lt9sss0csss840c8k4s4ko8g', 'x7EQADRYJOoM55zrZuplqk1Pbcxu8aogh/Gx3/Z7TPD7BL+jCMydNo+LoeVksU0FuV5PNLn4oY5/xdfnmRPpIw==', '2014-11-20 09:11:45', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}', 0, NULL, NULL, '2014-01-21 13:52:16', '2014-11-20 09:11:45'),
+(2, 'Thanh', 'Nguyen', 'nqthanh', 'nqthanh', 'nqthanh@wincofood.com.vn', 'nqthanh@wincofood.com.vn', 96, 0, 0, 1, 1, 't4ih61t6lvk4wgoo0gw0s8ok84c0044', 'IexHddMsl7KCuWE8toxz//xy+RhX4iL6btEBD0SCihB5ddrXfpUMJAFFp9Ps6aUFAmhm6OVMVKncnlmSZo4CPg==', '2014-11-20 09:10:26', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:9:"ROLE_BOSS";}', 0, NULL, NULL, '2014-11-03 09:27:37', '2014-11-20 09:10:26'),
+(3, 'Nhat', 'Hoa', 'nhathoa', 'nhathoa', 'nhathoa@gmail.com', 'nhathoa@gmail.com', 96, 0, 0, 1, 1, '646w7lugnts0owkgkcgkocssgo0goc8', '3TGUvbzxcWCwij99V0F17py8uAFhHxDAYECe9BjA9iHTZFLM1e8OtfWRrgnfCI96yzv4FNMMy7/54xusXd5JKg==', '2014-11-19 10:22:02', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-04 04:28:25', '2014-11-19 10:22:02'),
+(5, 'Alex', 'Tran', 'alextran', 'alextran', 'alex@likipe.se', 'alex@likipe.se', 96, 0, 0, 1, 1, '5oswq8zo9d8ogsko4ksgskko08s0cs0', 'lxgXw5oqlI5v2ymxEjERUudtLmRzS/8NQklQTCuggbt8VyOEWzsDMajI5rGQT2MXWbJf1/hqobR9ojMcUrfw1Q==', '2014-11-13 22:35:45', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-05 09:51:24', '2014-11-19 10:59:27'),
+(6, 'Dung', 'Nguyen', 'dungnguyen', 'dungnguyen', 'dungnguyen@gmail.com', 'dungnguyen@gmail.com', 96, 0, 0, 1, 1, 'mo0iu4o1o3kwg404csc0cw484c00gs0', 'hxNBf/uDOSeS2prhl34MMN0HbppFXAQkZ3oaTfDWtYXluGcTL++lKjUu+3jb6oagRZJpFkWptRUUvjB+U0rYhw==', '2014-11-19 15:31:23', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-05 09:52:46', '2014-11-19 15:31:23'),
+(7, 'Vinh', 'Dang', 'vinhdang', 'vinhdang', 'vinhdang@gmail.com', 'vinhdang@gmail.com', 96, 0, 0, 1, 1, 'gf21hmta9nkkwc0g0cwkwko04kw0s0g', 'Qa3Ea7VZPzU2XiYEOuzWal/9kkaSYogK/wFzsZLeRPMbECf2Z5sKecKT6ADEYdNLYiKZ0l3XDJiRGEGqH2jj6A==', '2014-11-17 13:31:46', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:9:"ROLE_BOSS";}', 0, NULL, NULL, '2014-11-05 09:54:06', '2014-11-17 13:33:11'),
+(8, '12', '34', '1234', '1234', '1234@gmail.com', '1234@gmail.com', 96, 0, 0, 1, 1, 'p39rf60d2i8sc8socokw8840oo4g4os', 'FXFIjqDHMGgRwsrKekMfYWxnKRKhnachOCg8vOw9nq3Wxl8sw2qly52A8qCwW2k7uFweZhNfhel/lnArWJ6fPw==', '2014-11-16 15:33:53', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_EMPLOYEE";}', 0, NULL, NULL, '2014-11-15 15:56:08', '2014-11-17 13:32:37');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
