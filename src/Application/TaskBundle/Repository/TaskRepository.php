@@ -34,6 +34,27 @@ class TaskRepository extends EntityRepository {
 	}
 
 	/**
+	 * Filter fromdate to todate
+	 * @author Alex
+	 * @param array $aFilters
+	 */
+	public function filterFromTo($aFilters, $fromDate, $toDate) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('(t.start >= :start or t.end >= :start) and (t.start <= :end or t.end <= :end)');
+		$qb->setParameter('start', $fromDate);
+		$qb->setParameter('end', $toDate);
+		if (isset($aFilters['id'])) {
+			$qb->orderBy('t.id', $aFilters['id']);
+		}
+		if (isset($aFilters['created'])) {
+			$qb->orderBy('t.created', $aFilters['created']);
+		}
+
+		$results = $qb->getQuery()->getResult();
+		return $results;
+	}
+
+	/**
 	 * Filter by user
 	 * @author Alex
 	 * @param array $aFilters

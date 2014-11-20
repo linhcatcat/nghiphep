@@ -37,6 +37,8 @@ class ReportController extends Controller {
 	 */
 	public function indexAction(Request $request) {
 		$userService = $this->get('Application_user.service');
+		$taskService = $this->get('application_task_service');
+		//var_dump(count($test));
 		//test
 		/*$startDate = new \DateTime("2014-11-19");
 		$startTime = '09:00';
@@ -135,50 +137,56 @@ class ReportController extends Controller {
 	 * @author Alex <alex@likipe.se>
 	 * @return view, array user
 	 */
-	public function exportDayAction(Request $req) {
+	public function exportDayAction(Request $request) {
 		if(false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw new AccessDeniedException();
 		}
-		$userService = $this->get('Application_user.service');
-		$users = $userService->getRepository()->findAll();
+
+		$taskService = $this->get('application_task_service');
 		$excelService = $this->get('xls.service_xls5');
 		// or $this->get('xls.service_pdf');
 		// or create your own is easy just modify services.yml
 
+		$fromDate = $request->get('from_date');;
+		$toDate = $request->get('to_date');
+		$tasks = $taskService->filterFromTo(array('id' => 'DESC'), $fromDate, $toDate);
 
 		// create the object see http://phpexcel.codeplex.com documentation
 		$excelService->excelObj->getProperties()->setCreator("Linh Tran")
-							->setLastModifiedBy("Linh Tran")
-							->setTitle("Office 2005 XLSX Test Document")
-							->setSubject("Office 2005 XLSX Test Document")
-							->setDescription("Test document for Office 2005 XLSX, generated using PHP classes.")
-							->setKeywords("office 2005 openxml php")
-							->setCategory("Test result file");
+			->setLastModifiedBy("Linh Tran")
+			->setTitle("Office 2005 XLSX Test Document")
+			->setSubject("Office 2005 XLSX Test Document")
+			->setDescription("Test document for Office 2005 XLSX, generated using PHP classes.")
+			->setKeywords("office 2005 openxml php")
+			->setCategory("Test result file");
 		$excelService->excelObj->setActiveSheetIndex(0)
-					->setCellValue('A1', 'Username (Id)')
-					->setCellValue('B1', 'First Name')
-					->setCellValue('C1', 'Last Name')
-					->setCellValue('D1', 'Email')
-					->setCellValue('E1', 'Gender')
-					->setCellValue('F1', 'Roles')
-					->setCellValue('G1', 'Entitled (hour)')
-					->setCellValue('H1', 'Taken (hour)')
-					->setCellValue('I1', 'Balance (hour)');
+			->setCellValue('A1', 'Entry No.')
+			->setCellValue('B1', 'Employee No.')
+			->setCellValue('C1', 'Period cal. payroll')
+			->setCellValue('D1', 'Year cal. payroll')
+			->setCellValue('E1', 'Link Payroll Item code')
+			->setCellValue('F1', 'From Date')
+			->setCellValue('G1', 'Cause of Absence Code')
+			->setCellValue('H1', 'Description')
+			->setCellValue('I1', 'Quantity');
 		$row = 2;
-		foreach ($users as $key => $user) {
-			$roles = $user->getRoles();
-			unset( $roles[array_search('ROLE_USER', $roles)] );
-			$excelService->excelObj->setActiveSheetIndex(0)
-					->setCellValue('A'.$row, $user->getUsername())
-					->setCellValue('B'.$row, $user->getFirstName())
-					->setCellValue('C'.$row, $user->getLastName())
-					->setCellValue('D'.$row, $user->getEmail())
-					->setCellValue('E'.$row, $user->getGender())
-					->setCellValue('F'.$row, implode(', ', $roles))
-					->setCellValue('G'.$row, $user->getEntitled())
-					->setCellValue('H'.$row, $user->getTaken())
-					->setCellValue('I'.$row, $user->balance());
-			$row++;
+		foreach ($tasks as $task) {
+			$calTasks = $this->calculatorDay($task->getStart(), $task->getStartTime(), $task->getEnd(), $task->getEndTime());
+			foreach ($calTasks as $calTask) {
+				if( strtotime(date('Y-m-d', strtotime($calTask['start']))) >= strtotime($fromDate) && strtotime(date('Y-m-d', strtotime($calTask['start']))) <= strtotime($toDate) ){
+					$excelService->excelObj->setActiveSheetIndex(0)
+						->setCellValue('A'.$row, '')
+						->setCellValue('B'.$row, $task->getUser()->getUsername())
+						->setCellValue('C'.$row, '')
+						->setCellValue('D'.$row, '')
+						->setCellValue('E'.$row, '')
+						->setCellValue('F'.$row, $calTask['start'])
+						->setCellValue('G'.$row, '')
+						->setCellValue('H'.$row, '')
+						->setCellValue('I'.$row, $calTask['hour']);
+					$row++;
+				}
+			}
 		}
 		$excelService->excelObj->getActiveSheet()->setTitle('Report');
 		// Set active sheet index to the first sheet, so Excel opens this as the first sheet

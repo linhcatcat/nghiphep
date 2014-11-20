@@ -10,7 +10,14 @@
 			<ul class="nav nav-tabs" id="list-tabs">
 				<li><a class="btn">{{ 'Report'|trans }}</a></li>
 				<li><a class="file-input-wrapper btn" href="{{ path('application_backend_report_export') }}">Export</a></li>
-				<li><a class="file-input-wrapper btn" href="{{ path('application_backend_report_export_day') }}">Export1</a></li>
+				<li>
+					<form id="exportDay" method="POST" enctype="multipart/form-data" action="{{ path('application_backend_report_export_day') }}">
+						<input type="date" readonly="readonly" required="required" name="from_date" id="from_date" class="from-date date">
+						<input type="date" readonly="readonly" required="required" name="to_date" id="to_date" class="to-date date">
+						<input type="submit" value="Export" class="btn">
+
+					</form>
+				</li>
 			</ul>
 
 			<div class="tab-content">
@@ -57,4 +64,47 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block stylesheet %}
+	<style>
+		#exportDay {
+			margin-bottom: 0;
+			padding-top: 5px;
+		}
+		#exportDay .date {
+			width: 80px;
+			margin-left: 5px;
+			margin-bottom: 0;
+		}
+		#exportDay .ui-datepicker-trigger {
+			background-color: transparent;
+			border: none;
+		}
+		#exportDay .ui-datepicker-trigger img {
+			width: 20px;
+		}
+	</style>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$("#from_date").datepicker({
+			showOn: "button",
+			buttonImage: "/application/images/calendar.gif",
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+				$("#to_date").datepicker("option","minDate", selected);
+			}
+		});
+		//.datepicker("setDate", new Date());
+		$("#to_date").datepicker({
+			showOn: "button",
+			buttonImage: "/application/images/calendar.gif",
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1,
+			onSelect: function(selected) {
+				$("#from_date").datepicker("option","maxDate", selected);
+			}
+		});
+	</script>
 {% endblock %}

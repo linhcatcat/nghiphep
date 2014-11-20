@@ -20,6 +20,7 @@ class UserRepository extends EntityRepository {
 	 */
 	public function filter($limit, $offset, $aFilters) {
 		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.locked = 0');
 		$qb->setFirstResult($offset);
 		if (0 <= $limit) {
 			$qb->setMaxResults($limit);
@@ -51,6 +52,7 @@ class UserRepository extends EntityRepository {
 	 */
 	public function count() {
 		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.locked = 0');
 		$qb->select($qb->expr()->countDistinct('u.id'));
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;

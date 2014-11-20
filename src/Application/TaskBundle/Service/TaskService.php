@@ -108,6 +108,18 @@ class TaskService {
 	}
 
 	/**
+	 * Filter 
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function filterFromTo($aFilters = array(), $fromDate, $toDate) {
+		$results = $this->getRepository()->filterFromTo($aFilters, $fromDate, $toDate);
+		return $results;
+	}
+
+	/**
 	 * Filter by user
 	 * @author Alex
 	 * @param array $aFilters

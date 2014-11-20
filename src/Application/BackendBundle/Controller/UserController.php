@@ -168,7 +168,9 @@ class UserController extends Controller
 		if (empty($user)) {
 			throw $this->createNotFoundException($translator->trans('No user found for id ' . $userID));
 		}
-		$userService->deleteUser($user);
+		//$userService->deleteUser($user);
+		$user->setLocked(1);
+		$userManagerService->updateUser($user);
 		$this->get('session')->getFlashBag()->add('delete_user_successfully', $translator->trans('Deleted successfully'));
 
 		return $this->redirect($this->generateUrl('application_backend_user_index'));
