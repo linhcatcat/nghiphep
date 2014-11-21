@@ -56,7 +56,8 @@ header .container {
 #container.frontend {
 	width: 1004px;
 	margin: 0 auto;
-	min-height: 100%
+	min-height: 100%;
+	padding-bottom: 0;
 }
 .frontend .footer {
 	width: 1004px;
@@ -66,6 +67,7 @@ header .container {
 }
 .frontend .container .main-content {	
 	padding-left: 0;
+	margin-bottom: 40px;
 }
 .submit-profile .btn {
 	line-height: 17px;
@@ -80,7 +82,7 @@ header .container {
 }
 .form-frontend .note_task {
 	height: 100px;
-	width: 499px;
+	width: 730px;
 }
 .form-frontend .ho_ten {
 	width: 328px;
@@ -139,7 +141,7 @@ header .container .login .btn {
 	background: none repeat scroll 0 0 #bae4ee;
 	color: #063b63;
 }
-.list-content .content .nav.nav-tabs > li a {
+.list-content .content nav.nav-tabs > li a {
 	color: #063b63;
 }
 .list-content .content .table thead tr th {
@@ -154,4 +156,32 @@ header .container .login .btn {
 header .container .login .btn:hover, header .container .login .btn:focus {
 	background: none repeat scroll 0 0 #0096e0;
 	color: #fff;
+}
+.w50, #UserType_password div {
+	width: 50%;
+	float: left;
+}
+.w100 {
+	width: 100%;
+	float: left;
+}
+.txt_in .txt_gen label {
+	width: 10%;
+	float: left;
+}
+.txt_in .txt_gen input {
+	width: 5%;
+}
+.frm_cnt {
+	padding: 20px 60px 20px 100px;
+}
+.save-user-admin {
+	margin-left: 35%;
+	position: relative;
+}
+.txt_in input {
+	width: 330px;
+}
+.info-leave .icon-arrow-right {
+	padding-left: 12px;
 }

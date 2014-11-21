@@ -22,8 +22,39 @@
 			</ul>
 
 			<div class="tab-content">
-				<div class="tab-pane active" id="user-admin">
+				<div class="tab-pane active frm_cnt txt_in" id="user-admin">
 					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
+						<div class="w50">
+							{{ form_label(form.first_name) }}
+							{{ form_errors(form.first_name) }}
+							{{ form_widget(form.first_name) }}
+						</div>
+						<div class="w50">
+							{{ form_label(form.last_name) }}
+							{{ form_errors(form.last_name) }}
+							{{ form_widget(form.last_name) }}
+						</div>
+						<div class="w50">
+							{{ form_label(form.username) }}
+							{{ form_errors(form.username) }}
+							{{ form_widget(form.username) }}
+						</div>
+						<div class="w50">
+							{{ form_label(form.email) }}
+							{{ form_errors(form.email) }}
+							{{ form_widget(form.email) }}
+						</div>
+						<div class="w100 txt_gen">
+							{{ form_label(form.gender) }}
+							{{ form_errors(form.gender) }}
+							{{ form_widget(form.gender) }}
+						</div>
+						<div class="w100">
+							<div class="hide">{{ form_label(form.password) }}</div>
+							{{ form_errors(form.password) }}
+							{{ form_widget(form.password) }}
+						</div>
+						<div class="clearfix"></div>
 						{{ form_widget(form) }}
 						<div class="submit-profile clearfix">
 							<div class="save-user-admin pull-left">

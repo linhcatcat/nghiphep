@@ -22,6 +22,16 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="user-admin">
 					<form enctype="multipart/form-data" method="POST" class="add_user_admin_form">
+						<div class="w50">
+							{{ form_label(form.first_name) }}
+							{{ form_errors(form.first_name) }}
+							{{ form_widget(form.first_name) }}
+						</div>
+						<div class="w50">
+							{{ form_label(form.last_name) }}
+							{{ form_errors(form.last_name) }}
+							{{ form_widget(form.last_name) }}
+						</div>
 						{{ form_widget(form) }}
 						<div class="submit-profile clearfix">
 							<div class="save-user-admin pull-left">

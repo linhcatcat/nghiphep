@@ -177,12 +177,12 @@ class ReportController extends Controller {
 					$excelService->excelObj->setActiveSheetIndex(0)
 						->setCellValue('A'.$row, '')
 						->setCellValue('B'.$row, $task->getUser()->getUsername())
-						->setCellValue('C'.$row, '')
-						->setCellValue('D'.$row, '')
-						->setCellValue('E'.$row, '')
+						->setCellValue('C'.$row, date('m', strtotime($toDate)))
+						->setCellValue('D'.$row, date('Y', strtotime($toDate)))
+						->setCellValue('E'.$row, $task->getLeaveType()==0?'ANNUAL_LEAVE':($task->getLeaveType()==1?'UNPAID_LEAVE':'PAID_LEAVE'))
 						->setCellValue('F'.$row, $calTask['start'])
-						->setCellValue('G'.$row, '')
-						->setCellValue('H'.$row, '')
+						->setCellValue('G'.$row, $task->getLeaveType()==0?'AL':($task->getLeaveType()==1?'UL':'PL'))
+						->setCellValue('H'.$row, $task->getLeaveType()==0?'ANNUAL LEAVE':($task->getLeaveType()==1?'UNPAID LEAVE':'PAID LEAVE'))
 						->setCellValue('I'.$row, $calTask['hour']);
 					$row++;
 				}

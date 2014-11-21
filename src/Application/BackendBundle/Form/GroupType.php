@@ -16,11 +16,18 @@ class GroupType extends AbstractType {
 			'attr'	=> array(
 				'class' => 'name_group'
 			),
-			'label'	=> 'Name'
+			'label'	=> 'Department'
+		));
+
+		$builder->add('code', 'text', array(
+			'attr'	=> array(
+				'class' => 'name_code'
+			),
+			'label'	=> 'Department code'
 		));
 
 		$builder->add("user","entity",array(
-			"label" => "Manger",
+			"label" => "Manager",
 			"class" => "ApplicationUserBundle:User",
 			"query_builder" => function(EntityRepository $er){
 				//return $er->createQueryBuilder("u")->where("u.enabled = 1 and u.username like 'nhathoa' and u.roles in ")->orderBy("u.username", "ASC");

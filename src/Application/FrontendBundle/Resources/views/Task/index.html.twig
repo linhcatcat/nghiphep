@@ -39,24 +39,16 @@
 			</ul>
 
 			<div class="tab-content">
-				<div class="tab-pane active" id="user-admin">
+				<div class="tab-pane active frm_cnt" id="user-admin">
 					<form id="form-add-task" enctype="multipart/form-data" method="POST" class="add_user_admin_form form-frontend">
-						{#<div>
-			                <label class="required" for="TaskType_ho_ten">Nhân viên</label>
-						    <input type="text" name="ho_ten" value="{{ user.firstName }} {{ user.lastName }}" id="TaskType_ho_ten" class="ho_ten" readonly />
-						</div>
-						<div>
-			                <label class="required" for="TaskType_manv">Mã nhân viên</label>
-						    <input type="text" name="manv" value="{{ user.username }}" id="TaskType_manv" class="ho_ten" readonly />
-						</div>#}
-						<div>
+						<div class="w50">
 							{{ form_row(form.user) }}
 						</div>
-						<div>
+						<div class="w50">
 							{{ form_label(form.start) }}
-						    {{ form_errors(form.start) }}
-						    {{ form_widget(form.start) }}
-						    <select class="txtStartTime hour" name="txtStartTime">
+							{{ form_errors(form.start) }}
+							{{ form_widget(form.start) }}
+							<select class="txtStartTime hour" name="txtStartTime">
 								<option value="08:00">08:00</option> 
 								<option value="08:30">08:30</option>
 								<option value="09:00">09:00</option>
@@ -75,11 +67,16 @@
 								<option value="16:30">16:30</option>
 							</select>
 						</div>
-						<div>
+						<div class="w50">
+							{{ form_label(form.leaveType) }}
+							{{ form_errors(form.leaveType) }}
+							{{ form_widget(form.leaveType) }}
+						</div>
+						<div class="w50">
 							{{ form_label(form.end) }}
-						    {{ form_errors(form.end) }}
-						    {{ form_widget(form.end) }}
-						    <select class="txtEndTime hour" name="txtEndTime">
+							{{ form_errors(form.end) }}
+							{{ form_widget(form.end) }}
+							<select class="txtEndTime hour" name="txtEndTime">
 								{# <option value="08:00">08:00</option> #}
 								<option value="08:30">08:30</option>
 								<option value="09:00">09:00</option>
@@ -98,6 +95,11 @@
 								<option value="16:30">16:30</option>
 								<option value="17:00">17:00</option>
 							</select>
+						</div>
+						<div>
+							{{ form_label(form.note) }}
+							{{ form_errors(form.note) }}
+							{{ form_widget(form.note) }}
 						</div>
 						{{ form_widget(form) }}
 						<div class="submit-profile clearfix">

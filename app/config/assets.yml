@@ -32,6 +32,7 @@ assetic:
                 - '%kernel.root_dir%/../web/application/custom-scroll/jquery.custom-scrollbar.css'
                 - '%kernel.root_dir%/../web/application/css/colorbox.css'
                 - '%kernel.root_dir%/../web/application/css/main.css'
+                - '%kernel.root_dir%/../web/application/css/css.css'
                 - '%kernel.root_dir%/../web/application/css/login-backend.css'
 
         application_shared_ie7_css:

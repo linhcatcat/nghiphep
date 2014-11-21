@@ -24,7 +24,7 @@ class UserType extends AbstractType {
 		}
 		$builder
 			->add('first_name', 'text', array(
-				'label' => 'First Name',
+				'label' => 'Họ',
 				'attr' => array('value' => empty($options['first_name']) ? '' : $options['first_name']),
 				'required' => false,
 			))

@@ -50,7 +50,7 @@ class UserType extends AbstractType {
 			))
 			->add('password', 'repeated', array(
 				'type' => 'password',
-				'invalid_message' => 'The password fields must match.',
+				'invalid_message' => 'Mật khẩu không trùng khớp',
 				'options' => array('attr' => array('class' => 'password-field')),
 				'first_options'  => array('label' => 'Password'),
 				'second_options' => array('label' => 'Repeat Password'),

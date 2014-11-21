@@ -124,7 +124,7 @@ class GroupController extends Controller {
 		}
 		$members = array_unique( $members );
 		if( count($members) == $userService->count() ) {
-			$this->get('session')->getFlashBag()->add('all_user_added_to_group', $translator->trans('All user added to group'));
+			$this->get('session')->getFlashBag()->add('all_user_added_to_group', $translator->trans('All user added to department'));
 			//return $this->redirect($this->generateUrl('application_backend_group_show_user', array('groupID' => $groupID)));
 			return $this->redirect($this->generateUrl('application_backend_group_index'));
 		}
@@ -136,7 +136,7 @@ class GroupController extends Controller {
 			$groupUser->setGroup( $group );
 			$em->persist($groupUser);
 			$em->flush();
-			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' to '.$group->getName().' group successfully'));
+			$this->get('session')->getFlashBag()->add('add_group_user_successfully', $translator->trans('Add ' . $groupUser->getUser()->getUsername() . ' to '.$group->getName().' department successfully'));
 			return $this->redirect($this->generateUrl('application_backend_group_show_user', array('groupID' => $groupID)));
 		}
 		
@@ -156,7 +156,7 @@ class GroupController extends Controller {
 		$groupService = $this->get('application_group_service');
 		$group = $groupService->find($groupID);
 		if(empty($group)) {
-			throw $this->createNotFoundException($translator->trans('Group Not found'));
+			throw $this->createNotFoundException($translator->trans('Department Not found'));
 		}
 		$page = (int) $request->query->get('page', 1);
 		$limit = $this->container->getParameter('limit_items_per_page');

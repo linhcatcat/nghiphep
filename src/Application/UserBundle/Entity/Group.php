@@ -29,6 +29,12 @@ class Group {
 	protected $name;
 
 	/**
+	 * @var string $code
+	 * @ORM\Column(name="code", type="string", length=255, nullable=false)
+	 */
+	protected $code;
+
+	/**
      * @ORM\OneToOne(targetEntity="Application\UserBundle\Entity\User", mappedBy="group")
      * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      */
@@ -117,7 +123,7 @@ class Group {
 	 * Set name
 	 *
 	 * @param string $name
-	 * @return Product
+	 * @return Group
 	 */
 	public function setName($name) {
 		$this->name = $name;
@@ -134,10 +140,30 @@ class Group {
 	}
 
 	/**
+	 * Set code
+	 *
+	 * @param string $code
+	 * @return Group
+	 */
+	public function setCode($code) {
+		$this->code = $code;
+		return $this;
+	}
+
+	/**
+	 * Get code
+	 *
+	 * @return string 
+	 */
+	public function getCode() {
+		return $this->code;
+	}
+
+	/**
 	 * Set created
 	 *
 	 * @param \DateTime $created
-	 * @return Product
+	 * @return Group
 	 */
 	public function setCreated($created) {
 		$this->created = $created;

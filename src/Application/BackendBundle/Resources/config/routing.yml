@@ -16,7 +16,7 @@ application_backend_user:
 
 application_backend_group:
     resource: "@ApplicationBackendBundle/Resources/config/routes/group.yml"
-    prefix:   /group
+    prefix:   /department
 
 application_backend_task:
     resource: "@ApplicationBackendBundle/Resources/config/routes/task.yml"

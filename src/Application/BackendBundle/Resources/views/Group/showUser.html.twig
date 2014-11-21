@@ -24,7 +24,7 @@
 				</div>
 			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">
-				<li><a>{% trans %}Group{% endtrans %}: {{ group.name }}</a></li>
+				<li><a>{% trans %}Department{% endtrans %}: {{ group.name }}</a></li>
 				<li><a>{% trans %}Manager{% endtrans %}: {{ group.user.username }} - {{ group.user.firstName }} {{ group.user.lastName }}</a></li>
 				<li><a class="btn" href="{{ path('application_backend_group_add_user',{'groupID' : group.id}) }}" class="add-group-user">{{ 'Add Employee'|trans }}</a></li>
 			</ul>
@@ -56,7 +56,7 @@
 							</tr>
 							{% else %}
 								<tr>
-									<td colspan="6">{{ 'Not found employee in group'|trans }}</td>
+									<td colspan="6">{{ 'Not found employee in department'|trans }}</td>
 								</tr>
 							{% endfor %}
 						</tbody>
