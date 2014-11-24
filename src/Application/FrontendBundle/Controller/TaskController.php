@@ -34,10 +34,13 @@ class TaskController extends Controller
 	{
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$mailService = $this->get('wincofood_mail_service');
-			//$body = $this->renderView('ApplicationFrontendBundle:Email:test.html.twig',array('data' => 'Hello Chao'));
-			//$rs = $mailService->send('Test 123456', $body, 'From name', 'trancatlinh@gmail.com', 'To name', 'trancatlinh@gmail.com');
-			//var_dump($rs);
+			/*$mailService = $this->get('wincofood_mail_service');
+			$body = $this->renderView('ApplicationFrontendBundle:Email:test.html.twig',array('data' => 'Hello Chao'));
+			$rs = $mailService->send('Test 123456', $body, 'From name', 'trancatlinh@gmail.com', 'To name', 'trancatlinh@gmail.com');
+			var_dump($rs);*/
+
+			
+
 			$flag = true;
 			if($securityContext->isGranted('ROLE_EMPLOYEE')){
 				$flag = false;
@@ -128,8 +131,14 @@ class TaskController extends Controller
 						$userManage->updateUser( $userReg );
 						$em->persist($task);
 						$em->flush();
-						$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
-						return $this->redirect($this->generateUrl('application_frontend_task_index'));
+						
+						if( $currentUser->getId() == $task->getUser()->getId() ) {
+							$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
+							return $this->redirect($this->generateUrl('application_frontend_task_index'));
+						} else {
+							$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn hộ thành công, vui lòng chờ duyệt!'));
+							return $this->redirect($this->generateUrl('application_frontend_task_manage'));
+						}
 					}
 				}
 				return $this->redirect($this->generateUrl('application_frontend_homepage'));

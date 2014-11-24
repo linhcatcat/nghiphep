@@ -29,12 +29,12 @@ class UserType extends AbstractType {
 				'required' => false,
 			))
 			->add('last_name', 'text', array(
-				'label' => 'Last Name',
+				'label' => 'Tên',
 				'attr' => array('value' => empty($options['last_name']) ? '' : $options['last_name']),
 				'required' => false,
 			))
 			->add('username', 'text', array(
-				'label' => 'Username',
+				'label' => 'Tài khoản',
 				'attr' => array('value' => empty($options['username']) ? '' : $options['username'], 'readonly' => $readonly),
 			))
 			->add('email', 'email', array(
@@ -45,10 +45,10 @@ class UserType extends AbstractType {
 				'label' => 'Entitled',
 				'attr' => array('value' => empty($options['entitled']) ? '' : $options['entitled']),
 			))
-			->add( 'gender', 'choice',
-				array(
+			->add( 'gender', 'choice', array(
+				'label' => 'Gender ',
 				'expanded'   => true,
-				'choices'   => array(1 => 'Male', 0 => 'Female'),
+				'choices'   => array(1 => 'Male ', 0 => 'Female '),
 				'multiple'  => false,
 				'data' => isset($options['gender']) ? $options['gender'] : 1
 			))
@@ -62,10 +62,10 @@ class UserType extends AbstractType {
 			))
 			->add('password', 'repeated', array(
 				'type' => 'password',
-				'invalid_message' => 'The password fields must match.',
+				'invalid_message' => 'The password fields must match. ',
 				'options' => array('attr' => array('class' => 'password-field')),
-				'first_options'  => array('label' => 'Password'),
-				'second_options' => array('label' => 'Repeat Password'),
+				'first_options'  => array('label' => 'Password '),
+				'second_options' => array('label' => 'Repeat Password '),
 				'required' => $required,
 			));
 
