@@ -81,6 +81,18 @@ class TaskRepository extends EntityRepository {
 	}
 
 	/**
+	 * Get by user
+	 * @author Alex
+	 */
+	public function getByUser($user) {
+		$qb = $this->createQueryBuilder('t');
+		$qb->where('t.user = :user');
+		$qb->setParameter('user', $user->getId());
+		$results = $qb->getQuery()->getResult();
+		return $results;
+	}
+
+	/**
 	 * Filter by user ids
 	 * @author Alex
 	 * @param array $aFilters
