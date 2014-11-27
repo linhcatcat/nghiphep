@@ -132,6 +132,18 @@ class TaskService {
 	}
 
 	/**
+	 * Get by user
+	 * @author Alex
+	 * @param array $aFilters
+	 * @param integer $limit
+	 * @param integer $offset
+	 */
+	public function getByUser($user) {
+		$results = $this->getRepository()->getByUser($user);
+		return $results;
+	}
+
+	/**
 	 * Filter by userIds
 	 * @author Alex
 	 * @param array $aFilters
@@ -174,5 +186,33 @@ class TaskService {
 	public function count() {
 		$count = $this->getRepository()->count();
 		return $count;
+	}
+
+	public function checkExisted($start1, $end1, $start2, $end2) {
+		var_dump($start1);
+		var_dump($end1);
+		var_dump($start2);
+		var_dump($end2);
+		$start1 = strtotime($start1);
+		$end1 = strtotime($end1);
+		$start2 = strtotime($start2);
+		$end2 = strtotime($end2);
+		while ($start1 <= $end1 ) {
+			if( $start1 >= $start2 &&  $start1 <= $end2) {
+				return true;
+			}
+			$start1 = $start1 + 3600;
+		}
+		return false;
+	}
+
+	public function checkTaskExisted($start, $end, $user){
+		$tasks = $this->getByUser($user);
+		foreach ($tasks as $task) {
+			if( $this->checkExisted($start, $end, $task->getStartDate(), $task->getEndDate()) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
