@@ -202,7 +202,7 @@ class TaskService {
 		return false;
 	}
 
-	public function chackTaskExisted($start, $end, $user){
+	public function checkTaskExisted($start, $end, $user){
 		$tasks = $this->getByUser($user);
 		foreach ($tasks as $task) {
 			if( $this->checkExisted($start, $end, $task->getStartDate(), $task->getEndDate()) ) {

@@ -46,6 +46,7 @@ class TaskController extends Controller
 				$flag = false;
 			}
 			$userService = $this->get('Application_user.service');
+			$taskService = $this->get('application_task_service');
 			$currentUser = $this->container->get('security.context')->getToken()->getUser();
 			$timeStart = '08:00';
 			$timeEnd = '17:00';
@@ -128,9 +129,12 @@ class TaskController extends Controller
 						
 					} else {
 						$userReg->setPending($hour + $userReg->getPending());
-						$userManage->updateUser( $userReg );
+
+						var_dump($taskService->checkTaskExisted(strtotime('Y-m-d ', $startDate).$startTime, strtotime('Y-m-d ', $endDate).$endTime, $currentUser));
+
+						/*$userManage->updateUser( $userReg );
 						$em->persist($task);
-						$em->flush();
+						$em->flush();*/
 						
 						if( $currentUser->getId() == $task->getUser()->getId() ) {
 							$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));
