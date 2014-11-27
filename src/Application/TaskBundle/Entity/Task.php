@@ -137,11 +137,11 @@ class Task {
 	}
 
 	public function getStartDate(){
-		date('Y-m-d ', $this->start->getTimestamp()) . $this->startTime . ':00';
+		return date('Y-m-d ', $this->start->getTimestamp()) . $this->startTime . ':00';
 	}
 
 	public function getEndDate(){
-		date('Y-m-d ', $this->end->getTimestamp()) . $this->endTime . ':00';
+		return date('Y-m-d ', $this->end->getTimestamp()) . $this->endTime . ':00';
 	}
 
 	/**

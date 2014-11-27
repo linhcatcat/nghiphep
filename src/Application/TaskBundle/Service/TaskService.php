@@ -189,6 +189,10 @@ class TaskService {
 	}
 
 	public function checkExisted($start1, $end1, $start2, $end2) {
+		var_dump($start1);
+		var_dump($end1);
+		var_dump($start2);
+		var_dump($end2);
 		$start1 = strtotime($start1);
 		$end1 = strtotime($end1);
 		$start2 = strtotime($start2);

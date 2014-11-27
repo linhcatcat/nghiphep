@@ -129,9 +129,8 @@ class TaskController extends Controller
 						
 					} else {
 						$userReg->setPending($hour + $userReg->getPending());
-
-						var_dump($taskService->checkTaskExisted(strtotime('Y-m-d ', $startDate).$startTime, strtotime('Y-m-d ', $endDate).$endTime, $currentUser));
-
+						var_dump($taskService->checkTaskExisted(date('Y-m-d ', $startDate).$startTime.':00', date('Y-m-d ', $endDate).$endTime.':00', $currentUser));
+						exit();
 						/*$userManage->updateUser( $userReg );
 						$em->persist($task);
 						$em->flush();*/
