@@ -129,11 +129,16 @@ class TaskController extends Controller
 						
 					} else {
 						$userReg->setPending($hour + $userReg->getPending());
-						var_dump($taskService->checkTaskExisted(date('Y-m-d ', $startDate).$startTime.':00', date('Y-m-d ', $endDate).$endTime.':00', $currentUser));
-						exit();
-						/*$userManage->updateUser( $userReg );
-						$em->persist($task);
-						$em->flush();*/
+						$result = $taskService->checkTaskExisted(date('Y-m-d ', $startDate).$startTime.':00', date('Y-m-d ', $endDate).$endTime.':00', $currentUser);
+						if($result['result']) {
+							$this->get('session')->getFlashBag()
+							->add('add_task_error', $translator->trans('Bạn đã đăng ký từ ngày '.$result['from'].' đến ngày '.$result['to']));
+							return $this->redirect($this->generateUrl('application_frontend_homepage'));
+						} else {
+							$userManage->updateUser( $userReg );
+							$em->persist($task);
+							$em->flush();
+						}
 						
 						if( $currentUser->getId() == $task->getUser()->getId() ) {
 							$this->get('session')->getFlashBag()->add('add_task_successfully', $translator->trans('Bạn đã gởi đơn thành công, vui lòng chờ duyệt!'));

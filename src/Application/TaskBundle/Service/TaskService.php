@@ -189,10 +189,6 @@ class TaskService {
 	}
 
 	public function checkExisted($start1, $end1, $start2, $end2) {
-		var_dump($start1);
-		var_dump($end1);
-		var_dump($start2);
-		var_dump($end2);
 		$start1 = strtotime($start1);
 		$end1 = strtotime($end1);
 		$start2 = strtotime($start2);
@@ -208,11 +204,16 @@ class TaskService {
 
 	public function checkTaskExisted($start, $end, $user){
 		$tasks = $this->getByUser($user);
+		$arr = array();
 		foreach ($tasks as $task) {
 			if( $this->checkExisted($start, $end, $task->getStartDate(), $task->getEndDate()) ) {
-				return true;
+				return array(
+					'result' => true,
+					'from' => $task->getStartDate(),
+					'to' => $task->getEndDate()
+				);
 			}
 		}
-		return false;
+		return array('result' => false);
 	}
 }
