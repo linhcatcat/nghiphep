@@ -49,9 +49,11 @@ class TaskType extends AbstractType {
 			),
 			'label' => 'Loại nghỉ phép',
 			'choices'   => array(
-				0 => 'Nghỉ phép', 
-				1 => 'Nghỉ không lương', 
-				2 => 'Nghỉ bù'
+				0 => 'Nghỉ phép năm', 
+				1 => 'Nghỉ ốm - không hưởng lương', 
+				2 => 'Nghỉ thai sản',
+				3 => 'Nghỉ hưởng lương-chế độ (tang,hôn,...)',
+				4 => 'Nghỉ không lương'
 			),
 			'data' => 0,
 		));
