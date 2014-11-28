@@ -7471,3 +7471,46 @@ i .icon-play {
 	float: left;
 	margin-right: 5px;
 }
+.confirm .close {
+	right: 10px;
+	position: absolute;
+}
+.confirm .modal-body {
+	padding: 0;
+}
+.confirm .list-content .nav.nav-tabs {
+	padding-bottom: 8px;
+}
+.confirm .tab-content {
+	padding: 8px 10px;
+}
+.confirm .modal-footer {
+	padding: 8px 10px;
+}
+.confirm .modal-footer .btn {
+	padding: 8px 10px;
+}
+.confirm .modal-header h3 {
+	text-align: left;
+}
+.confirm .modal-body {
+	padding: 8px 10px;
+	text-align: center;
+}
+.confirm .modal-body div label:first-child{
+	margin-right: 10px;
+}
+.confirm .modal-body div label input{
+	margin-right: 3px;
+	margin-top: 0;
+}
+.confirm .modal-body textarea.description {
+	width: 97%;
+	resize: none;
+}
+.confirm .modal-body label.description {
+	text-align: left;
+}
+#form-confirm-task {
+	margin-bottom: 0;
+}

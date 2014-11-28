@@ -1,0 +1,24 @@
+<!-- Modal -->
+<div id="confirm" class="modal hide fade confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<form method="POST" enctype="multipart/form-data" id="form-confirm-task">
+		<div class="modal-header">
+	      	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+	      	<h3>{% trans %}Confirm{% endtrans %}</h3>
+	    </div>
+		<div class="modal-body">
+			<input type="hidden" id="task-id" value=""/>
+			<div>
+				<label style="display:inline-block;" for="agree"><input class="agree-deny" type="radio" value="1" id="agree" name="confirm" checked="checked">{% trans %}Approve{% endtrans %}</label>
+				<label style="display:inline-block;" for="deny"><input class="agree-deny" type="radio" value="2" id="deny" name="confirm">{% trans %}Deny{% endtrans %}</label>
+			</div>
+			<div class="des-wrap hide">
+				<label class="description" for="description">{% trans %}Description{% endtrans %}</label>
+				<textarea class="description" name="description" id="description"></textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary">{% trans %}Ok{% endtrans %}</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">{% trans %}Cancel{% endtrans %}</button>
+		</div>
+	</form>
+</div>

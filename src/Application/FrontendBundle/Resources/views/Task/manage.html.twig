@@ -70,11 +70,13 @@
 								{% else %}
 									<td class="approve"></td>
 								{% endif %}
-								{% if task.status == 0 %}
-									<td class="confirm-task"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><strong><span>{{ task.trangThai }}</span></strong></a></td>
-								{% else %}
-									<td class="confirm-task"><a class="btn{{ task.status?' disabled':'' }}" data-id="{{ task.id }}"><span>{{ task.trangThai }}</span></a></td>
-								{% endif %}
+								<td class="confirm-task">
+									{% if task.status == 0 %}
+										<a href="#confirm" class="btn" data-id="{{ task.id }}" data-toggle="modal"><strong><span>{{ task.trangThai }}</span></strong></a>
+									{% else %}
+										<a href="#" class="btn disabled" data-id="{{ task.id }}"><span>{{ task.trangThai }}</span></a>
+									{% endif %}
+								</td>
 							</tr>
 							{% else %}
 								<tr>
@@ -83,6 +85,7 @@
 							{% endfor %}
 						</tbody>
 					</table>
+					{% include 'ApplicationFrontendBundle:Task:confirm.html.twig' %}
 					{% if tasks is not empty %}
 						{{ pagination|raw }}
 					{% endif %}
@@ -95,6 +98,56 @@
 {% block javascript %}
 	<script type="text/javascript">
 		$('.confirm-task').on('click', 'a', function(e) {
+			e.preventDefault();
+			$('.confirm #task-id').val( $(this).data('id') );
+		});
+		$('#form-confirm-task .agree-deny').change(function(){
+			if($(this).val() == 2) {
+				$('.des-wrap').show();
+			} else {
+				$('.des-wrap').hide();
+			}
+		});
+		$('.confirm .modal-footer').on('click', '.btn-primary', function(e){
+			e.preventDefault();
+			$that = $(this);
+			if($(this).parent().find('.disabled').length){
+				return;
+			}
+			var id = $('#form-confirm-task #task-id').val();
+			var status = $('#form-confirm-task input[name="confirm"]:checked').val();
+			var des = $('#form-confirm-task #description').val();
+			$.ajax({
+				type: 'POST',
+				url: Routing.generate('application_frontend_task_confirm'),
+				dataType: 'json',
+				data: {
+					id: id,
+					status: status,
+					des: des
+				},
+				success: function(data){
+					if( data['result'] ) {
+						$('tr.item-'+id+' .confirm-task').html( '<a href="#" class="btn disabled">'+data['type']+'</a>' );
+						$('tr.item-'+id+' .approve-date').text( data['approve-date'] );
+						$('tr.item-'+id+' .approve').text( data['approve'] );
+					}
+					$('#confirm').modal('hide');
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					
+				},
+				beforeSend: function() {
+					//$that.addClass("disabled");
+					$that.prepend('<i class="icon-refresh icon-spin" style="margin-right: 5px;"></i>');
+				},
+				complete: function() {
+					$that.find('.icon-refresh').remove();
+				}
+			});
+			
+		})
+		/*$('.confirm-task').on('click', 'a', function(e) {
 			e.preventDefault();
 			$that = $(this);
 			if($(this).parent().find('.disabled').length){
@@ -124,6 +177,6 @@
 					$that.find('.icon-refresh').remove();
 				}
 			});
-		});
+		});*/
 	</script>
 {% endblock %}
