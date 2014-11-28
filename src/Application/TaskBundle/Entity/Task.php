@@ -120,19 +120,25 @@ class Task {
 			return 'Đã duyệt';
 		}
 		if( $this->status == 2 ){
-			return 'Không duyệt';
+			return 'Từ chối';
 		}
 	}
 
 	public function loai() {
 		if( $this->leaveType == 0 ){
-			return 'Nghỉ phép';
+			return 'Nghỉ phép năm';
 		}
 		if( $this->leaveType == 1 ){
-			return 'Nghỉ không lương';
+			return 'Nghỉ ốm - không hưởng lương';
 		}
 		if( $this->leaveType == 2 ){
-			return 'Nghỉ bù';
+			return 'Nghỉ thai sản';
+		}
+		if( $this->leaveType == 3 ){
+			return 'Nghỉ hưởng lương-chế độ (tang,hôn,...)';
+		}
+		if( $this->leaveType == 4 ){
+			return 'Nghỉ không lương';
 		}
 	}
 

@@ -315,11 +315,14 @@ class TaskController extends Controller
 		$currentUser = $this->container->get('security.context')->getToken()->getUser();
 		$taskService = $this->get('application_task_service');
 		$userManage = $this->get('fos_user.user_manager');
+		$translator = $this->get('translator');
 		
 		$data = $req->request->all();
 		$id = $data['id'];
+		$status = $data['status'];
+		$des = $data['des'];
 		$task = $taskService->find($id);
-		$task->setStatus( 1 );
+		$task->setStatus( $status );
 		$task->setApprove( $currentUser );
 		$task->setApproveDate();
 		$userReg = $task->getUser();
@@ -330,7 +333,7 @@ class TaskController extends Controller
 		if( $rs ) {
 			return new Response(json_encode(array('result' => 1, 'type' => $task->trangThai(), 'approve-date' => $task->getApproveDate()->format('Y-m-d h:i:s'), 'approve' => $currentUser->getFirstName().' '.$currentUser->getLastName())), 200);
 		} else {
-			return new Response(json_encode(array('result' => 0, 'data' => 'Đã có lỗi xảy ra')), 300);
+			return new Response(json_encode(array('result' => 0, 'data' => $translator->trans('Đã có lỗi xảy ra'))), 300);
 		}
 	}
 }
