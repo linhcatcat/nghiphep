@@ -4,6 +4,24 @@
 {% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
 	{% block active_class_group %}active{% endblock %}
 {% endembed %}
+<style>
+	#sortable1, #sortable2 {
+		border: 1px solid #eee;
+		width: 142px;
+		min-height: 20px;
+		list-style-type: none;
+		margin: 0;
+		padding: 5px 0 0 0;
+		float: left;
+		margin-right: 10px;
+	}
+	#sortable1 li, #sortable2 li {
+		margin: 0 5px 5px 5px;
+		padding: 5px;
+		font-size: 1.2em;
+		width: 120px;
+	}
+</style>
 <div class="main-content">
 	<div class="list-content">
 		<div class="content">
@@ -12,18 +30,52 @@
 			</ul>
 
 			<div class="tab-content">
-				<div class="tab-pane active" id="product">
+				<div class="tab-pane active row-fluid" id="product">
 					<form enctype="multipart/form-data" method="POST" class="edit_group_form backend-form">
-						{{ form_widget(form) }}
-						<div class="submit-profile clearfix">
-							<div class="save-group pull-left">
-								<i class="icon-save"></i>
-								<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+						<div class="span3">
+							{{ form_widget(form) }}
+							<div class="submit-profile clearfix">
+								<div class="save-group pull-left">
+									<i class="icon-save"></i>
+									<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+								</div>
+								<a href="{{ path('application_backend_group_index') }}" class="btn cancel-edit-cmspage pull-left">
+									<i class="icon-long-arrow-left"></i>
+									{% trans %}Cancel{% endtrans %}
+								</a>
 							</div>
-							<a href="{{ path('application_backend_group_index') }}" class="btn cancel-edit-cmspage pull-left">
-								<i class="icon-long-arrow-left"></i>
-								{% trans %}Cancel{% endtrans %}
-							</a>
+						</div>
+						<div class="span9">
+							<table style='width:370px;'>
+							    <tr>
+							        <td style='width:160px;'>
+							            <b>Group 1:</b><br/>
+							           <select multiple="multiple" id='lstBox1'>
+							              <option value="ajax">Ajax</option>
+							              <option value="jquery">jQuery</option>
+							              <option value="javascript">JavaScript</option>
+							              <option value="mootool">MooTools</option>
+							              <option value="prototype">Prototype</option>
+							              <option value="dojo">Dojo</option>
+							        </select>
+							    </td>
+							    <td style='width:50px;text-align:center;vertical-align:middle;'>
+							        <input type='button' id='btnRight' value ='  >  '/>
+							        <br/><input type='button' id='btnLeft' value ='  <  '/>
+							    </td>
+							    <td style='width:160px;'>
+							        <b>Group 2: </b><br/>
+							        <select multiple="multiple" id='lstBox2'>
+							          <option value="asp">ASP.NET</option>
+							          <option value="c#">C#</option>
+							          <option value="vb">VB.NET</option>
+							          <option value="java">Java</option>
+							          <option value="php">PHP</option>
+							          <option value="python">Python</option>  
+							        </select>
+							    </td>
+							</tr>
+							</table>
 						</div>
 					</form>
 				</div>
@@ -31,5 +83,32 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$('#btnRight').click(function(e) {
+	        var selectedOpts = $('#lstBox1 option:selected');
+	        if (selectedOpts.length == 0) {
+	            alert("Nothing to move.");
+	            e.preventDefault();
+	        }
+
+	        $('#lstBox2').append($(selectedOpts).clone());
+	        $(selectedOpts).remove();
+	        e.preventDefault();
+	    });
+
+	    $('#btnLeft').click(function(e) {
+	        var selectedOpts = $('#lstBox2 option:selected');
+	        if (selectedOpts.length == 0) {
+	            alert("Nothing to move.");
+	            e.preventDefault();
+	        }
+
+	        $('#lstBox1').append($(selectedOpts).clone());
+	        $(selectedOpts).remove();
+	        e.preventDefault();
+	    });
+	</script>
 {% endblock %}
 {% block js_upload %}GroupType_content{% endblock %}
