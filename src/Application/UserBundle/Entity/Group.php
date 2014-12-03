@@ -64,10 +64,16 @@ class Group {
 	protected $member;
 
 	/**
+     * @ORM\OneToMany(targetEntity="Application\UserBundle\Entity\GroupManager", mappedBy="group", cascade={"remove"})
+     */
+    protected $manager;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->member = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->manager = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	public function __toString(){
@@ -250,5 +256,38 @@ class Group {
     public function getMembers()
     {
         return $this->member;
+    }
+
+    /**
+     * Add manager
+     *
+     * @param \Application\UserBundle\Entity\GroupManager $manager
+     * @return manager
+     */
+    public function addManager(\Application\UserBundle\Entity\GroupManager $manager)
+    {
+        $this->manager[] = $manager;
+    
+        return $this;
+    }
+
+    /**
+     * Remove manager
+     *
+     * @param \Application\UserBundle\Entity\GroupManager $manager
+     */
+    public function removeManager(\Application\UserBundle\Entity\GroupManager $manager)
+    {
+        $this->manager->removeElement($manager);
+    }
+
+    /**
+     * Get manager
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getManagers()
+    {
+        return $this->manager;
     }
 }

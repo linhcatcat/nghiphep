@@ -94,7 +94,7 @@ class TaskController extends Controller {
 			if ($form->isValid()) {
 				$em = $this->getDoctrine()->getManager();
 				$userManage = $this->get('fos_user.user_manager');
-				$startTime = $request->get('txtStartTime');;
+				$startTime = $request->get('txtStartTime');
 				$endTime = $request->get('txtEndTime');
 				$task->setStartTime( $startTime )->setEndTime( $endTime );
 				$startDate = $task->getStart()->getTimestamp();

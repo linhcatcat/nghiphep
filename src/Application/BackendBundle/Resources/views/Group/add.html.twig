@@ -5,21 +5,12 @@
 	{% block active_class_group %}active{% endblock %}
 {% endembed %}
 <style>
-	#sortable1, #sortable2 {
-		border: 1px solid #eee;
-		width: 142px;
-		min-height: 20px;
-		list-style-type: none;
-		margin: 0;
-		padding: 5px 0 0 0;
-		float: left;
-		margin-right: 10px;
+	#GroupType_manager,
+	#GroupType_employee{
+		height: 150px;
 	}
-	#sortable1 li, #sortable2 li {
-		margin: 0 5px 5px 5px;
-		padding: 5px;
-		font-size: 1.2em;
-		width: 120px;
+	.user-nanager  label{
+		text-align: left;
 	}
 </style>
 <div class="main-content">
@@ -45,36 +36,28 @@
 								</a>
 							</div>
 						</div>
-						<div class="span9">
+						<div class="span9 user-nanager">
 							<table style='width:370px;'>
-							    <tr>
-							        <td style='width:160px;'>
-							            <b>Group 1:</b><br/>
-							           <select multiple="multiple" id='lstBox1'>
-							              <option value="ajax">Ajax</option>
-							              <option value="jquery">jQuery</option>
-							              <option value="javascript">JavaScript</option>
-							              <option value="mootool">MooTools</option>
-							              <option value="prototype">Prototype</option>
-							              <option value="dojo">Dojo</option>
-							        </select>
-							    </td>
-							    <td style='width:50px;text-align:center;vertical-align:middle;'>
-							        <input type='button' id='btnRight' value ='  >  '/>
-							        <br/><input type='button' id='btnLeft' value ='  <  '/>
-							    </td>
-							    <td style='width:160px;'>
-							        <b>Group 2: </b><br/>
-							        <select multiple="multiple" id='lstBox2'>
-							          <option value="asp">ASP.NET</option>
-							          <option value="c#">C#</option>
-							          <option value="vb">VB.NET</option>
-							          <option value="java">Java</option>
-							          <option value="php">PHP</option>
-							          <option value="python">Python</option>  
-							        </select>
-							    </td>
-							</tr>
+								<tr>
+									<td style='width:160px;'>
+										<label for="GroupType_employee">All User</label>
+										<select multiple="multiple" id="GroupType_employee" name="GroupType_employee">
+											{% for user in users %}
+												<option value="{{ user.id }}">{{ user.username }} - {{ user.getName }}</option>
+											{% endfor %}
+										</select>
+									</td>
+									<td style='width:50px;text-align:center;vertical-align:middle;'>
+										<input type='button' id='btnRight' value ='  >  '/>
+										<br/><input type='button' id='btnLeft' value ='  <  '/>
+									</td>
+									<td style='width:160px;'>
+										<label for="GroupType_manager">Manager</label>
+										<select multiple="multiple" id="GroupType_manager" name="GroupType_manager[]" readonly>
+											<option value="1">admin - Linh Tran</option>
+										</select>
+									</td>
+								</tr>
 							</table>
 						</div>
 					</form>
@@ -87,28 +70,28 @@
 {% block javascript %}
 	<script type="text/javascript">
 		$('#btnRight').click(function(e) {
-	        var selectedOpts = $('#lstBox1 option:selected');
-	        if (selectedOpts.length == 0) {
-	            alert("Nothing to move.");
-	            e.preventDefault();
-	        }
+			var selectedOpts = $('#GroupType_employee option:selected');
+			if (selectedOpts.length == 0) {
+				alert("Nothing to move.");
+				e.preventDefault();
+			}
 
-	        $('#lstBox2').append($(selectedOpts).clone());
-	        $(selectedOpts).remove();
-	        e.preventDefault();
-	    });
+			$('#GroupType_manager').append($(selectedOpts).clone());
+			$(selectedOpts).remove();
+			e.preventDefault();
+		});
 
-	    $('#btnLeft').click(function(e) {
-	        var selectedOpts = $('#lstBox2 option:selected');
-	        if (selectedOpts.length == 0) {
-	            alert("Nothing to move.");
-	            e.preventDefault();
-	        }
+		$('#btnLeft').click(function(e) {
+			var selectedOpts = $('#GroupType_manager option:selected');
+			if (selectedOpts.length == 0) {
+				alert("Nothing to move.");
+				e.preventDefault();
+			}
 
-	        $('#lstBox1').append($(selectedOpts).clone());
-	        $(selectedOpts).remove();
-	        e.preventDefault();
-	    });
+			$('#GroupType_employee').append($(selectedOpts).clone());
+			$(selectedOpts).remove();
+			e.preventDefault();
+		});
 	</script>
 {% endblock %}
 {% block js_upload %}GroupType_content{% endblock %}

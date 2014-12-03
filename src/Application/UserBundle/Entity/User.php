@@ -109,6 +109,10 @@ class User extends BaseUser {
 		$this->updatedDate = new \DateTime("now");
 	}
 
+	public function getName()
+	{
+		return $this->firstName .' '. $this->lastName;
+	}
 
 	/**
 	 * Get id
