@@ -76,7 +76,7 @@
 				e.preventDefault();
 			}
 
-			$('#GroupType_manager').append($(selectedOpts).clone());
+			$('#GroupType_manager').append($(selectedOpts.attr("selected","selected")).clone());
 			$(selectedOpts).remove();
 			e.preventDefault();
 		});
