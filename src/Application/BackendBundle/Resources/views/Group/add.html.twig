@@ -9,8 +9,31 @@
 	#GroupType_employee{
 		height: 150px;
 	}
-	.user-nanager  label{
+	.user-nanager label{
 		text-align: left;
+		margin-left: 5px;
+	}
+	#sortable1, #sortable2 {
+		border: 1px solid #eee;
+		min-height: 20px;
+		list-style-type: none;
+		margin: 0;
+		padding: 5px 0 0 0;
+		margin-right: 10px;
+		width: 212px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-height: 210px;
+	}
+	#sortable1 li, #sortable2 li {
+		margin: 0 5px 5px 5px;
+		padding: 5px;
+		font-size: 1.2em;
+		cursor: move;
+		text-align: left;
+	}
+	.user-nanager ul.connectedSortable {
+
 	}
 </style>
 <div class="main-content">
@@ -39,26 +62,23 @@
 						<div class="span9 user-nanager">
 							<table style='width:370px;'>
 								<tr>
-									<td style='width:160px;'>
+									<td style="width:200px; vertical-align: top;">
 										<label for="GroupType_employee">All User</label>
-										<select multiple="multiple" id="GroupType_employee" name="GroupType_employee">
+										<ul id="sortable1" class="connectedSortable">
 											{% for user in users %}
-												<option value="{{ user.id }}">{{ user.username }} - {{ user.getName }}</option>
+												<li id="{{ user.id }}" class="ui-state-default">{{ user.username }} - {{ user.getName }}</li>
 											{% endfor %}
-										</select>
+										</ul>
 									</td>
-									<td style='width:50px;text-align:center;vertical-align:middle;'>
-										<input type='button' id='btnRight' value ='  >  '/>
-										<br/><input type='button' id='btnLeft' value ='  <  '/>
-									</td>
-									<td style='width:160px;'>
+									<td style="width:200px; vertical-align: top;">
 										<label for="GroupType_manager">Manager</label>
-										<select multiple="multiple" id="GroupType_manager" name="GroupType_manager[]" readonly>
-											<option value="1">admin - Linh Tran</option>
-										</select>
+										<ul id="sortable2" class="connectedSortable">
+										</ul>
 									</td>
 								</tr>
 							</table>
+							
+							
 						</div>
 					</form>
 				</div>
@@ -69,28 +89,14 @@
 {% endblock %}
 {% block javascript %}
 	<script type="text/javascript">
-		$('#btnRight').click(function(e) {
-			var selectedOpts = $('#GroupType_employee option:selected');
-			if (selectedOpts.length == 0) {
-				alert("Nothing to move.");
-				e.preventDefault();
-			}
-
-			$('#GroupType_manager').append($(selectedOpts.attr("selected","selected")).clone());
-			$(selectedOpts).remove();
-			e.preventDefault();
+		$( "#sortable1, #sortable2" ).sortable({
+			connectWith: ".connectedSortable",
 		});
-
-		$('#btnLeft').click(function(e) {
-			var selectedOpts = $('#GroupType_manager option:selected');
-			if (selectedOpts.length == 0) {
-				alert("Nothing to move.");
-				e.preventDefault();
+		$( "#sortable2" ).sortable({
+			update:function(event,ui){
+				var aDatas = $(this).sortable('toArray');
+				console.log( aDatas );
 			}
-
-			$('#GroupType_employee').append($(selectedOpts).clone());
-			$(selectedOpts).remove();
-			e.preventDefault();
 		});
 	</script>
 {% endblock %}
