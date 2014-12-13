@@ -60,7 +60,7 @@
 							</div>
 						</div>
 						<div class="span9 user-nanager">
-							<table style='width:370px;'>
+							{#<table style='width:370px;'>
 								<tr>
 									<td style="width:200px; vertical-align: top;">
 										<label for="GroupType_employee">All User</label>
@@ -76,8 +76,7 @@
 										</ul>
 									</td>
 								</tr>
-							</table>
-							
+							</table>#}
 							
 						</div>
 					</form>
@@ -95,7 +94,33 @@
 		$( "#sortable2" ).sortable({
 			update:function(event,ui){
 				var aDatas = $(this).sortable('toArray');
-				console.log( aDatas );
+				$.ajax({
+					type: 'POST',
+					url: Routing.generate('application_backend_group_add_manager'),
+					dataType: 'json',
+					data: {
+						groupId: groupId,
+						aDatas: aDatas
+					},
+					success: function(data){
+						if( data['result'] ) {
+							$('tr.item-'+id+' .confirm-task').html( '<a href="#" class="btn disabled">'+data['type']+'</a>' );
+							$('tr.item-'+id+' .approve-date').text( data['approve-date'] );
+							$('tr.item-'+id+' .approve').text( data['approve'] );
+						}
+						$('#confirm').modal('hide');
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						
+					},
+					beforeSend: function() {
+						//$that.addClass("disabled");
+						$that.prepend('<i class="icon-refresh icon-spin" style="margin-right: 5px;"></i>');
+					},
+					complete: function() {
+						$that.find('.icon-refresh').remove();
+					}
+				});
 			}
 		});
 	</script>

@@ -4,6 +4,38 @@
 {% embed "ApplicationBackendBundle:Default:left-sidebar.html.twig" %}
 	{% block active_class_group %}active{% endblock %}
 {% endembed %}
+<style>
+	#GroupType_manager,
+	#GroupType_employee{
+		height: 150px;
+	}
+	.user-nanager label{
+		text-align: left;
+		margin-left: 5px;
+	}
+	#sortable1, #sortable2 {
+		border: 1px solid #eee;
+		min-height: 20px;
+		list-style-type: none;
+		margin: 0;
+		padding: 5px 0 0 0;
+		margin-right: 10px;
+		width: 212px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-height: 210px;
+	}
+	#sortable1 li, #sortable2 li {
+		margin: 0 5px 5px 5px;
+		padding: 5px;
+		font-size: 1.2em;
+		cursor: move;
+		text-align: left;
+	}
+	.user-nanager ul.connectedSortable {
+
+	}
+</style>
 <div class="main-content">
 	<div class="list-content">
 		<div class="content">
@@ -12,18 +44,43 @@
 			</ul>
 
 			<div class="tab-content">
-				<div class="tab-pane active" id="cms-page">
+				<div class="tab-pane active row-fluid" id="cms-page">
 					<form enctype="multipart/form-data" method="POST" class="edit_group_form backend-form">
-						{{ form_widget(form) }}
-						<div class="submit-profile clearfix">
-							<div class="save-cmspage pull-left">
-								<i class="icon-save"></i>
-								<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+						<div class="span3">
+							{{ form_widget(form) }}
+							<div class="submit-profile clearfix">
+								<div class="save-cmspage pull-left">
+									<i class="icon-save"></i>
+									<input class="btn save-profile" type="submit" value="{{ 'Save'|trans }}" />
+								</div>
+								<a href="{{ path('application_backend_group_index') }}" class="btn cancel-edit-cmspage pull-left">
+									<i class="icon-long-arrow-left"></i>
+									{% trans %}Cancel{% endtrans %}
+								</a>
 							</div>
-							<a href="{{ path('application_backend_group_index') }}" class="btn cancel-edit-cmspage pull-left">
-								<i class="icon-long-arrow-left"></i>
-								{% trans %}Cancel{% endtrans %}
-							</a>
+						</div>
+
+						<div class="span9 user-nanager">
+							<table style='width:370px;'>
+								<tr>
+									<td style="width:200px; vertical-align: top;">
+										<label for="GroupType_employee">All User</label>
+										<ul id="sortable1" class="connectedSortable">
+											{% for user in users %}
+												<li id="{{ user.id }}" class="ui-state-default">{{ user.username }} - {{ user.getName }}</li>
+											{% endfor %}
+										</ul>
+									</td>
+									<td style="width:200px; vertical-align: top;">
+										<label for="GroupType_manager">Manager</label>
+										<ul id="sortable2" class="connectedSortable">
+											{% for manager in group.getManagers %}
+											<li class="ui-state-default" id="{{ manager.user.id }}">{{ manager.user.username }} - {{ manager.user.getName }}</li>
+											{% endfor %}
+										</ul>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</form>
 				</div>
@@ -31,4 +88,36 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block javascript %}
+	<script type="text/javascript">
+		$( "#sortable1, #sortable2" ).sortable({
+			connectWith: ".connectedSortable",
+		});
+		$( "#sortable2" ).sortable({
+			update:function(event,ui){
+				var aDatas = $(this).sortable('toArray');
+				var groupId = {{ group.id }};
+				$.ajax({
+					type: 'POST',
+					url: Routing.generate('application_backend_group_add_manager'),
+					dataType: 'json',
+					data: {
+						groupId: groupId,
+						aDatas: aDatas
+					},
+					success: function(data){
+						console.log(data);
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						
+					},
+					beforeSend: function() {
+					},
+					complete: function() {
+					}
+				});
+			}
+		});
+	</script>
 {% endblock %}

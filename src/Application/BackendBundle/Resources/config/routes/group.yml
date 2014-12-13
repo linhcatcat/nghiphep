@@ -25,3 +25,9 @@ application_backend_group_show_user:
 application_backend_group_delete_user:
     pattern: /{groupUserID}/delete-user
     defaults: { _controller: "ApplicationBackendBundle:Group:deleteUser" }
+
+application_backend_group_add_manager:
+    pattern:  /add-manager
+    defaults: { _controller: "ApplicationBackendBundle:Group:addManager" }
+    options:
+        expose: true

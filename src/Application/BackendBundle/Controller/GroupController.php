@@ -5,10 +5,12 @@ namespace Application\BackendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Application\BackendBundle\Form\GroupType;
 use Application\BackendBundle\Form\GroupUserType;
 use Application\UserBundle\Entity\Group;
 use Application\UserBundle\Entity\GroupUser;
+use Application\UserBundle\Entity\GroupManager;
 
 class GroupController extends Controller {
 	/**
@@ -71,18 +73,25 @@ class GroupController extends Controller {
 	public function editAction(Request $request, $groupID) {
 		$groupService = $this->get('application_group_service');
 		$translator = $this->get('translator');
-
+		$userService = $this->get('Application_user.service');
+		$allUsers = $userService->getRepository()->findAll();
 		$group = $groupService->find($groupID);
-		//var_dump(count($group->getMembers()));
+		$users = array();
+		$managerIds = array();
+		foreach ($group->getManagers() as $manager) {
+			$managerIds[] = $manager->getUser()->getId();
+		}
+		foreach ($allUsers as $user) {
+			if( !in_array($user->getId(), $managerIds) ) {
+				$users[] = $user;
+			}
+		}
 		if(empty($group))
 			throw $this->createNotFoundException($translator->trans('Email Template Not found'));
 		
 		$form = $this->createForm(new GroupType(), $group);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
-			//var_dump($group->getUser()->getUsername());exit();
-			//$group->addMember( $group->getUser() );
-			//var_dump(count($group->getMembers()));exit();
 			$bUpdate = $groupService->update($group);
 			if($bUpdate) {
 				$this->get('session')->getFlashBag()->add('edit_group_successfully', $translator->trans('Edit ' . $group->getName() . ' Successfully'));
@@ -90,6 +99,7 @@ class GroupController extends Controller {
 			}
 		}
 		return $this->render('ApplicationBackendBundle:Group:edit.html.twig', array(
+			'users' => $users,
 			'form'	=>	$form->createView(),
 			'group' => $group
 		));
@@ -195,5 +205,47 @@ class GroupController extends Controller {
 		$groupUserService->remove($groupUserID);
 		$this->get('session')->getFlashBag()->add('remove_group_user_successfully', $translator->trans('Removed '. $groupUser->getUser()->getUsername() .' from '. $groupUser->getGroup()->getName() .' group successfully'));
 		return $this->redirect($this->generateUrl('application_backend_group_show_user', array('groupID' => $groupUser->getGroup()->getId())));
+	}
+
+	/**
+	 * Add manager to group
+	 * @author Alex <alex@likipe.se>
+	 * @return Response
+	 */
+	public function addManagerAction(Request $request) {
+		$translator = $this->get('translator');
+		$userService = $this->get('Application_user.service');
+		$userManagerService = $this->get('fos_user.user_manager');
+		$groupService = $this->get('application_group_service');
+		$data = $request->request->all();
+		$group = $groupService->find( (int)$data['groupId'] );
+		$em = $this->getDoctrine()->getManager();
+		$users = array();
+		$userIds = array();
+		$managerIds = isset($data['aDatas'])?$data['aDatas']:array();
+		foreach ($group->getManagers() as $groupManager) {
+			if( !in_array($groupManager->getUser()->getId(), $managerIds) ) {
+				$em->remove( $groupManager );
+				$em->flush();
+			}
+			$userIds[] = $groupManager->getUser()->getId();
+		}
+		
+		foreach ($managerIds as $userId) {
+			if( !in_array($userId, $userIds) ) {
+				$user = $userService->getRepository()->find( (int)$userId );
+				$groupManager = new GroupManager();
+				$groupManager->setUser( $user );
+				$groupManager->setGroup( $group );
+				$em->persist( $groupManager );
+				$em->flush();
+			}
+		}
+		return new Response(json_encode(array('result' => 1)), 200);
+		/*if( $rs ) {
+			return new Response(json_encode(array('result' => 1)), 200);
+		} else {
+			return new Response(json_encode(array('result' => 0, 'data' => $translator->trans('System error!'))), 300);
+		}*/
 	}
 }
