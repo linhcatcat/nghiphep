@@ -39,6 +39,14 @@
 <div class="main-content">
 	<div class="list-content">
 		<div class="content">
+			{% if app.session.getFlashBag().has( 'add_group_successfully' ) %}
+				<div class="alert alert-success">
+					<button class="close" data-dismiss="alert" type="button">×</button>
+						{% for message in app.session.getFlashBag().get('add_group_successfully')%}
+							{{message|raw}}
+						{% endfor %}
+				</div>
+			{% endif %}
 			<ul class="nav nav-tabs" id="list-tabs">
 				<li class="active"><a href="#edit-group">{{ 'Edit Department'|trans }}</a></li>
 			</ul>

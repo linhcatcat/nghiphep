@@ -45,16 +45,11 @@ class GroupController extends Controller {
 		$form = $this->createForm(new GroupType(), $group);
 		$form->handleRequest($request);
 		if ($form->isValid()) {
-			$sdfsdfg = $request->get('sdfsdfg');
-			$manager = $request->get('GroupType_manager');
-			var_dump($sdfsdfg);
-			var_dump($manager);
-			exit();
 			$em = $this->getDoctrine()->getEntityManager();
-			//$em->persist($group);
-			//$em->flush();
-			$this->get('session')->getFlashBag()->add('add_group_successfully', $translator->trans('Add ' . $group->getName() . ' successfully'));
-			return $this->redirect($this->generateUrl('application_backend_group_index'));
+			$em->persist($group);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add('add_group_successfully', $translator->trans('Add ' . $group->getName() . 'department successfully<br/>Please add manager user for department'));
+			return $this->redirect($this->generateUrl('application_backend_group_edit', array('groupID' => $group->getId())));
 		}
 		
 		return $this->render('ApplicationBackendBundle:Group:add.html.twig', array(
