@@ -71,4 +71,12 @@ class UserRepository extends EntityRepository {
 		$count = $qb->getQuery()->getSingleScalarResult();
 		return $count;
 	}
+
+	public function loadUser($username) {
+		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.username LIKE :username or u.firstName LIKE :username or u.lastName LIKE :username');
+		$qb->setParameter('username', "%".$username."%");
+		$results = $qb->getQuery()->getResult();
+		return $results;
+	}
 }

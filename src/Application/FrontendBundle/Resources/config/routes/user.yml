@@ -1,3 +1,9 @@
 application_frontend_user_edit:
     pattern:  /{userID}/edit
     defaults: { _controller: "ApplicationFrontendBundle:Task:editUser" }
+
+application_frontend_user_load:
+    pattern:  /load
+    defaults: { _controller: "ApplicationFrontendBundle:User:load" }
+    options:
+        expose: true

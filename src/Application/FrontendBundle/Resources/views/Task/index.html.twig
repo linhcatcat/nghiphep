@@ -49,22 +49,14 @@
 							{{ form_errors(form.start) }}
 							{{ form_widget(form.start) }}
 							<select class="txtStartTime hour" name="txtStartTime">
-								<option value="08:00">08:00</option> 
-								<option value="08:30">08:30</option>
+								<option value="08:00">08:00</option>
 								<option value="09:00">09:00</option>
-								<option value="09:30">09:30</option>
 								<option value="10:00">10:00</option>
-								<option value="10:30">10:30</option>
 								<option value="11:00">11:00</option>
-								<option value="11:30">11:30</option>
 								<option value="13:00">13:00</option>
-								<option value="13:30">13:30</option>
 								<option value="14:00">14:00</option>
-								<option value="14:30">14:30</option>
 								<option value="15:00">15:00</option>
-								<option value="15:30">15:30</option>
 								<option value="16:00">16:00</option>
-								<option value="16:30">16:30</option>
 							</select>
 						</div>
 						<div class="w50">
@@ -77,22 +69,13 @@
 							{{ form_errors(form.end) }}
 							{{ form_widget(form.end) }}
 							<select class="txtEndTime hour" name="txtEndTime">
-								{# <option value="08:00">08:00</option> #}
-								<option value="08:30">08:30</option>
 								<option value="09:00">09:00</option>
-								<option value="09:30">09:30</option>
 								<option value="10:00">10:00</option>
-								<option value="10:30">10:30</option>
 								<option value="11:00">11:00</option>
-								<option value="11:30">11:30</option>
 								<option value="12:00">12:00</option>
-								<option value="13:30">13:30</option>
 								<option value="14:00">14:00</option>
-								<option value="14:30">14:30</option>
 								<option value="15:00">15:00</option>
-								<option value="15:30">15:30</option>
 								<option value="16:00">16:00</option>
-								<option value="16:30">16:30</option>
 								<option value="17:00">17:00</option>
 							</select>
 						</div>
@@ -162,41 +145,24 @@
 		function otherdayStart(strClass){
 			var strHtml = '';
 			strHtml = strHtml + '<option value="08:00">08:00</option>';
-			strHtml = strHtml + '<option value="08:30">08:30</option>';
 			strHtml = strHtml + '<option value="09:00">09:00</option>';
-			strHtml = strHtml + '<option value="09:30">09:30</option>';
 			strHtml = strHtml + '<option value="10:00">10:00</option>';
-			strHtml = strHtml + '<option value="10:30">10:30</option>';
 			strHtml = strHtml + '<option value="11:00">11:00</option>';
-			strHtml = strHtml + '<option value="11:30">11:30</option>';
 			strHtml = strHtml + '<option value="13:00">13:00</option>';
-			strHtml = strHtml + '<option value="13:30">13:30</option>';
 			strHtml = strHtml + '<option value="14:00">14:00</option>';
-			strHtml = strHtml + '<option value="14:30">14:30</option>';
 			strHtml = strHtml + '<option value="15:00">15:00</option>';
-			strHtml = strHtml + '<option value="15:30">15:30</option>';
 			strHtml = strHtml + '<option value="16:00">16:00</option>';
-			strHtml = strHtml + '<option value="16:30">16:30</option>';
 			$(strClass).html( strHtml );
 		}
 		function otherdayEnd(strClass){
 			var strHtml = '';
-			//strHtml = strHtml + '<option value="08:00">08:00</option>';
-			strHtml = strHtml + '<option value="08:30">08:30</option>';
 			strHtml = strHtml + '<option value="09:00">09:00</option>';
-			strHtml = strHtml + '<option value="09:30">09:30</option>';
 			strHtml = strHtml + '<option value="10:00">10:00</option>';
-			strHtml = strHtml + '<option value="10:30">10:30</option>';
 			strHtml = strHtml + '<option value="11:00">11:00</option>';
-			strHtml = strHtml + '<option value="11:30">11:30</option>';
 			strHtml = strHtml + '<option value="12:00">12:00</option>';
-			strHtml = strHtml + '<option value="13:30">13:30</option>';
 			strHtml = strHtml + '<option value="14:00">14:00</option>';
-			strHtml = strHtml + '<option value="14:30">14:30</option>';
 			strHtml = strHtml + '<option value="15:00">15:00</option>';
-			strHtml = strHtml + '<option value="15:30">15:30</option>';
 			strHtml = strHtml + '<option value="16:00">16:00</option>';
-			strHtml = strHtml + '<option value="16:30">16:30</option>';
 			strHtml = strHtml + '<option value="17:00">17:00</option>';
 			$(strClass).html( strHtml );
 		}
@@ -204,25 +170,17 @@
 		function saturdayStart(strClass){
 			var strHtml = '';
 			strHtml = strHtml + '<option value="08:00">08:00</option>';
-			strHtml = strHtml + '<option value="08:30">08:30</option>';
 			strHtml = strHtml + '<option value="09:00">09:00</option>';
-			strHtml = strHtml + '<option value="09:30">09:30</option>';
 			strHtml = strHtml + '<option value="10:00">10:00</option>';
-			strHtml = strHtml + '<option value="10:30">10:30</option>';
 			strHtml = strHtml + '<option value="11:00">11:00</option>';
-			strHtml = strHtml + '<option value="11:30">11:30</option>';
 			$(strClass).html( strHtml );
 		}
 		function saturdayEnd(strClass){
 			var strHtml = '';
 			strHtml = strHtml + '<option value="08:00">08:00</option>';
-			strHtml = strHtml + '<option value="08:30">08:30</option>';
 			strHtml = strHtml + '<option value="09:00">09:00</option>';
-			strHtml = strHtml + '<option value="09:30">09:30</option>';
 			strHtml = strHtml + '<option value="10:00">10:00</option>';
-			strHtml = strHtml + '<option value="10:30">10:30</option>';
 			strHtml = strHtml + '<option value="11:00">11:00</option>';
-			strHtml = strHtml + '<option value="11:30">11:30</option>';
 			strHtml = strHtml + '<option value="12:00">12:00</option>';
 			$(strClass).html( strHtml );
 		}

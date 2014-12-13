@@ -273,4 +273,9 @@ class UserService {
 		$count = $this->getRepository()->countByUsername($username);
 		return $count?true:false;
 	}
+
+	public function loadUser($username) {
+		$results = $this->getRepository()->loadUser($username);
+		return $results;
+	}
 }
