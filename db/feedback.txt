@@ -1,0 +1,39 @@
+- Add roles
+	Tạo giúp người khác
+Role:
+	HR admin
+	Approve
+	Help
+	Employee
+
+- Deny (date creation)
+
+- 1.30 (2 hours)
+
+show description (reason)
+
+- deplicate
+
+- Department (Register)	> Select
+
+- Report (drag)
+	- Description
+	- Department
+
+- > 5.5 & Sumit (> 1 month) => add 1 day
+
+- attached file
+
+- Nghi khac
+
+- Email personal
+
+- User: Hidden count (Entitled)
+	Đã nghỉ: (chi nghi phep)
+
+- Search user
+
+- Import entiled (delete)
+
+- Create & approve (different or same)
+
