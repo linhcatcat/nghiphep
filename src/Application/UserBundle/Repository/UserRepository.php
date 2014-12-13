@@ -74,7 +74,7 @@ class UserRepository extends EntityRepository {
 
 	public function loadUser($username) {
 		$qb = $this->createQueryBuilder('u');
-		$qb->where('u.username LIKE :username or u.firstName LIKE :username or u.lastName LIKE :username');
+		$qb->where('u.username LIKE :username or u.firstName LIKE :username or u.lastName LIKE :username or u.email LIKE :username');
 		$qb->setParameter('username', "%".$username."%");
 		$results = $qb->getQuery()->getResult();
 		return $results;
